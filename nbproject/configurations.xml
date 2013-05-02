@@ -2,6 +2,10 @@
 <configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df name="Bomberman" root=".">
+      <df name="include">
+      </df>
+      <df name="src">
+      </df>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
