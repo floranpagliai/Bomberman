@@ -1,36 +1,37 @@
-##
-## Makefile for Makefile in /home/paglia_f//WorkOffline/printf
-##
-## Made by floran pagliai
-## Login   <paglia_f@epitech.net>
-##
-## Started on  Mon Nov 14 10:39:32 2011 floran pagliai
-## Last update Tue Feb 19 13:53:29 2013 floran pagliai
-##
+NAME		=	bomberman
 
-NAME= 	
+DIR		=	src/
 
-SRC=	
+SRC		=	$(DIR)main.cpp\
+			$(DIR)MyGame.cpp\
+			$(DIR)Camera.cpp
 
-OBJ=	$(SRC:.cpp=.o)
+OBJ		=	$(SRC:.cpp=.o)
 
-CC=	clang++
+RM		=	rm -f
 
-LIB=	-I/afs/epitech.net/users/labos/gamelab/public/include -L/afs/epitech.net/users/labos/gamelab/public/lib -Wl,--rpath=/afs/epitech.net/users/labos/gamelab/public/lib -lgdl_gl -lGL -lGLU
+CC		=	g++
 
-FLAG=	-W -Wall -Werror
+INCLUDE		+=	-I./include/ -I./lib/include
 
-all:	$(OBJ)
-	$(CC) $(FLAG) -o $(NAME) $(OBJ)
-	make clean
+CXXFLAGS	+=	
 
-clean:
-	rm -f $(OBJ)
-	rm -rf *~
-	rm -rf *#
+LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU
 
 
-fclean:	clean
-	rm -f $(NAME)
 
-re: fclean all
+$(NAME)	:	$(OBJ)
+		$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
+
+all	:	$(NAME)
+
+clean	:
+		$(RM) $(OBJ)
+
+fclean	:	clean
+		$(RM) $(NAME)
+
+re	: 	fclean all
+
+.cpp.o	:
+		$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
