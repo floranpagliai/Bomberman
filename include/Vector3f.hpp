@@ -13,4 +13,5 @@ struct	Vector3f {
   }
 
 };
+
 #endif

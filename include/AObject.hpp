@@ -1,6 +1,12 @@
 #ifndef __AOBJECT__HPP__
 #define __AOBJECT__HPP__
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+#include <GameClock.hpp>
+#include <Input.hpp>
+
 #include "Vector3f.hpp"
 
 class	AObject {

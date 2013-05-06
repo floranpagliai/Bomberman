@@ -1,8 +1,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <Input.hpp>
 
 #include "AObject.hpp"
-#include "Input.hpp"
 #include "Vector3f.hpp"
 
 namespace Primitive {

@@ -4,8 +4,9 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "GameClock.hpp"
-#include "Input.hpp"
+#include <GameClock.hpp>
+#include <Input.hpp>
+
 #include "Vector3f.hpp"
 
 class Camera {
