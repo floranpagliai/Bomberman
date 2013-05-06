@@ -4,7 +4,8 @@ DIR		=	src/
 
 SRC		=	$(DIR)main.cpp\
 			$(DIR)MyGame.cpp\
-			$(DIR)Camera.cpp
+			$(DIR)Camera.cpp\
+			$(DIR)Primitive.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 
