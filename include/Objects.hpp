@@ -3,6 +3,9 @@
 
 #include "AObject.hpp"
 #include "Vector3f.hpp"
+#include "Image.hpp"
+#include "GameClock.hpp"
+#include "Input.hpp"
 
 namespace Object
 {
@@ -20,3 +23,5 @@ namespace Object
     void draw(void);
   };
 }
+
+#endif

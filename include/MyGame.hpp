@@ -1,19 +1,26 @@
-#ifndef __MYGAME_HPP_
-#define __MYGAME_HPP_
+#ifndef __MYGAME_HPP__
+#define __MYGAME_HPP__
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <Game.hpp>
+#include "Game.hpp"
 
 #include <cstdlib>
 #include <list>
 
 #include "AObject.hpp"
 #include "Camera.hpp"
+#include "Primitive.hpp"
+#include "Bomberman.hpp"
+#include "Game.hpp"
+#include "Model.hpp"
+#include "Image.hpp"
+#include "Color.hpp"
 
-class MyGame : public gdl::Game {
+class MyGame : public gdl::Game
+{
 private:
-  Camera	camera_;
+  Camera		camera_;
   std::list<AObject*>	objects_;
 
 public:

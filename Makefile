@@ -5,7 +5,8 @@ DIR		=	src/
 SRC		=	$(DIR)main.cpp\
 			$(DIR)MyGame.cpp\
 			$(DIR)Camera.cpp\
-			$(DIR)Primitive.cpp
+			$(DIR)Primitive.cpp\
+			$(DIR)Bomberman.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 
@@ -28,6 +29,10 @@ all	:	$(NAME)
 
 clean	:
 		$(RM) $(OBJ)
+		$(RM) src/*~
+		$(RM) src/*#
+		$(RM) include/*~
+		$(RM) include/*#
 
 fclean	:	clean
 		$(RM) $(NAME)

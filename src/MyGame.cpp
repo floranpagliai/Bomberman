@@ -1,13 +1,24 @@
 #include "MyGame.hpp"
 
-void	MyGame::initialize(void) {
+
+//création window, add objects, initialize objects
+void	MyGame::initialize(void)
+{
+  window_.setTitle("Chevre");
+  window_.setHeight(700);
+  window_.setWidth(1024);
   window_.create();
+  
   camera_.initialize();
+  objects_.push_back(new Primitive::Rectangle());
+  
+  objects_.push_back(new Model::Bomberman());
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
     (*itb)->initialize();
 }
 
+//update objects
 void	MyGame::update(void) {
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
@@ -15,15 +26,20 @@ void	MyGame::update(void) {
   camera_.update(gameClock_, input_);
 }
 
-void MyGame::draw(void) {
+//dump buffers, call method object draw and display rendenring in the window
+void	MyGame::draw(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glClearColor(0.74f, 0.84f, 95.0f, 1.0f);
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClearDepth(1.0f);
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
     (*itb)->draw();
   this->window_.display();
 }
-void MyGame::unload(void) {
 
+//free all
+void	MyGame::unload(void) {
+  /*
+    doit liberer la mémoire lorsque la fenêtre est fermée !!
+   */
 }

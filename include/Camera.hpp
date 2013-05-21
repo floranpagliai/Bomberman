@@ -6,8 +6,8 @@
 
 #include <GameClock.hpp>
 #include <Input.hpp>
-
 #include "Vector3f.hpp"
+#include "Window.hpp"
 
 class Camera {
 private:
