@@ -17,7 +17,7 @@ namespace Primitive {
     glVertex3f(150.0f, 00.0f, 0.0f);
     glEnd();
   }
-
+  
   void Rectangle::initialize(void) {
   }
   

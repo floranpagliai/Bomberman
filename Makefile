@@ -9,11 +9,12 @@ SRC		=	$(DIR)main.cpp\
 			$(DIR)Bomberman.cpp\
 			$(DIR)Bomb.cpp\
 			$(DIR)Object.cpp
+
 OBJ		=	$(SRC:.cpp=.o)
 
 RM		=	rm -f
 
-CC		=	g++
+CC		=	clang++
 
 INCLUDE		+=	-I./include/ -I./lib/include
 
