@@ -11,7 +11,7 @@ void	MyGame::initialize(void)
 
   camera_.initialize();
   //objects_.push_back(new Primitive::Rectangle());
-
+  objects_.push_back(new Bomb::Bombe());
   objects_.push_back(new Model::Bomberman());
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)

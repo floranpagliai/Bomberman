@@ -1,23 +1,27 @@
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include "Input.hpp"
+#ifndef __OBJECT_HPP__
+#define __OBJECT_HPP__
 
 #include "AObject.hpp"
 #include "Vector3f.hpp"
-#include "Object.hpp"
-namespace Primitive
+#include "Image.hpp"
+#include "GameClock.hpp"
+#include "Input.hpp"
+#include "MyGame.hpp"
+namespace Object
 {
-  class Triangle : public AObject
+  class Cube : public AObject
   {
     void initialize(void);
     void update(gdl::GameClock const &, gdl::Input &);
     void draw(void);
   };
   
-  class Rectangle : public AObject
+  class Pyramide : public AObject
   {
     void initialize(void);
     void update(gdl::GameClock const &, gdl::Input &);
     void draw(void);
   };
 }
+
+#endif

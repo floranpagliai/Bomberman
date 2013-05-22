@@ -6,8 +6,9 @@ SRC		=	$(DIR)main.cpp\
 			$(DIR)MyGame.cpp\
 			$(DIR)Camera.cpp\
 			$(DIR)Primitive.cpp\
-			$(DIR)Bomberman.cpp
-
+			$(DIR)Bomberman.cpp\
+			$(DIR)Bomb.cpp\
+			$(DIR)Object.cpp
 OBJ		=	$(SRC:.cpp=.o)
 
 RM		=	rm -f

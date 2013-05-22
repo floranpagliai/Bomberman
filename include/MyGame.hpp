@@ -16,7 +16,8 @@
 #include "Model.hpp"
 #include "Image.hpp"
 #include "Color.hpp"
-
+#include "Bomb.hpp"
+#include "Object.hpp"
 class MyGame : public gdl::Game
 {
 private:
