@@ -20,6 +20,9 @@ void	MyGame::initialize(void)
 
 //update objects
 void	MyGame::update(void) {
+  //  gdl::Input &	input;
+  //if (input.iskeyDown(gdl::keys::Escape) == true)
+  //gdl::glEnd();
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
     (*itb)->update(gameClock_, input_);

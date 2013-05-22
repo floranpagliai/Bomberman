@@ -14,7 +14,7 @@ OBJ		=	$(SRC:.cpp=.o)
 
 RM		=	rm -f
 
-CC		=	clang++
+CC		=	g++
 
 INCLUDE		+=	-I./include/ -I./lib/include
 

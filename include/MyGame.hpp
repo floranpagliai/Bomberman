@@ -18,6 +18,8 @@
 #include "Color.hpp"
 #include "Bomb.hpp"
 #include "Object.hpp"
+#include "Input.hpp"
+
 class MyGame : public gdl::Game
 {
 private:

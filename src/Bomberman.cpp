@@ -51,6 +51,10 @@ namespace Model
         this->position_.x += 45.0f;
 	this->model_.play("Run");
       }
+    else if (input.isKeyDown(gdl::Keys::Escape) == true)
+      {
+	exit (EXIT_FAILURE);
+      }
     else
         this->model_.play("Stop");
   }
