@@ -24,23 +24,46 @@ namespace Model
     model_.set_default_model_color(gdl::Color(255,0,0));
     //model_.set_anim_speed("Take 001", 1); //pour changer la vitesse quand il court
     //model_.infos(); // pour avoir les infos sur le personnage
+    model_.cut_animation(this->model_, "Take 001", 40, 50, "Run");
+    model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
 
     /// Joue l’animation portant le nom "Take 001" quand on appuie sur la touche "p"
     if (input.isKeyDown(gdl::Keys::Up) == true)
-      this->model_.play("Take 001");
+      {
+        this->rotation_.y = 180;
+        this->position_.y += 45.0f;
+	this->model_.play("Run");
+      }
     else if (input.isKeyDown(gdl::Keys::Down) == true)
-      this->model_.play("Take 001", 4);
+      {
+        this->rotation_.y = 0;
+        this->position_.y -= 45.0f;
+        this->model_.play("Run");
+      }
     else if (input.isKeyDown(gdl::Keys::Left) == true)
-      this->model_.play("Take 001");
+    {
+      this->rotation_.y = -90;
+      this->position_.x -= 45.0f;
+      this->model_.play("Run");
+    }
     else if (input.isKeyDown(gdl::Keys::Right) == true)
       {
-	this->rotation_.y = ((int)rotation_.y + 1) % 360;      
-	this->model_.play("Take 001");
+        this->rotation_.y = 90;
+        this->position_.x += 45.0f;
+	this->model_.play("Run");
       }
+    else
+        this->model_.play("Stop");
   }
   void Bomberman::draw(void)
   {
-    /// Affichage du modele
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(this->position_.x, this->position_.y, this->position_.z);
+    glRotatef(this->rotation_.y, 0.0f, 1.0f, 0.0f);
+    gdl::Model::Begin();
     this->model_.draw();
+    gdl::Model::End();
+    glPopMatrix();
   }
 }
