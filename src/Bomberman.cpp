@@ -27,7 +27,6 @@ namespace Model
     model_.cut_animation(this->model_, "Take 001", 40, 50, "Run");
     model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
 
-    /// Joue l’animation portant le nom "Take 001" quand on appuie sur la touche "p"
     if (input.isKeyDown(gdl::Keys::Up) == true)
       {
         this->rotation_.y = 180;
@@ -55,6 +54,7 @@ namespace Model
     else
         this->model_.play("Stop");
   }
+
   void Bomberman::draw(void)
   {
     glMatrixMode(GL_MODELVIEW);

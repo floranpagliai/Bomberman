@@ -24,5 +24,7 @@ namespace Model
     void draw(void);
   private:
     gdl::Model model_;
+
+    int speed_;
   };
 }
