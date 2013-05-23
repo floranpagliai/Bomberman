@@ -11,12 +11,11 @@ namespace Bomb
   void	Bombe::update(gdl::GameClock const & gameClock, gdl::Input & input)
   {
     this->model_.update(gameClock);
-    model_.set_default_model_color(gdl::Color(255, 0, 0));
   }
 
   void	Bombe::draw(void)
   {
     //affichage du modele
-    this->model_.draw();
+    this->model_.draw(); 
   }
 }
