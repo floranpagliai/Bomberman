@@ -19,12 +19,6 @@ namespace Model
     this->model_ = gdl::Model::load("assets/marvin.fbx");
   }
 
-  /*void Player::~Player(void)
-  {
-    // Destruction des ressources.
-    //delete this->odel_;
-    }*/
-
   void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
   {
     /// Si une animation est en cours, nous la mettons a jour
@@ -65,7 +59,7 @@ namespace Model
       }
     else if (input.isKeyDown(gdl::Keys::B) == true)
       {
-	this->objects_.push_back(new Bomb::Bombe(0.0f, 0.0f, this->objects_));
+	this->objects_->push_front(new Bomb::Bombe(0.0f, 0.0f, this->objects_));
       }
     else
         this->model_.play("Stop");

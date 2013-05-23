@@ -11,13 +11,14 @@ namespace Bomb
   class Bombe : public AObject
   {
   public:
-    Bombe(float const x, float const y, std::list<AObject *> objects);
+    Bombe(float const x, float const y, std::list<AObject*> *);
     ~Bombe();
     void	initialize(void);
     void	update(gdl::GameClock const &, gdl::Input &);
     void	draw(void);
   private:
     gdl::Model	model_;
+    std::list<AObject*>	*objects_;
     
   };
 }
