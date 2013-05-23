@@ -17,13 +17,17 @@
 =======
 #include <cstdlib>
 #include "Bomb.hpp"
+<<<<<<< HEAD
 >>>>>>> commit pour flo avec Bug creation Bomb
+=======
+
+>>>>>>> changement position à la création de  player et bomb
 namespace Model
 {
   class Player : public AObject
   {
   public:
-    Player(std::list<AObject*> *);
+    Player(float const x, float const y, std::list<AObject*> *);
     ~Player(void);
 
     void initialize(void);
