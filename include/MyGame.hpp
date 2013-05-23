@@ -3,16 +3,15 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <cstdlib>
+#include <list>
+
 #include "Game.hpp"
 #include "Model.hpp"
 #include "Image.hpp"
 #include "Color.hpp"
 #include "Object.hpp"
 #include "Input.hpp"
-
-#include <cstdlib>
-#include <list>
-
 #include "AObject.hpp"
 #include "Camera.hpp"
 #include "Primitive.hpp"

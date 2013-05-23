@@ -1,13 +1,13 @@
+#include <cstdlib>
 #include "GL/gl.h"
 #include "GL/glu.h"
 #include "Input.hpp"
-
+#include "Bomb.hpp"
 #include "AObject.hpp"
 #include "Vector3f.hpp"
 #include "GameClock.hpp"
 #include "Image.hpp"
 #include "Model.hpp"
-#include <cstdlib>
 
 namespace Model
 {
@@ -29,6 +29,7 @@ namespace Model
     void	speedUp();
   private:
     gdl::Model model_;
+    std::list<AObject*>		objects_;
 
     int		ammo_;
     int		power_;

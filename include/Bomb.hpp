@@ -11,7 +11,7 @@ namespace Bomb
   class Bombe : public AObject
   {
   public:
-    //Bombe();
+    //    Bombe();
     //~Bombe();
     void	initialize(void);
     void	update(gdl::GameClock const &, gdl::Input &);

@@ -14,8 +14,9 @@ namespace Model
     //delete this->odel_;
     }*/
 
-  void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
+void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
   {
+    
     /// Si une animation est en cours, nous la mettons a jour
     this->model_.update(gameClock);
     model_.set_default_model_color(gdl::Color(255,0,0));
@@ -52,10 +53,18 @@ namespace Model
       {
 	exit (EXIT_FAILURE);
       }
+    /*  else if (input.isKeyDown(gdl::Keys::B) == true)
+      {
+	//Bomb::Bombe::initialize();
+	this->objects_.push_back(new Bomb::Bombe());
+	std::list<AObject*>::iterator itb = this->objects_.begin();
+	for (; itb != this->objects_.end(); ++itb)
+	  (*itb)->initialize();
+	  }*/
     else
-        this->model_.play("Stop");
+      this->model_.play("Stop");
   }
-
+  
   void	Player::draw(void)
   {
     glMatrixMode(GL_MODELVIEW);

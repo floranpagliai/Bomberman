@@ -2,6 +2,14 @@
 
 namespace Bomb
 {
+  /*  Bombe::Bombe(float const x, float const z)
+  {
+    this->position_.x = x;
+    this->position_.y = 0.0f;
+    this->position_.z = z;
+    this->initialize();
+    }*/
+
   void	Bombe::initialize(void)
   {
     //charge le modele
