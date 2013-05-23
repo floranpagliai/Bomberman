@@ -13,7 +13,6 @@ namespace Bomb
 
   Bombe::~Bombe()
   {
-
   }
 
   void	Bombe::initialize(void)
@@ -30,7 +29,6 @@ namespace Bomb
   void	Bombe::draw(void)
   {
     //affichage du modele
-    //  this->model_.draw(); 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(this->position_.x, this->position_.y, this->position_.z);
