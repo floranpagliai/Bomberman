@@ -23,8 +23,9 @@ namespace Model
   class Player : public AObject
   {
   public:
-    Player(std::list<AObject*> *objects);
+    Player(std::list<AObject*> *);
     ~Player(void);
+
     void initialize(void);
     void update(gdl::GameClock const &, gdl::Input &);
     void draw(void);

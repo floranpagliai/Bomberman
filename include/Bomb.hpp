@@ -12,10 +12,14 @@ namespace Bomb
   {
   public:
 <<<<<<< HEAD
+<<<<<<< HEAD
     //    Bombe();
     //~Bombe();
 =======
     Bombe(float const x, float const y, std::list<AObject *> objects);
+=======
+    Bombe(float const x, float const y, std::list<AObject*> *);
+>>>>>>> Resolution bug Bomb
     ~Bombe();
 >>>>>>> commit pour flo avec Bug creation Bomb
     void	initialize(void);
@@ -23,6 +27,7 @@ namespace Bomb
     void	draw(void);
   private:
     gdl::Model	model_;
+    std::list<AObject*>	*objects_;
     
   };
 }

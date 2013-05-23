@@ -19,6 +19,7 @@ namespace Model
     this->model_ = gdl::Model::load("assets/marvin.fbx");
   }
 
+<<<<<<< HEAD
   /*void Player::~Player(void)
   {
     // Destruction des ressources.
@@ -26,6 +27,9 @@ namespace Model
     }*/
 
 void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
+=======
+  void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
+>>>>>>> Resolution bug Bomb
   {
     
     /// Si une animation est en cours, nous la mettons a jour
@@ -76,7 +80,7 @@ void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
 =======
     else if (input.isKeyDown(gdl::Keys::B) == true)
       {
-	this->objects_.push_back(new Bomb::Bombe(0.0f, 0.0f, this->objects_));
+	this->objects_->push_front(new Bomb::Bombe(0.0f, 0.0f, this->objects_));
       }
 >>>>>>> commit pour flo avec Bug creation Bomb
     else

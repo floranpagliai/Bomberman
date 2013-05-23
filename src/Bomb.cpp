@@ -3,6 +3,7 @@
 namespace Bomb
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   /*  Bombe::Bombe(float const x, float const z)
   {
     this->position_.x = x;
@@ -12,10 +13,14 @@ namespace Bomb
     }*/
 =======
   Bombe::Bombe(float const x, float const y, std::list<AObject*> objects)
+=======
+  Bombe::Bombe(float const x, float const y, std::list<AObject*> *objects)
+>>>>>>> Resolution bug Bomb
   {
     this->position_.x = x;
     this->position_.y = y;
     this->position_.z = 0.0f;
+    this->objects_ = objects;
     this->initialize();
   }
 
