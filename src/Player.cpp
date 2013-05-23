@@ -77,11 +77,11 @@ namespace Model
   {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
+    
     glTranslatef(this->position_.x, this->position_.y, this->position_.z);
     glRotatef(this->rotation_.y, 0.0f, 1.0f, 0.0f);
-    gdl::Model::Begin();
+    
     this->model_.draw();
-    gdl::Model::End();
     glPopMatrix();
   }
 

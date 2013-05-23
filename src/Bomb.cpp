@@ -19,6 +19,19 @@ namespace Bomb
   {
     //charge le modele
     this->model_ = gdl::Model::load("assets/bomb.fbx");
+    int		x = this->position_.x;
+    int		z = this->position_.z;
+
+    if (x % (BLOCK_SIZE * 2) > BLOCK_SIZE)
+      x += (BLOCK_SIZE * 2 - (x % (BLOCK_SIZE * 2)));
+    else
+      x -= x % (BLOCK_SIZE * 2);
+    if (z % (BLOCK_SIZE * 2) > BLOCK_SIZE)
+      z += (BLOCK_SIZE * 2 - (z % (BLOCK_SIZE * 2)));
+    else
+      z -= z % (BLOCK_SIZE * 2);
+    this->position_.x = x;
+    this->position_.z = z;
   }
   
   void	Bombe::update(gdl::GameClock const & gameClock, gdl::Input & input)
