@@ -2,8 +2,11 @@
 
 namespace Model
 {
-  Player::Player(std::list<AObject*> *objects)
+  Player::Player(float const x, float const y, std::list<AObject*> *objects)
   {
+    this->position_.x = x;
+    this->position_.y = y;
+    this->position_.z = 5.0f;
     this->objects_ = objects;
     this->initialize();
   }
@@ -17,18 +20,23 @@ namespace Model
   {
     /// Charge le modele
     this->model_ = gdl::Model::load("assets/marvin.fbx");
+    model_.set_default_model_color(gdl::Color(255,0,0));
+    //model_.set_anim_speed("Take 001", 1); //pour changer la vitesse quand il court
+    //model_.infos(); // pour avoir les infos sur le personnage
+    model_.cut_animation(this->model_, "Take 001", 40, 50, "Run");
+    model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
   }
 
   void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
   {
     /// Si une animation est en cours, nous la mettons a jour
     this->model_.update(gameClock);
-    model_.set_default_model_color(gdl::Color(255,0,0));
+    /*model_.set_default_model_color(gdl::Color(255,0,0));
     //model_.set_anim_speed("Take 001", 1); //pour changer la vitesse quand il court
     //model_.infos(); // pour avoir les infos sur le personnage
     model_.cut_animation(this->model_, "Take 001", 40, 50, "Run");
     model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
-
+    */
     if (input.isKeyDown(gdl::Keys::Up) == true)
       {
         this->rotation_.y = 180;
@@ -59,7 +67,7 @@ namespace Model
       }
     else if (input.isKeyDown(gdl::Keys::B) == true)
       {
-	this->objects_->push_front(new Bomb::Bombe(0.0f, 0.0f, this->objects_));
+	this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.y, this->objects_));
       }
     else
         this->model_.play("Stop");

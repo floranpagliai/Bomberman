@@ -16,7 +16,7 @@ void	MyGame::initialize(void)
   //objects_.push_back(new Object::Cube());
   //objects_.push_back(new Object::Pyramide());
   //Model::Player *pl = new Model::Player(); 
-  objects_.push_back(new Model::Player(&objects_));
+  objects_.push_back(new Model::Player(1000.0f, 1000.0f, &objects_));
   
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)

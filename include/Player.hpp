@@ -9,12 +9,13 @@
 #include "Model.hpp"
 #include <cstdlib>
 #include "Bomb.hpp"
+
 namespace Model
 {
   class Player : public AObject
   {
   public:
-    Player(std::list<AObject*> *);
+    Player(float const x, float const y, std::list<AObject*> *);
     ~Player(void);
 
     void initialize(void);

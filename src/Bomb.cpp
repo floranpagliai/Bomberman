@@ -21,7 +21,7 @@ namespace Bomb
     //charge le modele
     this->model_ = gdl::Model::load("assets/bomb.fbx");
   }
-
+  
   void	Bombe::update(gdl::GameClock const & gameClock, gdl::Input & input)
   {
     this->model_.update(gameClock);
@@ -30,6 +30,13 @@ namespace Bomb
   void	Bombe::draw(void)
   {
     //affichage du modele
-    this->model_.draw(); 
+    //  this->model_.draw(); 
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(this->position_.x, this->position_.y, this->position_.z);
+    gdl::Model::Begin();
+    this->model_.draw();
+    gdl::Model::End();
+    glPopMatrix();
   }
 }
