@@ -2,6 +2,17 @@
 
 namespace Model
 {
+  Player::Player(std::list<AObject*> *objects)
+  {
+    this->objects_ = objects;
+    this->initialize();
+  }
+
+  Player::~Player()
+  {
+    
+  }
+
   void Player::initialize(void)
   {
     /// Charge le modele
@@ -52,6 +63,10 @@ namespace Model
       {
 	exit (EXIT_FAILURE);
       }
+    else if (input.isKeyDown(gdl::Keys::B) == true)
+      {
+	this->objects_.push_back(new Bomb::Bombe(0.0f, 0.0f, this->objects_));
+      }
     else
         this->model_.play("Stop");
   }
@@ -66,6 +81,11 @@ namespace Model
     this->model_.draw();
     gdl::Model::End();
     glPopMatrix();
+  }
+
+  void	Player::putBomb()
+  {
+    
   }
 
   int	Player::getAmmo() const

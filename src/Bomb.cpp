@@ -2,6 +2,19 @@
 
 namespace Bomb
 {
+  Bombe::Bombe(float const x, float const y, std::list<AObject*> objects)
+  {
+    this->position_.x = x;
+    this->position_.y = y;
+    this->position_.z = 0.0f;
+    this->initialize();
+  }
+
+  Bombe::~Bombe()
+  {
+
+  }
+
   void	Bombe::initialize(void)
   {
     //charge le modele

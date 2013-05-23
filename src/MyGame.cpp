@@ -10,12 +10,14 @@ void	MyGame::initialize(void)
   window_.create();
   camera_.initialize();
 
-  //  objects_.push_back(new Primitive::Rectangle());
+  //objects_.push_back(new Bomb::Bombe());
+  //objects_.push_back(new Primitive::Rectangle());
   //objects_.push_back(new Primitive::Triangle());
   //objects_.push_back(new Object::Cube());
   //objects_.push_back(new Object::Pyramide());
-  objects_.push_back(new Model::Bomberman());
-   //objects_.push_back(new Bomb::Bombe());
+  //Model::Player *pl = new Model::Player(); 
+  objects_.push_back(new Model::Player(&objects_));
+  
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
     (*itb)->initialize();
