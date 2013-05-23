@@ -53,7 +53,7 @@ void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
       {
 	exit (EXIT_FAILURE);
       }
-    /*  else if (input.isKeyDown(gdl::Keys::B) == true)
+    /*     else if (input.isKeyDown(gdl::Keys::B) == true)
       {
 	//Bomb::Bombe::initialize();
 	this->objects_.push_back(new Bomb::Bombe());
