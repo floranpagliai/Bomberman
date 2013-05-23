@@ -2,6 +2,7 @@
 
 namespace Bomb
 {
+<<<<<<< HEAD
   /*  Bombe::Bombe(float const x, float const z)
   {
     this->position_.x = x;
@@ -9,6 +10,20 @@ namespace Bomb
     this->position_.z = z;
     this->initialize();
     }*/
+=======
+  Bombe::Bombe(float const x, float const y, std::list<AObject*> objects)
+  {
+    this->position_.x = x;
+    this->position_.y = y;
+    this->position_.z = 0.0f;
+    this->initialize();
+  }
+
+  Bombe::~Bombe()
+  {
+
+  }
+>>>>>>> commit pour flo avec Bug creation Bomb
 
   void	Bombe::initialize(void)
   {

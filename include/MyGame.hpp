@@ -25,10 +25,10 @@ private:
   std::list<AObject*>	objects_;
 
 public:
-  void	initialize(void);
-  void	update(void);
-  void	draw(void);
-  void	unload(void);
+  virtual void	initialize(void);
+  virtual void	update(void);
+  virtual void	draw(void);
+  virtual void	unload(void);
 };
 
 #endif

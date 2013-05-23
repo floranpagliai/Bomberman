@@ -2,6 +2,17 @@
 
 namespace Model
 {
+  Player::Player(std::list<AObject*> *objects)
+  {
+    this->objects_ = objects;
+    this->initialize();
+  }
+
+  Player::~Player()
+  {
+    
+  }
+
   void Player::initialize(void)
   {
     /// Charge le modele
@@ -53,6 +64,7 @@ void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
       {
 	exit (EXIT_FAILURE);
       }
+<<<<<<< HEAD
     /*     else if (input.isKeyDown(gdl::Keys::B) == true)
       {
 	//Bomb::Bombe::initialize();
@@ -61,6 +73,12 @@ void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
 	for (; itb != this->objects_.end(); ++itb)
 	  (*itb)->initialize();
 	  }*/
+=======
+    else if (input.isKeyDown(gdl::Keys::B) == true)
+      {
+	this->objects_.push_back(new Bomb::Bombe(0.0f, 0.0f, this->objects_));
+      }
+>>>>>>> commit pour flo avec Bug creation Bomb
     else
       this->model_.play("Stop");
   }
@@ -75,6 +93,11 @@ void Player::update(gdl::GameClock const & gameClock, gdl::Input & input)
     this->model_.draw();
     gdl::Model::End();
     glPopMatrix();
+  }
+
+  void	Player::putBomb()
+  {
+    
   }
 
   int	Player::getAmmo() const

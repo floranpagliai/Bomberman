@@ -11,13 +11,19 @@ namespace Bomb
   class Bombe : public AObject
   {
   public:
+<<<<<<< HEAD
     //    Bombe();
     //~Bombe();
+=======
+    Bombe(float const x, float const y, std::list<AObject *> objects);
+    ~Bombe();
+>>>>>>> commit pour flo avec Bug creation Bomb
     void	initialize(void);
     void	update(gdl::GameClock const &, gdl::Input &);
     void	draw(void);
   private:
     gdl::Model	model_;
+    
   };
 }
 #endif
