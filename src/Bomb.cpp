@@ -28,13 +28,12 @@ namespace Bomb
 
   void	Bombe::draw(void)
   {
-    //affichage du modele
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
+    
     glTranslatef(this->position_.x, this->position_.y, this->position_.z);
-    gdl::Model::Begin();
-    this->model_.draw();
-    gdl::Model::End();
+
+    this->model_.draw(); 
     glPopMatrix();
   }
 }
