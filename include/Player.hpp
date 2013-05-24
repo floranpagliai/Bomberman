@@ -1,13 +1,16 @@
 #include "GL/gl.h"
 #include "GL/glu.h"
+
 #include "Input.hpp"
+#include "Image.hpp"
+#include "Model.hpp"
+
+#include <cstdlib>
 #include <list>
+
 #include "AObject.hpp"
 #include "Vector3f.hpp"
 #include "GameClock.hpp"
-#include "Image.hpp"
-#include "Model.hpp"
-#include <cstdlib>
 #include "Bomb.hpp"
 
 namespace Model
@@ -22,6 +25,9 @@ namespace Model
     void update(gdl::GameClock const &, gdl::Input &);
     void draw(void);
 
+	void	move(gdl::Input &);
+    void	putBomb(gdl::Input &);
+    	
     int		getAmmo() const;
     int		getPower() const;
     int		getSpeed() const;
@@ -29,7 +35,7 @@ namespace Model
     void	ammoUp();
     void	powerUp();
     void	speedUp();
-    void	putBomb();
+
 
   private:
     gdl::Model		model_;
@@ -37,6 +43,7 @@ namespace Model
     int			ammo_;
     int			power_;
     int			speed_;
+    bool	isPush;
     
   };
 }

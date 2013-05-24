@@ -4,7 +4,7 @@
 //création window, add objects, initialize objects
 void	MyGame::initialize(void)
 {
-  window_.setTitle("Chevre");
+  window_.setTitle("Bomberman");
   window_.setHeight(700);
   window_.setWidth(1024);
   window_.create();
@@ -15,8 +15,7 @@ void	MyGame::initialize(void)
   //objects_.push_back(new Primitive::Triangle());
   //objects_.push_back(new Object::Cube());
   //objects_.push_back(new Object::Pyramide());
-  //Model::Player *pl = new Model::Player(); 
-  objects_.push_back(new Model::Player(1000.0f, 1000.0f, &objects_));
+  objects_.push_back(new Model::Player(0.0f, 0.0f, &objects_));
   
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
@@ -30,6 +29,8 @@ void	MyGame::update(void)
   for (; itb != this->objects_.end(); ++itb)
     (*itb)->update(gameClock_, input_);
   camera_.update(gameClock_, input_);
+  if (input_.isKeyDown(gdl::Keys::Escape) == true)
+  	exit (EXIT_FAILURE);
 }
 
 //dump buffers, call method object draw and display rendenring in the window

@@ -3,6 +3,7 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
+
 #include "Game.hpp"
 #include "Model.hpp"
 #include "Image.hpp"
