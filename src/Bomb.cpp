@@ -2,11 +2,11 @@
 
 namespace Bomb
 {
-  Bombe::Bombe(float const x, float const y, std::list<AObject*> *objects)
+  Bombe::Bombe(float const x, float const y, float const z, std::list<AObject*> *objects)
   {
     this->position_.x = x;
     this->position_.y = y;
-    this->position_.z = 0.0f;
+    this->position_.z = z;
     this->objects_ = objects;
     this->initialize();
   }

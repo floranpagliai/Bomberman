@@ -52,13 +52,13 @@ namespace Model
 		if (input.isKeyDown(gdl::Keys::Up) == true)
       {
         this->rotation_.y = 180;
-        this->position_.y += 25.0f + speed_ * 2.0f;
+        this->position_.z -= 25.0f + speed_ * 2.0f;
 	this->model_.play("Run");
       }
     else if (input.isKeyDown(gdl::Keys::Down) == true)
       {
         this->rotation_.y = 0;
-        this->position_.y -= 25.0f + speed_ * 2.0f;
+        this->position_.z += 25.0f + speed_ * 2.0f;
         this->model_.play("Run");
       }
     else if (input.isKeyDown(gdl::Keys::Left) == true)
@@ -82,7 +82,7 @@ namespace Model
   	
     if (input.isKeyDown(gdl::Keys::B) == true && this->isPush == false)
       {
-		this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.y, this->objects_));
+		this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.y, this->position_.z, this->objects_));
 		this->isPush = true;
       }
       else

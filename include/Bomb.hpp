@@ -11,7 +11,7 @@ namespace Bomb
   class Bombe : public AObject
   {
   public:
-    Bombe(float const x, float const y, std::list<AObject*> *);
+    Bombe(float const x, float const y, float const z, std::list<AObject*> *);
     ~Bombe();
     void	initialize(void);
     void	update(gdl::GameClock const &, gdl::Input &);
