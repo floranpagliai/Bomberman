@@ -6,6 +6,8 @@
 #include "Image.hpp"
 #include "Vector3f.hpp"
 
+#  define	BLOCK_SIZE	50
+
 class	AObject {
 protected:
   Vector3f	position_;

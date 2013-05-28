@@ -79,7 +79,6 @@ namespace Model
 	
   void	Player::putBomb(gdl::Input &input)
   {
-  	
     if (input.isKeyDown(gdl::Keys::B) == true && this->isPush == false)
       {
 		this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.y, this->position_.z, this->objects_));
