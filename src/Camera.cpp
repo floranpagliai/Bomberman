@@ -1,6 +1,6 @@
 #include "Camera.hpp"
 
-Camera::Camera(void) : position_(0.0f, 5500.0f, 10000.0f), rotation_(0.0f, 0.0f, 0.0f) {
+Camera::Camera(void) : position_(0.0f, 5500.0f, 900.0f), rotation_(0.0f, 0.0f, 0.0f) {
 }
 
 void Camera::initialize(void) {
@@ -37,4 +37,11 @@ Vector3f Camera::getPosition(void) const {
 
 Vector3f Camera::getRotation(void) const {
     return (this->rotation_);
+}
+
+void Camera::setPosition(float const x, float const y, float const z) {
+    this->position_.x = x;
+    this->position_.y = y;
+    this->position_.z = z;
+    this->initialize();
 }

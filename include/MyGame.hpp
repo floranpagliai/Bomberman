@@ -19,6 +19,7 @@
 #include "AObject.hpp"
 #include "Bomb.hpp"
 #include "Camera.hpp"
+#include "Map.hpp"
 #include "MapElement.hpp"
 #include "Parser.hpp"
 #include "Player.hpp"

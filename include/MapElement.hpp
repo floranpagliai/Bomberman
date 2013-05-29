@@ -24,7 +24,7 @@ namespace MapElement {
 
     class Ground : public AObject {
     public:
-        Ground(float const, float const, std::list<AObject*> *, Camera const &);
+        Ground(float const, float const, std::list<AObject*> *);
         ~Ground();
         void initialize(void);
         void update(gdl::GameClock const &, gdl::Input &);
@@ -37,7 +37,7 @@ namespace MapElement {
 
     class Crate : public AObject {
     public:
-        Crate(float const, float const, std::list<AObject*> *, Camera const &);
+        Crate(float const, float const, std::list<AObject*> *);
         ~Crate();
         void initialize(void);
         void update(gdl::GameClock const &, gdl::Input &);
@@ -50,7 +50,7 @@ namespace MapElement {
 
     class Wall : public AObject {
     public:
-        Wall(float const x, float const y, std::list<AObject*> *, Camera const &);
+        Wall(float const x, float const y, std::list<AObject*> *);
         ~Wall();
         void initialize(void);
         void update(gdl::GameClock const &, gdl::Input &);

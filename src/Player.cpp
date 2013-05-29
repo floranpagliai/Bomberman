@@ -3,9 +3,9 @@
 namespace Model {
 
     Player::Player(float const x, float const z, std::list<AObject*> *objects) {
-        this->position_.x = x;
+        this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 1.0f;
-        this->position_.z = z;
+        this->position_.z = z * (BLOCK_SIZE * 2);
         this->ammo_ = 0;
         this->speed_ = 0;
         this->objects_ = objects;

@@ -5,12 +5,11 @@ DIR		=	src/
 SRC		=	$(DIR)main.cpp\
 			$(DIR)MyGame.cpp\
 			$(DIR)Camera.cpp\
-			$(DIR)Primitive.cpp\
 			$(DIR)Player.cpp\
 			$(DIR)Bomb.cpp\
 			$(DIR)Object.cpp\
-			$(DIR)Parser.cpp\
-			$(DIR)MapElement.cpp
+			$(DIR)MapElement.cpp\
+			$(DIR)Map.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 

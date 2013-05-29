@@ -22,6 +22,8 @@ public:
 
   Vector3f getPosition(void) const;
   Vector3f getRotation(void) const;
+
+  void setPosition(float const x, float const y, float const z);
 };
 
 #endif

@@ -9,24 +9,9 @@ void MyGame::initialize(void) {
     window_.setWidth(1024);
     window_.create();
     camera_.initialize();
-
-    openMap("map/map2");
-    objects_.push_back(new Model::Player(0.0f, 0.0f, &objects_));
-    //    int i = -10;
-    //    int x = -10;
-    //    while (i <= 10) {
-    //        while (x <= 10) {
-    //            if (x == -10 || x == 10 || i == -10 || i == 10)
-    //                objects_.push_back(new MapElement::Wall(x, i, &objects_, camera_));
-    //            objects_.push_back(new MapElement::Ground(x, i, &objects_, camera_));
-    //            x++;
-    //        }
-    //        x = -10;
-    //        i++;
-    //    }
-    //    objects_.push_back(new MapElement::Crate(1.0f, 0.0f, &objects_, camera_));
-    //    objects_.push_back(new MapElement::Crate(9.0f, 0.0f, &objects_, camera_));
-    //    objects_.push_back(new MapElement::Crate(5.0f, 3.0f, &objects_, camera_));
+    Map map_("map/map09", &objects_);
+    map_.openMap();
+    camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - map_.getMaxX() * 300.0f));
     std::list<AObject*>::iterator itb = this->objects_.begin();
     for (; itb != this->objects_.end(); ++itb)
         (*itb)->initialize();
@@ -39,6 +24,14 @@ void MyGame::update(void) {
     for (; itb != this->objects_.end(); ++itb)
         (*itb)->update(gameClock_, input_);
     camera_.update(gameClock_, input_);
+    if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z >= 0)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z + 50.f));
+    if (input_.isKeyDown(gdl::Keys::F2) == true && camera_.getPosition().z > 0)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
+    if (input_.isKeyDown(gdl::Keys::F3) == true)
+        std::cout << camera_.getPosition().z << std::endl;
+    if (input_.isKeyDown(gdl::Keys::F4) == true)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 1200.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }
@@ -61,32 +54,4 @@ void MyGame::unload(void) {
     /*
       doit liberer la mémoire lorsque la fenêtre est fermée !!
      */
-}
-
-void MyGame::openMap(const char *name) {
-    std::ifstream file(name, std::ios::in);
-    std::string str;
-    int x = 0;
-    int z = 0;
-
-    if (file) {
-        while (getline(file, str)) {
-            std::string::iterator it = str.begin();
-            while (it != str.end()) {
-                if (*it == '1' || *it == '7') {
-                    objects_.push_back(new MapElement::Ground(x, z, &objects_, camera_));
-                } else if (*it == '2') {
-                    objects_.push_back(new MapElement::Wall(x, z, &objects_, camera_));
-                } else if (*it == '3') {
-                    objects_.push_back(new MapElement::Crate(x, z, &objects_, camera_));
-                }
-                it++;
-                x++;
-            }
-            x = 0;
-            z++;
-        }
-        file.close();
-    } else
-        std::cout << "Bad Map File" << std::endl;
 }
