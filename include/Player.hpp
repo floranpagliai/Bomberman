@@ -5,6 +5,7 @@
 #include "Image.hpp"
 #include "Model.hpp"
 
+#include <iostream>
 #include <cstdlib>
 #include <list>
 
@@ -18,7 +19,7 @@ namespace Model
   class Player : public AObject
   {
   public:
-    Player(float const x, float const y, std::list<AObject*> *);
+    Player(float const, float const, std::list<AObject*> *);
     ~Player(void);
 
     void initialize(void);
@@ -27,7 +28,7 @@ namespace Model
 
 	void	move(gdl::Input &);
     void	putBomb(gdl::Input &);
-    	
+
     int		getAmmo() const;
     int		getPower() const;
     int		getSpeed() const;
@@ -43,7 +44,6 @@ namespace Model
     int			ammo_;
     int			power_;
     int			speed_;
-    bool	isPush;
-    
+    bool		isPush_;
   };
 }

@@ -2,10 +2,10 @@
 
 namespace Bomb
 {
-  Bombe::Bombe(float const x, float const y, float const z, std::list<AObject*> *objects)
+  Bombe::Bombe(float const x, float const z, std::list<AObject*> *objects)
   {
     this->position_.x = x;
-    this->position_.y = y;
+    this->position_.y = 0.0f;
     this->position_.z = z;
     this->objects_ = objects;
     this->initialize();
@@ -33,7 +33,7 @@ namespace Bomb
     this->position_.x = x;
     this->position_.z = z;
   }
-  
+
   void	Bombe::update(gdl::GameClock const & gameClock, gdl::Input & input)
   {
     this->model_.update(gameClock);
@@ -43,10 +43,10 @@ namespace Bomb
   {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    
+
     glTranslatef(this->position_.x, this->position_.y, this->position_.z);
 
-    this->model_.draw(); 
+    this->model_.draw();
     glPopMatrix();
   }
 }

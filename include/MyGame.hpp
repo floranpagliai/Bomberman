@@ -15,10 +15,12 @@
 #include <list>
 
 #include "AObject.hpp"
+#include "Bomb.hpp"
 #include "Camera.hpp"
+#include "MapElement.hpp"
 #include "Primitive.hpp"
 #include "Player.hpp"
-#include "Bomb.hpp"
+
 
 class MyGame : public gdl::Game
 {

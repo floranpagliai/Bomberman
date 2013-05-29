@@ -19,6 +19,9 @@ public:
 
   void	initialize(void);
   void	update(gdl::GameClock const &, gdl::Input &);
+
+  Vector3f getPosition(void) const;
+  Vector3f getRotation(void) const;
 };
 
 #endif

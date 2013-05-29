@@ -8,7 +8,9 @@ SRC		=	$(DIR)main.cpp\
 			$(DIR)Primitive.cpp\
 			$(DIR)Player.cpp\
 			$(DIR)Bomb.cpp\
-			$(DIR)Object.cpp
+			$(DIR)Object.cpp\
+			$(DIR)Parser.cpp\
+			$(DIR)MapElement.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 
