@@ -6,7 +6,7 @@
 #include "Image.hpp"
 #include "Vector3f.hpp"
 
-#define   BLOCK_SIZE 300
+#define   BLOCK_SIZE 250
 
 class AObject {
 protected:

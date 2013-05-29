@@ -1,9 +1,9 @@
 //
 // Parser.cpp for Parser.cpp in /home/cayrel_l//tek2/projet/bomber/Bomberman/src
-// 
+//
 // Made by lambert cayrel
 // Login   <cayrel_l@epitech.net>
-// 
+//
 // Started on  Fri May 24 16:54:35 2013 lambert cayrel
 // Last update Mon May 27 16:45:36 2013 lambert cayrel
 //
@@ -19,7 +19,8 @@
 
 void	DisplayLine(std::string str, int line)
 {
-  int			pos = 0;
+  int			x = -10;
+  int                   z = -10;
   std::string::iterator it = str.begin();
 
   while (it != str.end())
@@ -36,7 +37,6 @@ void	DisplayLine(std::string str, int line)
 	{
 	  std::cout << "Crate|";
 	}
-      pos++;
       it++;
     }
   std::cout << std::endl;

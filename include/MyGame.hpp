@@ -13,12 +13,14 @@
 
 #include <cstdlib>
 #include <list>
+#include <iostream>
+#include <fstream>
 
 #include "AObject.hpp"
 #include "Bomb.hpp"
 #include "Camera.hpp"
 #include "MapElement.hpp"
-#include "Primitive.hpp"
+#include "Parser.hpp"
 #include "Player.hpp"
 
 
@@ -33,6 +35,8 @@ public:
   virtual void	update(void);
   virtual void	draw(void);
   virtual void	unload(void);
+
+  void openMap(const char *name);
 };
 
 #endif

@@ -10,22 +10,23 @@ void MyGame::initialize(void) {
     window_.create();
     camera_.initialize();
 
+    openMap("map/map2");
     objects_.push_back(new Model::Player(0.0f, 0.0f, &objects_));
-    int i = -10;
-    int x = -10;
-    while (i <= 10) {
-        while (x <= 10) {
-            if ( x == -10 || x == 10 || i == -10 || i == 10)
-                objects_.push_back(new MapElement::Wall(x, i, &objects_, camera_));
-            objects_.push_back(new MapElement::Ground(x, i, &objects_, camera_));
-            x++;
-        }
-        x = -10;
-        i++;
-    }
-    objects_.push_back(new MapElement::Crate(1.0f, 0.0f, &objects_, camera_));
-    objects_.push_back(new MapElement::Crate(9.0f, 0.0f, &objects_, camera_));
-    objects_.push_back(new MapElement::Crate(5.0f, 3.0f, &objects_, camera_));
+    //    int i = -10;
+    //    int x = -10;
+    //    while (i <= 10) {
+    //        while (x <= 10) {
+    //            if (x == -10 || x == 10 || i == -10 || i == 10)
+    //                objects_.push_back(new MapElement::Wall(x, i, &objects_, camera_));
+    //            objects_.push_back(new MapElement::Ground(x, i, &objects_, camera_));
+    //            x++;
+    //        }
+    //        x = -10;
+    //        i++;
+    //    }
+    //    objects_.push_back(new MapElement::Crate(1.0f, 0.0f, &objects_, camera_));
+    //    objects_.push_back(new MapElement::Crate(9.0f, 0.0f, &objects_, camera_));
+    //    objects_.push_back(new MapElement::Crate(5.0f, 3.0f, &objects_, camera_));
     std::list<AObject*>::iterator itb = this->objects_.begin();
     for (; itb != this->objects_.end(); ++itb)
         (*itb)->initialize();
@@ -60,4 +61,32 @@ void MyGame::unload(void) {
     /*
       doit liberer la mémoire lorsque la fenêtre est fermée !!
      */
+}
+
+void MyGame::openMap(const char *name) {
+    std::ifstream file(name, std::ios::in);
+    std::string str;
+    int x = 0;
+    int z = 0;
+
+    if (file) {
+        while (getline(file, str)) {
+            std::string::iterator it = str.begin();
+            while (it != str.end()) {
+                if (*it == '1' || *it == '7') {
+                    objects_.push_back(new MapElement::Ground(x, z, &objects_, camera_));
+                } else if (*it == '2') {
+                    objects_.push_back(new MapElement::Wall(x, z, &objects_, camera_));
+                } else if (*it == '3') {
+                    objects_.push_back(new MapElement::Crate(x, z, &objects_, camera_));
+                }
+                it++;
+                x++;
+            }
+            x = 0;
+            z++;
+        }
+        file.close();
+    } else
+        std::cout << "Bad Map File" << std::endl;
 }
