@@ -4,38 +4,38 @@
 #include "AObject.hpp"
 #include "Bomb.hpp"
 
-namespace Model
-{
-  class Player : public AObject
-  {
-  public:
-    Player(float const, float const, std::list<AObject*> *);
-    ~Player(void);
+namespace Model {
 
-    void initialize(void);
-    void update(gdl::GameClock const &, gdl::Input &);
-    void draw(void);
+    class Player : public AObject {
+    public:
+        Player(float const, float const, std::list<AObject*> *);
+        ~Player(void);
 
-	void	move(gdl::Input &);
-    void	putBomb(gdl::Input &);
+        void initialize(void);
+        void update(gdl::GameClock const &, gdl::Input &);
+        void draw(void);
 
-    int		getAmmo() const;
-    int		getPower() const;
-    int		getSpeed() const;
+        void checkMove(gdl::Input &input);
+        void move(gdl::Input &);
+        void putBomb(gdl::Input &);
 
-    void	ammoUp();
-    void	powerUp();
-    void	speedUp();
+        int getAmmo() const;
+        int getPower() const;
+        int getSpeed() const;
+
+        void ammoUp();
+        void powerUp();
+        void speedUp();
 
 
-  protected:
-    gdl::Model		model_;
-    std::list<AObject*>	*objects_;
-    int			ammo_;
-    int			power_;
-    int			speed_;
-    bool		isPush_;
-  };
+    protected:
+        gdl::Model model_;
+        std::list<AObject*> *objects_;
+        int ammo_;
+        int power_;
+        int speed_;
+        bool isPush_;
+    };
 }
 
 #endif

@@ -17,7 +17,7 @@ namespace MapElement {
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->objects_ = objects;
-        this->type_ = 1;
+        this->type_ = GROUND;
         this->initialize();
     }
 
@@ -57,12 +57,91 @@ namespace MapElement {
         glPopMatrix();
     }
 
+    Wall::Wall(float const x, float const z, std::list<AObject*> *objects) {
+        this->position_.x = x * (BLOCK_SIZE * 2);
+        this->position_.y = 0.0f;
+        this->position_.z = z * (BLOCK_SIZE * 2);
+        this->objects_ = objects;
+        this->type_ = WALL;
+        this->initialize();
+    }
+
+    Wall::~Wall() {
+    }
+
+    void Wall::initialize(void) {
+        this->texture_ = gdl::Image::load("assets/ground_rock.png");
+    }
+
+    void Wall::update(gdl::GameClock const & gameClock, gdl::Input & input) {
+    }
+
+    void Wall::draw(void) {
+        texture_.bind();
+        glEnable(GL_TEXTURE_2D);
+        glPushMatrix();
+        glTranslatef(this->position_.x, this->position_.y, this->position_.z);
+        glBegin(GL_QUADS);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
+
+        glEnd();
+//        glRotatef(this->camera_.getRotation().x, 1.0f, 0.0f, 0.0f);
+//        glRotatef(this->camera_.getRotation().y, 0.0f, 1.0f, 0.0f);
+//        glRotatef(this->camera_.getRotation().z, 0.0f, 0.0f, 1.0f);
+
+        glPopMatrix();
+    }
+
     Crate::Crate(float const x, float const z, std::list<AObject*> *objects) {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->objects_ = objects;
-        this->type_ = 3;
+        this->type_ = CRATE;
         this->initialize();
     }
 
@@ -134,85 +213,6 @@ namespace MapElement {
 //                this->camera_.getRotation().z +
 //                this->position_.z, 0.0f);
         glEnd();
-        glPopMatrix();
-    }
-
-    Wall::Wall(float const x, float const z, std::list<AObject*> *objects) {
-        this->position_.x = x * (BLOCK_SIZE * 2);
-        this->position_.y = 0.0f;
-        this->position_.z = z * (BLOCK_SIZE * 2);
-        this->objects_ = objects;
-        this->type_ = 2;
-        this->initialize();
-    }
-
-    Wall::~Wall() {
-    }
-
-    void Wall::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/ground_rock.png");
-    }
-
-    void Wall::update(gdl::GameClock const & gameClock, gdl::Input & input) {
-    }
-
-    void Wall::draw(void) {
-        texture_.bind();
-        glEnable(GL_TEXTURE_2D);
-        glPushMatrix();
-        glTranslatef(this->position_.x, this->position_.y, this->position_.z);
-        glBegin(GL_QUADS);
-
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-
-        glEnd();
-//        glRotatef(this->camera_.getRotation().x, 1.0f, 0.0f, 0.0f);
-//        glRotatef(this->camera_.getRotation().y, 0.0f, 1.0f, 0.0f);
-//        glRotatef(this->camera_.getRotation().z, 0.0f, 0.0f, 1.0f);
-
         glPopMatrix();
     }
 }

@@ -50,7 +50,7 @@ namespace MapElement {
 
     class Wall : public AObject {
     public:
-        Wall(float const x, float const y, std::list<AObject*> *);
+        Wall(float const, float const, std::list<AObject*> *);
         ~Wall();
         void initialize(void);
         void update(gdl::GameClock const &, gdl::Input &);

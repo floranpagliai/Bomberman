@@ -8,11 +8,53 @@
         <df name="marvin.fbm">
         </df>
       </df>
+      <df name="doc">
+      </df>
       <df name="include">
+        <in>AObject.hpp</in>
+        <in>Bomb.hpp</in>
+        <in>Camera.hpp</in>
+        <in>Flamme.hpp</in>
+        <in>Map.hpp</in>
+        <in>MapElement.hpp</in>
+        <in>MyGame.hpp</in>
+        <in>Object.hpp</in>
+        <in>Parser.hpp</in>
+        <in>Player.hpp</in>
+        <in>Vector3f.hpp</in>
       </df>
       <df name="lib">
+        <df name="include">
+          <in>AnimStates.hpp</in>
+          <in>Assert.hpp</in>
+          <in>Clock.hpp</in>
+          <in>Color.hpp</in>
+          <in>Game.hpp</in>
+          <in>GameClock.hpp</in>
+          <in>GlError.hpp</in>
+          <in>IClock.hpp</in>
+          <in>Image.hpp</in>
+          <in>Input.hpp</in>
+          <in>Model.hpp</in>
+          <in>ModelException.hpp</in>
+          <in>Resource.hpp</in>
+          <in>Text.hpp</in>
+          <in>TextureMgr.hpp</in>
+          <in>Window.hpp</in>
+        </df>
+      </df>
+      <df name="map">
       </df>
       <df name="src">
+        <in>Bomb.cpp</in>
+        <in>Camera.cpp</in>
+        <in>Flamme.cpp</in>
+        <in>Map.cpp</in>
+        <in>MapElement.cpp</in>
+        <in>MyGame.cpp</in>
+        <in>Parser.cpp</in>
+        <in>Player.cpp</in>
+        <in>main.cpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
