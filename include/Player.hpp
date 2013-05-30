@@ -38,7 +38,7 @@ namespace Model
     void	speedUp();
 
 
-  private:
+  protected:
     gdl::Model		model_;
     std::list<AObject*>	*objects_;
     int			ammo_;

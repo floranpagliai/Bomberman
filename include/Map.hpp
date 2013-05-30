@@ -1,10 +1,3 @@
-/*
- * File:   Map.hpp
- * Author: floran
- *
- * Created on 29 mai 2013, 15:08
- */
-
 #ifndef __MAP_HPP__
 #define	__MAP_HPP__
 
@@ -27,13 +20,6 @@
 #include "Vector3f.hpp"
 
 class Map {
-public:
-    Map(const char *name, std::list<AObject*> *);
-    virtual ~Map();
-
-    int         getMaxX() const;
-    void        posMap();
-    void        openMap();
 private:
     int posX_;
     int posZ_;
@@ -41,7 +27,15 @@ private:
     const char *name_;
     std::list<AObject*> *objects_;
 
+public:
+    Map(const char *name, std::list<AObject*> *);
+    Map(const Map &);
+    virtual ~Map();
+
+    int getMaxX() const;
+    void posMap();
+    void openMap();
 };
 
-#endif	/* MAP_HPP */
+#endif
 

@@ -1,18 +1,19 @@
-/*
- * File:   Map.cpp
- * Author: floran
- *
- * Created on 29 mai 2013, 15:09
- */
-
 #include "Map.hpp"
 
 Map::Map(const char *name, std::list<AObject*> *objects) {
     this->objects_ = objects;
     this->name_ = name;
-    posX_ = 0;
-    posZ_ = 0;
-    maxX_ = 0;
+    this->posX_ = 0;
+    this->posZ_ = 0;
+    this->maxX_ = 0;
+}
+
+Map::Map(const Map &old) {
+    this->objects_ = old.objects_;
+    this->name_ = old.name_;
+    this->posX_ = old.posX_;
+    this->posZ_ = old.posZ_;
+    this->maxX_ = old.maxX_;
 }
 
 Map::~Map() {
@@ -56,6 +57,7 @@ void Map::openMap() {
             } else if (*it == '2') {
                 this->objects_->push_back(new MapElement::Wall(posX_, posZ_, this->objects_));
             } else if (*it == '3') {
+                this->objects_->push_back(new MapElement::Ground(posX_, posZ_, this->objects_));
                 this->objects_->push_back(new MapElement::Crate(posX_, posZ_, this->objects_));
             } else if (*it == '7') {
                 this->objects_->push_back(new MapElement::Ground(posX_, posZ_, this->objects_));

@@ -30,6 +30,7 @@ class MyGame : public gdl::Game
 private:
   Camera		camera_;
   std::list<AObject*>	objects_;
+  float cameraZ_;
 
 public:
   virtual void	initialize(void);
