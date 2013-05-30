@@ -35,15 +35,18 @@ protected:
   Vector3f	rotation_;
   bool		isOver;
   int		type_;
-  
+
 public:
-  
+
   AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), isOver(false) {
     }
-  
+
   virtual void initialize(void) = 0;
   virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
   virtual void draw(void) = 0;
+  bool  getIsOver() const {
+      return this->isOver;
+  }
   int getType() const {
     return type_;
   }

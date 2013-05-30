@@ -2,7 +2,6 @@
 
 Flamme::Flamme(float const x, float const y, float const z, std::list<AObject*> *objects)
 {
-  std::cout<< "1" << std::endl;
   this-> position_.x = x;
   this-> position_.y = 0.0f;
   this->position_.z = z;
@@ -32,14 +31,14 @@ void	Flamme::update(gdl::GameClock const & gameClock, gdl::Input & input)
 
 void	Flamme::draw()
 {
-  if (this->isOver == true)
-    {
-      glMatrixMode(GL_MODELVIEW);
-      glPushMatrix();
-      glPopMatrix();
-    }
-  else
-  {
+//  if (this->isOver == true)
+//    {
+//      glMatrixMode(GL_MODELVIEW);
+//      glPushMatrix();
+//      glPopMatrix();
+//    }
+//  else
+//  {
       texture_.bind();
       glEnable(GL_TEXTURE_2D);
       glPushMatrix();
@@ -98,7 +97,7 @@ void	Flamme::draw()
       //         this->position_.z, 0.0f);*/
       glEnd();
       glPopMatrix();
-  }
+//  }
 }
 
 void	Flamme::expand()
