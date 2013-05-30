@@ -1,4 +1,5 @@
 #include "Bomb.hpp"
+#include <iostream>
 
 namespace Bomb
 {
@@ -9,12 +10,12 @@ namespace Bomb
     this->position_.z = z;
     this->objects_ = objects;
     this->initialize();
-  }
+}
 
   Bombe::~Bombe()
   {
   }
-
+  
   void	Bombe::initialize(void)
   {
     //charge le modele
@@ -32,21 +33,42 @@ namespace Bomb
       z -= z % (BLOCK_SIZE * 2);
     this->position_.x = x;
     this->position_.z = z;
+    this->timer_.play();
   }
 
   void	Bombe::update(gdl::GameClock const & gameClock, gdl::Input & input)
   {
     this->model_.update(gameClock);
+    this->timer_.update();
+    std::cout << this->timer_.getTotalElapsedTime() << std::endl;
+    if (this->timer_.getTotalElapsedTime() >= 3)
+      this->explose();
   }
-
+  
   void	Bombe::draw(void)
-  {
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-
-    glTranslatef(this->position_.x, this->position_.y, this->position_.z);
-
-    this->model_.draw();
-    glPopMatrix();
+  {if (over == true)
+      {
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glPopMatrix();
+      }
+    else
+      {
+  	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glTranslatef(this->position_.x, this->position_.y, this->position_.z);
+	
+	this->model_.draw();
+	glPopMatrix();
+      }
   }
+  
+  void	Bombe::explose()
+  {
+    over = true;
+    this->timer_.pause();
+    std::cout << "bomb" << std::endl;
+    this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z, this->objects_));
+  }  
 }
+

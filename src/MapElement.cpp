@@ -8,7 +8,7 @@
 // Last update Mon May 27 17:24:14 2013 lambert cayrel
 //
 
-#include	"MapElement.hpp"
+#include "MapElement.hpp"
 
 namespace MapElement {
 
@@ -17,6 +17,7 @@ namespace MapElement {
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->objects_ = objects;
+        this->type_ = 1;
         this->initialize();
     }
 
@@ -61,6 +62,7 @@ namespace MapElement {
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->objects_ = objects;
+        this->type_ = 3;
         this->initialize();
     }
 
@@ -140,6 +142,7 @@ namespace MapElement {
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->objects_ = objects;
+        this->type_ = 2;
         this->initialize();
     }
 

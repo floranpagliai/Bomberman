@@ -5,6 +5,9 @@
 #include "Model.hpp"
 #include "GameClock.hpp"
 #include "Input.hpp"
+#include "MyGame.hpp"
+
+#define TIMER_BOMB 3
 
 namespace Bomb
 {
@@ -16,10 +19,15 @@ namespace Bomb
     void	initialize(void);
     void	update(gdl::GameClock const &, gdl::Input &);
     void	draw(void);
+    bool	stateOfBomb();
+    void	explose();
+
   private:
     gdl::Model	model_;
     std::list<AObject*>	*objects_;
-
+    gdl::Clock	timer_;
+    bool	over;
   };
 }
+
 #endif

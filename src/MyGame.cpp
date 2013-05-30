@@ -21,8 +21,14 @@ void MyGame::initialize(void) {
 
 void MyGame::update(void) {
     std::list<AObject*>::iterator itb = this->objects_.begin();
-    for (; itb != this->objects_.end(); ++itb)
+    for (; itb != this->objects_.end(); ++itb) {
+//        if ((*itb).getType() == 3) {
+//            delete *itb;
+//            objects_->erase(itb);
+//        }
         (*itb)->update(gameClock_, input_);
+
+    }
     camera_.update(gameClock_, input_);
     if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z >= 0)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z + 50.f));
