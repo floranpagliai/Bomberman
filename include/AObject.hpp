@@ -31,21 +31,22 @@
 
 class AObject {
 protected:
-    Vector3f position_;
-    Vector3f rotation_;
-    int type_;
-
+  Vector3f	position_;
+  Vector3f	rotation_;
+  bool		isOver;
+  int		type_;
+  
 public:
-
-    AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f) {
+  
+  AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), isOver(false) {
     }
-
-    virtual void initialize(void) = 0;
-    virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
-    virtual void draw(void) = 0;
-    int getType() const {
-        return type_;
-    }
+  
+  virtual void initialize(void) = 0;
+  virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
+  virtual void draw(void) = 0;
+  int getType() const {
+    return type_;
+  }
 };
 
 #endif

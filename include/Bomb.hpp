@@ -23,7 +23,6 @@ namespace Bomb
     gdl::Model	model_;
     std::list<AObject*>	*objects_;
     gdl::Clock	timer_;
-    bool	over;
   };
 }
 

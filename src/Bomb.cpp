@@ -46,7 +46,7 @@ namespace Bomb
   }
   
   void	Bombe::draw(void)
-  {if (over == true)
+  {if (this->isOver == true)
       {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -65,7 +65,7 @@ namespace Bomb
   
   void	Bombe::explose()
   {
-    over = true;
+    this->isOver = true;
     this->timer_.pause();
     std::cout << "bomb" << std::endl;
     this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z, this->objects_));

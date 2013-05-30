@@ -29,7 +29,7 @@ private:
   e_direction	direction_;
   std::list<AObject*>	*objects_;
   gdl::Model	model_;
-  bool		over;
+  //  bool		over;
   
 public:
   Flamme(float const x, float const y, float const z, std::list<AObject*> *objects);
