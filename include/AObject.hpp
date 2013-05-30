@@ -1,9 +1,30 @@
 #ifndef __AOBJECT__HPP__
 #define __AOBJECT__HPP__
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+#include "AnimStates.hpp"
+#include "Assert.hpp"
+#include "Clock.hpp"
+#include "Color.hpp"
+#include "Game.hpp"
 #include "GameClock.hpp"
-#include "Input.hpp"
+#include "GlError.hpp"
+#include "IClock.hpp"
 #include "Image.hpp"
+#include "Input.hpp"
+#include "Model.hpp"
+#include "ModelException.hpp"
+#include "Resource.hpp"
+#include "Text.hpp"
+#include "Window.hpp"
+
+#include <cstdlib>
+#include <list>
+#include <iostream>
+#include <fstream>
+
 #include "Vector3f.hpp"
 
 #define   BLOCK_SIZE 250

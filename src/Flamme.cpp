@@ -109,7 +109,7 @@ void	Flamme::draw()
 
 void	Flamme::expand()
 {
-  
+
 }
 
 void		Flamme::setDirection(e_direction direction)
@@ -119,7 +119,7 @@ void		Flamme::setDirection(e_direction direction)
 
 e_direction	Flamme::getDirection() const
 {
-  
+
 }
 
 void		Flamme::explose()

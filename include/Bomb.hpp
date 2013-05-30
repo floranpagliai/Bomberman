@@ -2,10 +2,7 @@
 #define __BOMB_HPP__
 
 #include "AObject.hpp"
-#include "Model.hpp"
-#include "GameClock.hpp"
-#include "Input.hpp"
-#include "MyGame.hpp"
+#include "Flamme.hpp"
 
 #define TIMER_BOMB 3
 

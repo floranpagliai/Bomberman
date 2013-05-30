@@ -1,17 +1,7 @@
-#include "GL/gl.h"
-#include "GL/glu.h"
-
-#include "Input.hpp"
-#include "Image.hpp"
-#include "Model.hpp"
-
-#include <iostream>
-#include <cstdlib>
-#include <list>
+#ifndef __PLAYER_HPP__
+#define __PLAYER_HPP__
 
 #include "AObject.hpp"
-#include "Vector3f.hpp"
-#include "GameClock.hpp"
 #include "Bomb.hpp"
 
 namespace Model
@@ -47,3 +37,5 @@ namespace Model
     bool		isPush_;
   };
 }
+
+#endif
