@@ -15,38 +15,47 @@ namespace Bomb {
     }
 
     void Bombe::initialize(void) {
-        //charge le modele
         this->model_ = gdl::Model::load("assets/bomb.fbx");
         int x = this->position_.x;
         int z = this->position_.z;
-        std::cout << "X = " << this->position_.x << std::endl;
-        std::cout << "Z = " << this->position_.z << std::endl;
 
         if (x > 0) {
-            if (x % (BLOCK_SIZE * 2) > BLOCK_SIZE)
+            if (x % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
+                std::cout << "0x1" << std::endl;
                 x += (BLOCK_SIZE * 2 - (x % (BLOCK_SIZE * 2)));
-            else
+            } else {
+                std::cout << "0x2" << std::endl;
                 x -= x % (BLOCK_SIZE * 2);
+            }
+
         } else {
-            if (x % (BLOCK_SIZE * 2) > BLOCK_SIZE)
-                x += (BLOCK_SIZE * 2 - (x % (BLOCK_SIZE * 2)));
-            else
+            if (-x % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
+                std::cout << "x1" << std::endl;
+                x -= (BLOCK_SIZE * 2 + (x % (BLOCK_SIZE * 2)));
+            } else {
+                std::cout << "x2" << std::endl;
                 x -= x % (BLOCK_SIZE * 2);
+            }
         }
         if (z > 0) {
-            if (z % (BLOCK_SIZE * 2) > BLOCK_SIZE)
+            if (z % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
+                std::cout << "0z1" << std::endl;
                 z += (BLOCK_SIZE * 2 - (z % (BLOCK_SIZE * 2)));
-            else
+            } else {
+                std::cout << "0z2" << std::endl;
                 z -= z % (BLOCK_SIZE * 2);
+            }
+
         } else {
-            if (z % (BLOCK_SIZE * 2) > BLOCK_SIZE)
-                z += (BLOCK_SIZE * 2 - (z % (BLOCK_SIZE * 2)));
-            else
+            if (-z % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
+                std::cout << "z1" << std::endl;
+                z -= (BLOCK_SIZE * 2 + (z % (BLOCK_SIZE * 2)));
+            } else {
+                std::cout << "z2" << std::endl;
                 z -= z % (BLOCK_SIZE * 2);
+            }
         }
-        std::cout << "X = " << x << std::endl;
-        std::cout << "Z = " << z << std::endl;
-        std::cout << -BLOCK_SIZE << std::endl;
+        std::cout << "===============" << std::endl;
         this->position_.x = x;
         this->position_.z = z;
         this->timer_.play();
