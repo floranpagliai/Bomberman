@@ -22,8 +22,8 @@ void MyGame::initialize(void) {
 void MyGame::update(void) {
     std::list<AObject*>::iterator itb = this->objects_.begin();
     for (; itb != this->objects_.end(); ++itb) {
-        if ((*itb)->getType() == 3) {
-            std::cout << (*itb)->getType() << std::endl;
+        if ((*itb)->getIsOver() == true) {
+            itb = this->objects_.erase(itb);
         }
         (*itb)->update(gameClock_, input_);
 
