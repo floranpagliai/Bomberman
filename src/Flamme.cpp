@@ -1,10 +1,11 @@
 #include "Flamme.hpp"
 
-Flamme::Flamme(float const x, float const y, float const z, std::list<AObject*> *objects) {
+Flamme::Flamme(float const x, float const y, float const z, int	const power, std::list<AObject*> *objects) {
     this-> position_.x = x;
     this-> position_.y = 0.0f;
     this->position_.z = z;
     this->objects_ = objects;
+    this->power_ = power;
     this->initialize();
 }
 
@@ -18,10 +19,12 @@ void Flamme::initialize() {
 }
 
 void Flamme::update(gdl::GameClock const & gameClock, gdl::Input & input) {
-    //this->texture_.update(gameClock);
-    this->timer_.update();
-    if (this->timer_.getTotalElapsedTime() >= 1)
-        this->explose();
+  //this->texture_.update(gameClock);
+  this->timer_.update();
+  if (this->timer_.getTotalElapsedTime() >= 0.20)
+    this->expand();
+  if (this->timer_.getTotalElapsedTime() >= 0.80)
+    this->explose();  
 }
 
 void Flamme::draw() {
@@ -75,18 +78,19 @@ void Flamme::draw() {
     glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
     glTexCoord2f(1.0f, 0.0f);
     glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-    //    glRotatef(this->camera_.getRotation().x +
-    //        this->position_.x,
-    //        this->camera_.getRotation().y +
-    //        this->position_.y,
-    //        this->camera_.getRotation().z +
-    //         this->position_.z, 0.0f);*/
+
     glEnd();
     glPopMatrix();
 }
 
 void Flamme::expand() {
-
+  if (this->power_ > 0)
+    {
+      this->objects_->push_back(new Flamme(this->position_.x + BLOCK_SIZE * 2, this->position_.y, this->position_.z, this->power_ - 1, this->objects_));
+      this->objects_->push_back(new Flamme(this->position_.x - BLOCK_SIZE * 2, this->position_.y, this->position_.z, this->power_ - 1, this->objects_));
+      this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z + BLOCK_SIZE * 2, this->power_ - 1, this->objects_));
+      this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z - BLOCK_SIZE * 2, this->power_ - 1, this->objects_));
+    }
 }
 
 void Flamme::setDirection(e_direction direction) {
@@ -98,6 +102,7 @@ e_direction Flamme::getDirection() const {
 }
 
 void Flamme::explose() {
-    this->isOver = true;
-    this->timer_.pause();
+  this->isOver = true;
+  this->timer_.pause();
+  //expand();
 }

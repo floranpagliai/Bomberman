@@ -3,10 +3,11 @@
 
 namespace Bomb {
 
-    Bombe::Bombe(float const x, float const z, std::list<AObject*> *objects) {
+  Bombe::Bombe(float const x, float const z, int const power, std::list<AObject*> *objects) {
         this->position_.x = x;
         this->position_.y = 0.0f;
         this->position_.z = z;
+	this->power_ = power;
         this->objects_ = objects;
         this->initialize();
     }
@@ -62,10 +63,15 @@ namespace Bomb {
         glPopMatrix();
     }
 
+  int	Bombe::getPower() const
+  {
+    return power_;
+  }
+
     void Bombe::explose() {
         this->isOver = true;
         this->timer_.pause();
-        this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z, this->objects_));
+        this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z, this->power_, this->objects_));
     }
 }
 
