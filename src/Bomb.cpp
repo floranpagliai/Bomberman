@@ -53,9 +53,7 @@ namespace Bomb {
         this->timer_.update();
         if (this->timer_.getTotalElapsedTime() >= 2)
             this->explose();
-        std::list<AObject *>::iterator it = this->objects_->begin();
-
-        for (; it != this->objects_->end() && this->isOver == false; it++) {
+        for (std::list<AObject *>::iterator it = this->objects_->begin(); it != this->objects_->end() && this->isOver == false; it++) {
             if (((*it)->getType() == FLAMME) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
                 this->explose();
             }
@@ -74,12 +72,11 @@ namespace Bomb {
     void Bombe::explose() {
         this->timer_.pause();
         this->isOver = true;
-
-        this->objects_->push_back(new Flamme(this->position_.x, this->position_.z, 0, 1, this->objects_));
-        this->objects_->push_back(new Flamme(this->position_.x + BLOCK_SIZE * 2, this->position_.z, this->power_, 1, this->objects_));
-        this->objects_->push_back(new Flamme(this->position_.x - BLOCK_SIZE * 2, this->position_.z, this->power_, 2, this->objects_));
-        this->objects_->push_back(new Flamme(this->position_.x, this->position_.z + BLOCK_SIZE * 2, this->power_, 3, this->objects_));
-        this->objects_->push_back(new Flamme(this->position_.x, this->position_.z - BLOCK_SIZE * 2, this->power_, 4, this->objects_));
+        this->objects_->push_front(new Flamme(this->position_.x, this->position_.z, 0, 1, this->objects_));
+        this->objects_->push_front(new Flamme(this->position_.x + BLOCK_SIZE * 2, this->position_.z, this->power_, 1, this->objects_));
+        this->objects_->push_front(new Flamme(this->position_.x - BLOCK_SIZE * 2, this->position_.z, this->power_, 2, this->objects_));
+        this->objects_->push_front(new Flamme(this->position_.x, this->position_.z + BLOCK_SIZE * 2, this->power_, 3, this->objects_));
+        this->objects_->push_front(new Flamme(this->position_.x, this->position_.z - BLOCK_SIZE * 2, this->power_, 4, this->objects_));
     }
 }
 

@@ -39,11 +39,9 @@ public:
   void		initialize(void);
   void		update(gdl::GameClock const &, gdl::Input &);
   void		draw(void);
-  void		expand(void);
-  void		setDirection(e_direction);
-  e_direction	getDirection() const;
-  void		destroyObjects();
-  void explose();
+
+  void		propagate(void) const;
+  void		checkPropagation(void);
 };
 
 #endif

@@ -8,15 +8,14 @@ namespace Model {
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->type_ = PLAYER;
         this->ammo_ = 1;
-	this->power_ = 0;
+        this->power_ = 0;
         this->speed_ = 0;
         this->objects_ = objects;
         this->isPush_ = false;
-	this->initialize();
+        this->initialize();
     }
 
     Player::~Player() {
-
     }
 
     void Player::initialize(void) {
@@ -57,75 +56,72 @@ namespace Model {
                 }
             }
         }
-            move(input);
-            if (input.isKeyDown(gdl::Keys::S) == true) {
-                this->speedUp();
-            }
-            if (input.isKeyDown(gdl::Keys::A) == true) {
-
-                this->ammoUp();
-            }
+        move(input);
+        if (input.isKeyDown(gdl::Keys::S) == true) {
+            this->speedUp();
         }
-
-        void Player::move(gdl::Input & input) {
-            if (input.isKeyDown(gdl::Keys::Up) == true) {
-                this->rotation_.y = 180;
-                this->position_.z -= 25.0f + speed_ * 7.0f;
-                this->model_.play("Run");
-            } else if (input.isKeyDown(gdl::Keys::Down) == true) {
-                this->rotation_.y = 0;
-                this->position_.z += 25.0f + speed_ * 8.0f;
-                this->model_.play("Run");
-            } else if (input.isKeyDown(gdl::Keys::Left) == true) {
-                this->rotation_.y = -90;
-                this->position_.x -= 25.0f + speed_ * 8.0f;
-                this->model_.play("Run");
-            } else if (input.isKeyDown(gdl::Keys::Right) == true) {
-                this->rotation_.y = 90;
-                this->position_.x += 25.0f + speed_ * 8.0f;
-                this->model_.play("Run");
-            } else
-                this->model_.play("Stop");
-        }
-
-        void Player::putBomb(gdl::Input & input) {
-            if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
-	      this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.z, this->power_ , this->objects_));
-                //ammo_--;
-                this->isPush_ = true;
-            } else
-                this->isPush_ = false;
-        }
-
-        int Player::getAmmo() const {
-
-            return ammo_;
-        }
-
-        int Player::getPower() const {
-
-            return power_;
-        }
-
-        int Player::getSpeed() const {
-
-            return speed_;
-        }
-
-        void Player::ammoUp() {
-            if (ammo_ < 6) {
-
-                ammo_ += 1;
-            }
-        }
-
-        void Player::powerUp() {
-
-            power_ += 1;
-        }
-
-        void Player::speedUp() {
-            if (speed_ < 4)
-                speed_ += 1;
+        if (input.isKeyDown(gdl::Keys::A) == true) {
+            this->ammoUp();
         }
     }
+
+    void Player::move(gdl::Input & input) {
+        if (input.isKeyDown(gdl::Keys::Up) == true) {
+            this->rotation_.y = 180;
+            this->position_.z -= 25.0f + speed_ * 7.0f;
+            this->model_.play("Run");
+        } else if (input.isKeyDown(gdl::Keys::Down) == true) {
+            this->rotation_.y = 0;
+            this->position_.z += 25.0f + speed_ * 7.0f;
+            this->model_.play("Run");
+        } else if (input.isKeyDown(gdl::Keys::Left) == true) {
+            this->rotation_.y = -90;
+            this->position_.x -= 25.0f + speed_ * 7.0f;
+            this->model_.play("Run");
+        } else if (input.isKeyDown(gdl::Keys::Right) == true) {
+            this->rotation_.y = 90;
+            this->position_.x += 25.0f + speed_ * 7.0f;
+            this->model_.play("Run");
+        } else
+            this->model_.play("Stop");
+    }
+
+    void Player::putBomb(gdl::Input & input) {
+        if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
+            this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.z, this->power_, this->objects_));
+            ammo_--;
+            this->isPush_ = true;
+        } else
+            this->isPush_ = false;
+    }
+
+    int Player::getAmmo() const {
+
+        return ammo_;
+    }
+
+    int Player::getPower() const {
+
+        return power_;
+    }
+
+    int Player::getSpeed() const {
+
+        return speed_;
+    }
+
+    void Player::ammoUp() {
+        if (ammo_ <= 1)
+            ammo_ += 1;
+    }
+
+    void Player::powerUp() {
+        if (power_ <= 4)
+            power_ += 1;
+    }
+
+    void Player::speedUp() {
+        if (speed_ < 4)
+            speed_ += 1;
+    }
+}

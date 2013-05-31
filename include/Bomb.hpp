@@ -7,25 +7,24 @@
 
 #define TIMER_BOMB 3
 
-namespace Bomb
-{
-  class Bombe : public AObject
-  {
-  public:
-    Bombe(float const, float const,int const, std::list<AObject*> *);
-    ~Bombe();
-    void	initialize(void);
-    void	update(gdl::GameClock const &, gdl::Input &);
-    void	draw(void);
-    bool	stateOfBomb();
-    void	explose();
+namespace Bomb {
 
-  private:
-    gdl::Model	model_;
-    std::list<AObject*>	*objects_;
-    gdl::Clock	timer_;
-    int power_;
-  };
+    class Bombe : public AObject {
+    public:
+        Bombe(float const, float const, int const, std::list<AObject*> *);
+        ~Bombe();
+        void initialize(void);
+        void update(gdl::GameClock const &, gdl::Input &);
+        void draw(void);
+        bool stateOfBomb();
+        void explose();
+
+    private:
+        gdl::Model model_;
+        gdl::Clock timer_;
+        std::list<AObject*> *objects_;
+        int power_;
+    };
 }
 
 #endif
