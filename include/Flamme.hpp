@@ -30,18 +30,19 @@ private:
   std::list<AObject*>	*objects_;
   gdl::Model	model_;
   //  bool		over;
-  
+
 public:
-  Flamme(float const x, float const y, float const z, std::list<AObject*> *objects);
+  Flamme(float const, float const, float const, int const, std::list<AObject*> *objects);
   ~Flamme();
-  
+
   void		initialize(void);
   void		update(gdl::GameClock const &, gdl::Input &);
-  void		draw(void);  
+  void		draw(void);
   void		expand(void);
   void		setDirection(e_direction);
   e_direction	getDirection() const;
   void		explose();
+  void		destroyObjects(void);
 };
 
 #endif

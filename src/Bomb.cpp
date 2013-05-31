@@ -63,11 +63,6 @@ namespace Bomb {
         glPopMatrix();
     }
 
-  int	Bombe::getPower() const
-  {
-    return power_;
-  }
-
     void Bombe::explose() {
         this->isOver = true;
         this->timer_.pause();

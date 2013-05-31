@@ -1,6 +1,6 @@
 #include "Flamme.hpp"
 
-Flamme::Flamme(float const x, float const y, float const z, int	const power, std::list<AObject*> *objects) {
+Flamme::Flamme(float const x, float const y, float const z, int const power, std::list<AObject*> *objects) {
     this-> position_.x = x;
     this-> position_.y = 0.0f;
     this->position_.z = z;
@@ -19,12 +19,14 @@ void Flamme::initialize() {
 }
 
 void Flamme::update(gdl::GameClock const & gameClock, gdl::Input & input) {
-  //this->texture_.update(gameClock);
-  this->timer_.update();
-  if (this->timer_.getTotalElapsedTime() >= 0.20)
-    this->expand();
-  if (this->timer_.getTotalElapsedTime() >= 0.80)
-    this->explose();  
+    //this->texture_.update(gameClock);
+    this->destroyObjects();
+    if (this->isOver == false) {
+        this->timer_.update();
+        this->expand();
+        if (this->timer_.getTotalElapsedTime() >= 0.5)
+            this->isOver = true;
+    }
 }
 
 void Flamme::draw() {
@@ -84,12 +86,11 @@ void Flamme::draw() {
 }
 
 void Flamme::expand() {
-  if (this->power_ > 0)
-    {
-      this->objects_->push_back(new Flamme(this->position_.x + BLOCK_SIZE * 2, this->position_.y, this->position_.z, this->power_ - 1, this->objects_));
-      this->objects_->push_back(new Flamme(this->position_.x - BLOCK_SIZE * 2, this->position_.y, this->position_.z, this->power_ - 1, this->objects_));
-      this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z + BLOCK_SIZE * 2, this->power_ - 1, this->objects_));
-      this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z - BLOCK_SIZE * 2, this->power_ - 1, this->objects_));
+    if (this->power_ > 0) {
+        this->objects_->push_back(new Flamme(this->position_.x + BLOCK_SIZE * 2, this->position_.y, this->position_.z, this->power_ - 1, this->objects_));
+        this->objects_->push_back(new Flamme(this->position_.x - BLOCK_SIZE * 2, this->position_.y, this->position_.z, this->power_ - 1, this->objects_));
+        this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z + BLOCK_SIZE * 2, this->power_ - 1, this->objects_));
+        this->objects_->push_back(new Flamme(this->position_.x, this->position_.y, this->position_.z - BLOCK_SIZE * 2, this->power_ - 1, this->objects_));
     }
 }
 
@@ -102,7 +103,30 @@ e_direction Flamme::getDirection() const {
 }
 
 void Flamme::explose() {
-  this->isOver = true;
-  this->timer_.pause();
-  //expand();
+    this->isOver = true;
+    this->timer_.pause();
+    //expand();
+}
+
+void Flamme::destroyObjects(void) {
+    std::list<AObject *>::iterator it = this->objects_->begin();
+
+    for (; it != this->objects_->end() && this->isOver == false; it++) {
+        if (((*it)->getType() == CRATE)
+                && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
+            this->isOver = true;
+            delete *it;
+            objects_->erase(it);
+        } else if (((*it)->getType() == PLAYER || (*it)->getType() == WALL) &&
+                this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
+            if ((*it)->getType() != WALL) {
+                delete *it;
+                objects_->erase(it);
+            } else {
+                this->isOver = true;
+            }
+            break;
+
+        }
+    }
 }

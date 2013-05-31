@@ -12,7 +12,7 @@ namespace Bomb
   class Bombe : public AObject
   {
   public:
-    Bombe(float const x, float const z, std::list<AObject*> *);
+    Bombe(float const, float const,int const, std::list<AObject*> *);
     ~Bombe();
     void	initialize(void);
     void	update(gdl::GameClock const &, gdl::Input &);
@@ -24,6 +24,7 @@ namespace Bomb
     gdl::Model	model_;
     std::list<AObject*>	*objects_;
     gdl::Clock	timer_;
+    int power_;
   };
 }
 
