@@ -2,6 +2,7 @@
 #define __BOMB_HPP__
 
 #include "AObject.hpp"
+#include "Player.hpp"
 #include "Flamme.hpp"
 
 #define TIMER_BOMB 3

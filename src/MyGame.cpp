@@ -20,11 +20,11 @@ void MyGame::initialize(void) {
 //update objects
 
 void MyGame::update(void) {
-    std::list<AObject*>::iterator itb;
-    for (itb = this->objects_.begin(); itb != this->objects_.end(); ++itb) {
-        (*itb)->update(gameClock_, input_);
-        if ((*itb)->getIsOver() == true ) {
-            itb = this->objects_.erase(itb);
+    std::list<AObject*>::iterator it;
+    for (it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+        (*it)->update(gameClock_, input_);
+        if ((*it)->getIsOver() == true ) {
+            it = this->objects_.erase(it);
         }
     }
     camera_.update(gameClock_, input_);

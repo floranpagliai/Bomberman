@@ -20,42 +20,27 @@ namespace Bomb {
         int z = this->position_.z;
 
         if (x > 0) {
-            if (x % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
-                std::cout << "0x1" << std::endl;
+            if (x % (BLOCK_SIZE * 2) > BLOCK_SIZE)
                 x += (BLOCK_SIZE * 2 - (x % (BLOCK_SIZE * 2)));
-            } else {
-                std::cout << "0x2" << std::endl;
+            else
                 x -= x % (BLOCK_SIZE * 2);
-            }
-
         } else {
-            if (-x % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
-                std::cout << "x1" << std::endl;
+            if (-x % (BLOCK_SIZE * 2) > BLOCK_SIZE)
                 x -= (BLOCK_SIZE * 2 + (x % (BLOCK_SIZE * 2)));
-            } else {
-                std::cout << "x2" << std::endl;
+            else
                 x -= x % (BLOCK_SIZE * 2);
-            }
         }
         if (z > 0) {
-            if (z % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
-                std::cout << "0z1" << std::endl;
+            if (z % (BLOCK_SIZE * 2) > BLOCK_SIZE)
                 z += (BLOCK_SIZE * 2 - (z % (BLOCK_SIZE * 2)));
-            } else {
-                std::cout << "0z2" << std::endl;
+            else
                 z -= z % (BLOCK_SIZE * 2);
-            }
-
         } else {
-            if (-z % (BLOCK_SIZE * 2) > BLOCK_SIZE) {
-                std::cout << "z1" << std::endl;
+            if (-z % (BLOCK_SIZE * 2) > BLOCK_SIZE)
                 z -= (BLOCK_SIZE * 2 + (z % (BLOCK_SIZE * 2)));
-            } else {
-                std::cout << "z2" << std::endl;
+            else
                 z -= z % (BLOCK_SIZE * 2);
-            }
         }
-        std::cout << "===============" << std::endl;
         this->position_.x = x;
         this->position_.z = z;
         this->timer_.play();
