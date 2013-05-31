@@ -29,10 +29,11 @@ private:
   e_direction	direction_;
   std::list<AObject*>	*objects_;
   gdl::Model	model_;
-  //  bool		over;
+  bool  isExpand_;
+  int dir_;
 
 public:
-  Flamme(float const, float const, float const, int const, std::list<AObject*> *objects);
+  Flamme(float const, float const, int const, int const, std::list<AObject*> *objects);
   ~Flamme();
 
   void		initialize(void);
@@ -41,8 +42,8 @@ public:
   void		expand(void);
   void		setDirection(e_direction);
   e_direction	getDirection() const;
-  void		explose();
-  void		destroyObjects(void);
+  void		destroyObjects();
+  void explose();
 };
 
 #endif

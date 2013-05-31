@@ -6,8 +6,9 @@ namespace Model {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
-        this->ammo_ = 5;
-	this->power_ = 1;
+        this->type_ = PLAYER;
+        this->ammo_ = 1;
+	this->power_ = 0;
         this->speed_ = 0;
         this->objects_ = objects;
         this->isPush_ = false;
@@ -90,7 +91,7 @@ namespace Model {
         void Player::putBomb(gdl::Input & input) {
             if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
 	      this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.z, this->power_ , this->objects_));
-                ammo_--;
+                //ammo_--;
                 this->isPush_ = true;
             } else
                 this->isPush_ = false;
@@ -126,6 +127,5 @@ namespace Model {
         void Player::speedUp() {
             if (speed_ < 4)
                 speed_ += 1;
-            std::cout << "Vitesse :" << speed_ << std::endl;
         }
     }

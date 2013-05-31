@@ -16,8 +16,8 @@ namespace MapElement {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
-        this->objects_ = objects;
         this->type_ = GROUND;
+        this->objects_ = objects;
         this->initialize();
     }
 
@@ -61,8 +61,8 @@ namespace MapElement {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
-        this->objects_ = objects;
         this->type_ = WALL;
+        this->objects_ = objects;
         this->initialize();
     }
 
@@ -129,9 +129,9 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
 
         glEnd();
-//        glRotatef(this->camera_.getRotation().x, 1.0f, 0.0f, 0.0f);
-//        glRotatef(this->camera_.getRotation().y, 0.0f, 1.0f, 0.0f);
-//        glRotatef(this->camera_.getRotation().z, 0.0f, 0.0f, 1.0f);
+        //        glRotatef(this->camera_.getRotation().x, 1.0f, 0.0f, 0.0f);
+        //        glRotatef(this->camera_.getRotation().y, 0.0f, 1.0f, 0.0f);
+        //        glRotatef(this->camera_.getRotation().z, 0.0f, 0.0f, 1.0f);
 
         glPopMatrix();
     }
@@ -140,8 +140,8 @@ namespace MapElement {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
-        this->objects_ = objects;
         this->type_ = CRATE;
+        this->objects_ = objects;
         this->initialize();
     }
 
@@ -206,12 +206,12 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-//        glRotatef(this->camera_.getRotation().x +
-//                this->position_.x,
-//                this->camera_.getRotation().y +
-//                this->position_.y,
-//                this->camera_.getRotation().z +
-//                this->position_.z, 0.0f);
+        //        glRotatef(this->camera_.getRotation().x +
+        //                this->position_.x,
+        //                this->camera_.getRotation().y +
+        //                this->position_.y,
+        //                this->camera_.getRotation().z +
+        //                this->position_.z, 0.0f);
         glEnd();
         glPopMatrix();
     }
