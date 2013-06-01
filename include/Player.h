@@ -23,6 +23,7 @@ public:
     void draw(void);
 
     void checkMove(gdl::Input &input);
+    bool checkMove2(gdl::Input &input, float, int);
     void move(gdl::Input &);
     void putBomb(gdl::Input &);
     bool getBonus(Bonus *);
