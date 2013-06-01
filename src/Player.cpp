@@ -145,7 +145,7 @@ int Player::getSpeed() const {
 }
 
 bool Player::ammoUp() {
-    if (ammo_ <= 1) {
+    if (ammo_ <= 5) {
         ammo_ += 1;
         return true;
     }
