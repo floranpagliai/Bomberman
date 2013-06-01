@@ -3,7 +3,7 @@
 
 #include "AObject.hpp"
 #include "MapElement.hpp"
-#include "Player.hpp"
+#include "Player.h"
 
 class Map {
 private:

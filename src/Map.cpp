@@ -61,7 +61,7 @@ void Map::openMap() {
                 this->objects_->push_back(new MapElement::Crate(posX_, posZ_, this->objects_));
             } else if (*it == '7') {
                 this->objects_->push_back(new MapElement::Ground(posX_, posZ_, this->objects_));
-                this->objects_->push_back(new Model::Player(posX_, posZ_, this->objects_));
+                this->objects_->push_back(new Player(posX_, posZ_, this->objects_));
             }
 
             it++;

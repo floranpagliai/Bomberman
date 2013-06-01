@@ -1,8 +1,6 @@
-#include "Player.hpp"
+#include "Player.h"
 
-namespace Model {
-
-    Player::Player(float const x, float const z, std::list<AObject*> *objects) {
+Player::Player(float const x, float const z, std::list<AObject*> *objects) {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
@@ -61,9 +59,6 @@ namespace Model {
             }
         }
         move(input);
-        if (input.isKeyDown(gdl::Keys::A) == true) {
-            this->ammoUp();
-        }
     }
 
     void Player::move(gdl::Input & input) {
@@ -90,7 +85,6 @@ namespace Model {
     void Player::putBomb(gdl::Input & input) {
         if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
             this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_));
-            ammo_--;
             this->isPush_ = true;
         } else
             this->isPush_ = false;
@@ -144,4 +138,3 @@ namespace Model {
         }
         return false;
     }
-}

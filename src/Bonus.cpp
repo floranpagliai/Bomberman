@@ -19,7 +19,6 @@ Bonus::Bonus(float const x, float const z, eBonusType const type, std::list<AObj
 }
 
 Bonus::~Bonus() {
-
 }
 
 void Bonus::initialize(void) {
@@ -29,6 +28,7 @@ void Bonus::initialize(void) {
         this->texture_ = gdl::Image::load("assets/bonus/powerUp.png");
     else
         this->texture_ = gdl::Image::load("assets/bonus/speedUp.png");
+    this->timer_.play();
 }
 
 void Bonus::update(gdl::GameClock const & gameClock, gdl::Input & input) {
@@ -40,6 +40,10 @@ void Bonus::update(gdl::GameClock const & gameClock, gdl::Input & input) {
         dirAnim_ = 1;
     if (this->position_.y <= BLOCK_SIZE + 100 && dirAnim_ == 1)
         this->position_.y -= 2.0f;
+    this->rotation_.y -= 80;
+    this->timer_.update();
+    if (this->timer_.getTotalElapsedTime() >= TIMER_BONUS)
+        this->isOver = true;
 }
 
 void Bonus::draw(void) {
@@ -94,11 +98,12 @@ void Bonus::draw(void) {
     glTexCoord2f(1.0f, 0.0f);
     glVertex3f(BONUS_SIZE, BONUS_SIZE, -BONUS_SIZE);
 
-    glEnd();
-    glRotatef(this->rotation_.x, 1.0f, 0.0f, 0.0f);
-    glRotatef(this->rotation_.y, 0.0f, 1.0f, 0.0f);
-    glRotatef(this->rotation_.z, 0.0f, 0.0f, 1.0f);
 
+    //glRotatef(this->rotation_.x, 1.0f, 0.0f, 0.0f);
+    glRotatef(this->rotation_.y, 0.0f, 1.0f, 0.0f);
+    //glRotatef(this->rotation_.z, 0.0f, 0.0f, 1.0f);
+
+    glEnd();
     glPopMatrix();
 }
 
