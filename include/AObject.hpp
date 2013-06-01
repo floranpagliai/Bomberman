@@ -35,7 +35,10 @@ enum eType {
     CRATE,
     BOMB,
     FLAMME,
-    PLAYER
+    PLAYER,
+    FIREUP,
+    POWERUP,
+    SPEEDUP
 
 };
 

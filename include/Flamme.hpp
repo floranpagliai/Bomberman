@@ -1,16 +1,12 @@
 #ifndef __FLAMME_HPP__
 #define __FLAMME_HPP__
 
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <iostream>
-
 #include "AObject.hpp"
 #include "Model.hpp"
 #include "GameClock.hpp"
 #include "Input.hpp"
 #include "Camera.hpp"
-
+#include "Bonus.hpp"
 
 enum	e_direction
   {
@@ -42,6 +38,7 @@ public:
 
   void		propagate(void) const;
   void		checkPropagation(void);
+  void          popBonus(void) const;
 };
 
 #endif

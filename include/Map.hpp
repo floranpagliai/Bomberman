@@ -1,14 +1,6 @@
 #ifndef __MAP_HPP__
 #define	__MAP_HPP__
 
-#include <GL/gl.h>
-#include <GL/glu.h>
-
-#include <cstdlib>
-#include <list>
-#include <iostream>
-#include <fstream>
-
 #include "AObject.hpp"
 #include "MapElement.hpp"
 #include "Player.hpp"

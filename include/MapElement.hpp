@@ -11,9 +11,6 @@
 #ifndef __MAPELEMENT_HPP__
 #define __MAPELEMENT_HPP__
 
-#include <GL/gl.h>
-#include <GL/glu.h>
-
 #include "AObject.hpp"
 #include "Model.hpp"
 #include "GameClock.hpp"

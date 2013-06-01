@@ -51,6 +51,8 @@ void Flamme::checkPropagation() {
             this->isOver = true;
             delete (*it);
             objects_->erase(it);
+            if ((*it)->getType() == CRATE)
+                this->popBonus();
             break;
 
         } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
@@ -58,6 +60,19 @@ void Flamme::checkPropagation() {
             break;
         }
     }
+}
+
+void Flamme::popBonus(void) const {
+    int value;
+
+    srand(time(NULL));
+    value = rand() % 6 + 1;
+    if (value == 1)
+        this->objects_->push_front(new Bonus::FireUp(this->position_.x, this->position_.z, this->objects_));
+    else if (value == 3)
+        this->objects_->push_front(new Bonus::PowerUp(this->position_.x, this->position_.z, this->objects_));
+    else if (value == 6)
+        this->objects_->push_front(new Bonus::SpeedUp(this->position_.x, this->position_.z, this->objects_));
 }
 
 void Flamme::draw() {

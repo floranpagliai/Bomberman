@@ -9,6 +9,7 @@ SRC		=	$(DIR)main.cpp\
 			$(DIR)Bomb.cpp\
 			$(DIR)Flamme.cpp\
 			$(DIR)MapElement.cpp\
+			$(DIR)Bonus.cpp\
 			$(DIR)Map.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
