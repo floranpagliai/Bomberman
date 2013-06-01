@@ -36,9 +36,7 @@ enum eType {
     BOMB,
     FLAMME,
     PLAYER,
-    FIREUP,
-    POWERUP,
-    SPEEDUP
+    BONUS
 
 };
 

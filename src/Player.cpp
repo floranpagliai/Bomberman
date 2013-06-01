@@ -51,7 +51,10 @@ namespace Model {
         for (int i = 0; i < 4; i++) {
             std::list<AObject*>::iterator it;
             for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
-                if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == CRATE) {
+                if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
+                    delete (*it);
+                    objects_->erase(it);
+                    this->powerUp();
                     break;
                 }
             }
