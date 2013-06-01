@@ -35,8 +35,9 @@ enum eType {
     CRATE,
     BOMB,
     FLAMME,
-    PLAYER,
-    BONUS
+    BONUS,
+    PLAYER
+
 
 };
 
@@ -56,6 +57,17 @@ public:
     virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
     virtual void draw(void) = 0;
 
+    bool checkCollision(float x, float z) {
+        if (this->position_.x - x - BLOCK_SIZE * 1.25 > 0)
+            return false;
+        if (this->position_.z - z - BLOCK_SIZE * 1.25 > 0)
+            return false;
+        if (this->position_.x > x - BLOCK_SIZE * 1.5 || this->position_.x > x + BLOCK_SIZE * 1.25)
+            if (this->position_.z > z - BLOCK_SIZE * 1.5 || this->position_.z > z + BLOCK_SIZE * 1.25)
+                return true;
+        return false;
+    }
+
     Vector3f getPosition(void) const {
         return (this->position_);
     }
@@ -66,17 +78,6 @@ public:
 
     int getType() const {
         return type_;
-    }
-
-    bool checkCollision(float x, float z) {
-        if (this->position_.x - x - BLOCK_SIZE * 1.25 > 0)
-            return false;
-        if (this->position_.z - z - BLOCK_SIZE * 1.25 > 0)
-            return false;
-        if (this->position_.x > x - BLOCK_SIZE * 1.5 || this->position_.x > x + BLOCK_SIZE * 1.25)
-            if (this->position_.z > z - BLOCK_SIZE * 1.5 || this->position_.z > z + BLOCK_SIZE * 1.25)
-                return true;
-        return false;
     }
 };
 

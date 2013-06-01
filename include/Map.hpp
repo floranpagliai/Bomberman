@@ -7,11 +7,12 @@
 
 class Map {
 private:
+    std::list<AObject*> *objects_;
+    const char *name_;
     int posX_;
     int posZ_;
     int maxX_;
-    const char *name_;
-    std::list<AObject*> *objects_;
+
 
 public:
     Map(const char *name, std::list<AObject*> *);

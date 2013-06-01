@@ -23,39 +23,44 @@ namespace MapElement {
     public:
         Ground(float const, float const, std::list<AObject*> *);
         ~Ground();
+
         void initialize(void);
         void update(gdl::GameClock const &, gdl::Input &);
         void draw(void);
     private:
-        Camera camera_;
-        gdl::Image texture_;
         std::list<AObject*> *objects_;
+        gdl::Image texture_;
+        Camera camera_;
+
+
     };
 
     class Crate : public AObject {
     public:
         Crate(float const, float const, std::list<AObject*> *);
         ~Crate();
+        
         void initialize(void);
         void update(gdl::GameClock const &, gdl::Input &);
         void draw(void);
     private:
-        Camera camera_;
-        gdl::Image texture_;
         std::list<AObject*> *objects_;
+        gdl::Image texture_;
+        Camera camera_;
     };
 
     class Wall : public AObject {
     public:
         Wall(float const, float const, std::list<AObject*> *);
         ~Wall();
+
         void initialize(void);
         void update(gdl::GameClock const &, gdl::Input &);
         void draw(void);
     private:
-        Camera camera_;
-        gdl::Image texture_;
         std::list<AObject*> *objects_;
+        gdl::Image texture_;
+        Camera camera_;
     };
 }
 

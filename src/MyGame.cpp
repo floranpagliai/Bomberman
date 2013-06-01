@@ -1,7 +1,5 @@
 #include "MyGame.hpp"
 
-//création window, add objects, initialize objects
-
 void MyGame::initialize(void) {
     window_.setTitle("Bomberman");
     window_.setHeight(700);
@@ -16,8 +14,6 @@ void MyGame::initialize(void) {
         (*it)->initialize();
 }
 
-//update objects
-
 void MyGame::update(void) {
     std::list<AObject*>::iterator it;
     for (it = this->objects_.begin(); it != this->objects_.end(); ++it) {
@@ -27,6 +23,8 @@ void MyGame::update(void) {
             it = this->objects_.erase(it);
         }
     }
+    if (camera_.getPosition().z != 0)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
     if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z >= 0)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z + 50.f));

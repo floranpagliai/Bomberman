@@ -96,6 +96,15 @@ namespace Model {
             this->isPush_ = false;
     }
 
+    bool Player::getBonus(Bonus *bonus) {
+        if (bonus->getBonusType() == AMMO)
+            return this->ammoUp();
+        else if (bonus->getBonusType() == POWER)
+            return this->powerUp();
+        else if (bonus->getBonusType() == SPEED)
+            return this->speedUp();
+    }
+
     int Player::getAmmo() const {
 
         return ammo_;
@@ -109,15 +118,6 @@ namespace Model {
     int Player::getSpeed() const {
 
         return speed_;
-    }
-
-    bool Player::getBonus(Bonus *bonus) {
-        if (bonus->getBonusType() == AMMO)
-            return this->ammoUp();
-        else if (bonus->getBonusType() == POWER)
-            return this->powerUp();
-        else if (bonus->getBonusType() == SPEED)
-            return this->speedUp();
     }
 
     bool Player::ammoUp() {

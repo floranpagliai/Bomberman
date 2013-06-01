@@ -19,7 +19,6 @@ namespace Model {
         void checkMove(gdl::Input &input);
         void move(gdl::Input &);
         void putBomb(gdl::Input &);
-
         bool getBonus(Bonus *);
 
         int getAmmo() const;
@@ -32,8 +31,8 @@ namespace Model {
 
 
     protected:
-        gdl::Model model_;
         std::list<AObject*> *objects_;
+        gdl::Model model_;
         int ammo_;
         int power_;
         int speed_;

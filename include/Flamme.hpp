@@ -8,37 +8,34 @@
 #include "Camera.hpp"
 #include "Bonus.hpp"
 
-enum	e_direction
-  {
-    LEFT = 0,
-    RIGHT = 1,
-    UP = 2,
-    DOWN = 3
-  };
+enum eDirection {
+    LEFT = 1,
+    RIGHT,
+    UP,
+    DOWN
+};
 
-class Flamme : public AObject
-{
+class Flamme : public AObject {
 private:
-  int		power_;
-  gdl::Clock	timer_;
-  gdl::Image	texture_;
-  e_direction	direction_;
-  std::list<AObject*>	*objects_;
-  gdl::Model	model_;
-  bool  isExpand_;
-  int dir_;
+    std::list<AObject*> *objects_;
+    gdl::Clock timer_;
+    gdl::Image texture_;
+    eDirection direction_;
+    int power_;
+    bool isExpand_;
+    int dir_;
 
 public:
-  Flamme(float const, float const, int const, int const, std::list<AObject*> *objects);
-  ~Flamme();
+    Flamme(float const, float const, int const, int const, std::list<AObject*> *objects);
+    ~Flamme();
 
-  void		initialize(void);
-  void		update(gdl::GameClock const &, gdl::Input &);
-  void		draw(void);
+    void initialize(void);
+    void update(gdl::GameClock const &, gdl::Input &);
+    void draw(void);
 
-  void		propagate(void) const;
-  void		checkPropagation(void);
-  void          popBonus(void) const;
+    void propagate(void) const;
+    void checkPropagation(void);
+    void popBonus(void) const;
 };
 
 #endif
