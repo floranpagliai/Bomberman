@@ -7,7 +7,7 @@
 
 #include "Bonus.hpp"
 
-Bonus::Bonus(float const x, float const z, eBonus const type, std::list<AObject*> *objects) {
+Bonus::Bonus(float const x, float const z, eBonusType const type, std::list<AObject*> *objects) {
     this->position_.x = x;
     this->position_.y = BLOCK_SIZE;
     this->position_.z = z;
@@ -100,4 +100,8 @@ void Bonus::draw(void) {
     glRotatef(this->rotation_.z, 0.0f, 0.0f, 1.0f);
 
     glPopMatrix();
+}
+
+eBonusType Bonus::getBonusType() const {
+    return this->bonusType_;
 }

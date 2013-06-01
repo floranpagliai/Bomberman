@@ -6,7 +6,7 @@
 
 #define BONUS_SIZE (BLOCK_SIZE - 100)
 
-enum eBonus {
+enum eBonusType {
   AMMO = 1,
   POWER,
   SPEED
@@ -17,15 +17,17 @@ private:
     Camera camera_;
     gdl::Image texture_;
     std::list<AObject*> *objects_;
-    eBonus      bonusType_;
+    eBonusType      bonusType_;
     int dirAnim_;
 public:
-    Bonus(float const, float const, eBonus const, std::list<AObject*> *);
+    Bonus(float const, float const, eBonusType const, std::list<AObject*> *);
     virtual ~Bonus();
 
     void initialize(void);
     void update(gdl::GameClock const &, gdl::Input &);
     void draw(void);
+
+    eBonusType getBonusType() const;
 };
 
 #endif	/* BONUS_HPP */

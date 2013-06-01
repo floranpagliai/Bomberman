@@ -5,26 +5,23 @@
 #include "Player.hpp"
 #include "Flamme.hpp"
 
-#define TIMER_BOMB 3
+#define TIMER_BOMB 4
 
-namespace Bomb {
+class Bombe : public AObject {
+public:
+    Bombe(float const, float const, int const, std::list<AObject*> *);
+    ~Bombe();
+    void initialize(void);
+    void update(gdl::GameClock const &, gdl::Input &);
+    void draw(void);
+    bool stateOfBomb();
+    void explose();
 
-    class Bombe : public AObject {
-    public:
-        Bombe(float const, float const, int const, std::list<AObject*> *);
-        ~Bombe();
-        void initialize(void);
-        void update(gdl::GameClock const &, gdl::Input &);
-        void draw(void);
-        bool stateOfBomb();
-        void explose();
-
-    private:
-        gdl::Model model_;
-        gdl::Clock timer_;
-        std::list<AObject*> *objects_;
-        int power_;
-    };
-}
+private:
+    gdl::Model model_;
+    gdl::Clock timer_;
+    std::list<AObject*> *objects_;
+    int power_;
+};
 
 #endif

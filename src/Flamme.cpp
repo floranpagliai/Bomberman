@@ -68,7 +68,7 @@ void Flamme::popBonus(void) const {
     srand(time(NULL));
     value = rand() % 6 + 1;
     if (value == 1 || value == 2 || value == 3)
-        this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonus)value, this->objects_));
+        this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType)value, this->objects_));
 }
 
 void Flamme::draw() {

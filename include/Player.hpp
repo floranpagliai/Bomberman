@@ -3,6 +3,7 @@
 
 #include "AObject.hpp"
 #include "Bomb.hpp"
+#include "Bonus.hpp"
 
 namespace Model {
 
@@ -19,13 +20,15 @@ namespace Model {
         void move(gdl::Input &);
         void putBomb(gdl::Input &);
 
+        bool getBonus(Bonus *);
+
         int getAmmo() const;
         int getPower() const;
         int getSpeed() const;
 
-        void ammoUp();
-        void powerUp();
-        void speedUp();
+        bool ammoUp();
+        bool powerUp();
+        bool speedUp();
 
 
     protected:

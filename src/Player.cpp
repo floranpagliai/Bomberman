@@ -52,17 +52,15 @@ namespace Model {
             std::list<AObject*>::iterator it;
             for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
                 if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
-                    delete (*it);
-                    objects_->erase(it);
-                    this->powerUp();
-                    break;
+                    if (this->getBonus(dynamic_cast<Bonus *> (*it))) {
+                        delete (*it);
+                        objects_->erase(it);
+                        break;
+                    }
                 }
             }
         }
         move(input);
-        if (input.isKeyDown(gdl::Keys::S) == true) {
-            this->speedUp();
-        }
         if (input.isKeyDown(gdl::Keys::A) == true) {
             this->ammoUp();
         }
@@ -91,7 +89,7 @@ namespace Model {
 
     void Player::putBomb(gdl::Input & input) {
         if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
-            this->objects_->push_front(new Bomb::Bombe(this->position_.x, this->position_.z, this->power_, this->objects_));
+            this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_));
             ammo_--;
             this->isPush_ = true;
         } else
@@ -113,18 +111,37 @@ namespace Model {
         return speed_;
     }
 
-    void Player::ammoUp() {
-        if (ammo_ <= 1)
+    bool Player::getBonus(Bonus *bonus) {
+        if (bonus->getBonusType() == AMMO)
+            return this->ammoUp();
+        else if (bonus->getBonusType() == POWER)
+            return this->powerUp();
+        else if (bonus->getBonusType() == SPEED)
+            return this->speedUp();
+    }
+
+    bool Player::ammoUp() {
+        if (ammo_ <= 1) {
             ammo_ += 1;
+            return true;
+        }
+        return false;
+
     }
 
-    void Player::powerUp() {
-        if (power_ <= 4)
+    bool Player::powerUp() {
+        if (power_ <= 4) {
             power_ += 1;
+            return true;
+        }
+        return false;
     }
 
-    void Player::speedUp() {
-        if (speed_ < 4)
+    bool Player::speedUp() {
+        if (speed_ < 4) {
             speed_ += 1;
+            return true;
+        }
+        return false;
     }
 }
