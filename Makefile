@@ -23,12 +23,12 @@ INCLUDE		+=	-I./include/ -I./lib/include
 
 CXXFLAGS	+=	
 
-LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU -lsfml-audio
+LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU -lsfml-audio 
 
 
 
 $(NAME)	:	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
+		$(CC) -lpthread -o $(NAME) $(OBJ) $(LDFLAGS)
 		make clean
 
 all	:	$(NAME)

@@ -47,12 +47,15 @@ void Bombe::initialize(void) {
 
 void Bombe::update(gdl::GameClock const & gameClock, gdl::Input & input) {
   this->model_.update(gameClock);
-  this->timer_.update();
+  this->timer_.update();pthread_t thread;
+
+    // Permet d'exécuter le fonction maFonction en parallèle
+
   if (this->timer_.getTotalElapsedTime() >= TIMER_BOMB)
     this->explose();
   for (std::list<AObject *>::iterator it = this->objects_->begin(); it != this->objects_->end() && this->isOver == false; it++) {
     if (((*it)->getType() == FLAMME) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-      this->explose();
+        this->explose();
     }
   }
 }
@@ -68,8 +71,8 @@ void Bombe::draw(void) {
     glPopMatrix();
 }
 
-void Bombe::explose() {
-  this->pl_->setAmmo(1);  
+void Bombe::explose(void) {
+  this->pl_->recupBomb();
   explosion = new sf::Music();
   explosion->OpenFromFile("sound/explosion.wav");
   explosion->Play();

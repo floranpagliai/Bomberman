@@ -11,9 +11,9 @@ protected:
     std::list<AObject*> *objects_;
     gdl::Model model_;
     int ammo_;
+    int ammoStock_;
     int power_;
     int speed_;
-    bool isPush_;
 
 
     sf::Music	*powerup;
@@ -21,7 +21,7 @@ protected:
 
 public:
     Player(float const, float const, std::list<AObject*> *);
-    ~Player(void);
+    virtual ~Player(void);
 
     void initialize(void);
     void update(gdl::GameClock const &, gdl::Input &);
@@ -39,7 +39,7 @@ public:
     int getPower() const;
     int getSpeed() const;
 
-    void	setAmmo(int);
+    void recupBomb();
     bool ammoUp();
     bool powerUp();
     bool speedUp();

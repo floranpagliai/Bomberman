@@ -34,12 +34,12 @@ void MyGame::update(void) {
     if (camera_.getPosition().z != 0)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
-    if (camera_.getPosition().z == 0) {
-        if (this->countClock_ == 0) {
-            this->countClock_ = 1;
-            this->objects_.push_back(new MyClock());
-        }
-    }
+//    if (camera_.getPosition().z == 0) {
+//        if (this->countClock_ == 0) {
+//            this->countClock_ = 1;
+//            this->objects_.push_back(new MyClock());
+//        }
+//    }
 
     if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z >= 0)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z + 50.f));

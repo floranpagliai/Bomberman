@@ -1,16 +1,15 @@
 #include "Player.h"
 
-
 Player::Player(float const x, float const z, std::list<AObject*> *objects) {
     this->position_.x = x * (BLOCK_SIZE * 2);
     this->position_.y = 0.0f;
     this->position_.z = z * (BLOCK_SIZE * 2);
     this->type_ = PLAYER;
     this->ammo_ = 1;
+    this->ammoStock_ = ammo_;
     this->power_ = 0;
     this->speed_ = 0;
     this->objects_ = objects;
-    this->isPush_ = false;
     this->initialize();
 }
 
@@ -51,28 +50,26 @@ void Player::draw(void) {
 
 bool Player::checkMove(gdl::Input &input, float dist, int dir) {
     dist = dist * 3;
-    for (int i = 0; i < 4; i++) {
-        std::list<AObject*>::iterator it;
-        for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
-            if (dir == 1) {
-                if (this->checkCollision((*it)->getPosition().x + dist, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
-                    return false;
-            } else {
-                if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z + dist) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
-                    return false;
-            }
-            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
-                if (this->getBonus(dynamic_cast<Bonus *> (*it))) {
-                    delete (*it);
-                    objects_->erase(it);
-                    break;
-                }
-            } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == FLAMME) {
-                this->isOver = true;
+    std::list<AObject*>::iterator it;
+    for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
+        if (dir == 1) {
+            if (this->checkCollision((*it)->getPosition().x + dist, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+                return false;
+        } else {
+            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z + dist) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+                return false;
+        }
+        if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
+            if (this->getBonus(dynamic_cast<Bonus *> (*it))) {
+                delete (*it);
+                objects_->erase(it);
                 break;
             }
-
+        } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == FLAMME) {
+            this->isOver = true;
+            break;
         }
+
     }
     return true;
 }
@@ -113,23 +110,29 @@ void Player::move(gdl::Input & input) {
 }
 
 void Player::putBomb(gdl::Input & input) {
-    if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
-        if (this->ammo_ != 0) {
-            this->ammo_ = this->ammo_ - 1;
-            this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_, this));
+    std::list<AObject*>::iterator it;
+    bool putBomb = true;
 
+    for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
+        if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BOMB) {
+            putBomb = false;
+            break;
         }
-        this->isPush_ = true;
-    } else
-        this->isPush_ = false;
+    }
+    if (input.isKeyDown(gdl::Keys::B) == true && this->ammoStock_ != 0 && putBomb == true) {
+        this->ammoStock_ -= 1;
+        this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_, this));
+    }
+
 }
 
-bool Player::getBonus(Bonus *bonus) {
+bool Player::getBonus(Bonus * bonus) {
     if (bonus->getBonusType() == AMMO)
         return this->ammoUp();
     else if (bonus->getBonusType() == POWER)
         return this->powerUp();
     else if (bonus->getBonusType() == SPEED)
+
         return this->speedUp();
 }
 
@@ -151,6 +154,7 @@ int Player::getSpeed() const {
 bool Player::ammoUp() {
     if (ammo_ <= 5) {
         ammo_ += 1;
+        ammoStock_ += 1;
         powerup->Play();
         return true;
     }
@@ -158,10 +162,16 @@ bool Player::ammoUp() {
 
 }
 
+void Player::recupBomb() {
+
+    ammoStock_ += 1;
+}
+
 bool Player::powerUp() {
     if (power_ <= 4) {
         power_ += 1;
         powerup->Play();
+
         return true;
     }
     return false;
@@ -176,7 +186,4 @@ bool Player::speedUp() {
     return false;
 }
 
-void Player::setAmmo(int nb) {
-    this->ammo_ = nb;
-}
 
