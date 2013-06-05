@@ -2,19 +2,37 @@
 
 t_move moveP1[5] = {
     {
-        gdl::Keys::Up, 180
+        gdl::Keys::Up, 180, 0, -1
     },
     {
-        gdl::Keys::Down, 0
+        gdl::Keys::Down, 0, 0, 1
     },
     {
-        gdl::Keys::Left, -90
+        gdl::Keys::Left, -90, -1, 0
     },
     {
-        gdl::Keys::Right, 90
+        gdl::Keys::Right, 90, 1, 0
     },
     {
-        gdl::Keys::B, 0
+        gdl::Keys::B, 0, 0, 0
+    }
+};
+
+t_move moveP2[5] = {
+    {
+        gdl::Keys::Z, 180, 0, -1
+    },
+    {
+        gdl::Keys::S, 0, 0, 1
+    },
+    {
+        gdl::Keys::Q, -90, -1, 0
+    },
+    {
+        gdl::Keys::D, 90, 1, 0
+    },
+    {
+        gdl::Keys::Space, 0, 0, 0
     }
 };
 
@@ -74,10 +92,10 @@ bool Bomberman::checkMove(gdl::Input &input, float dist, int dir) {
     std::list<AObject*>::iterator it;
     for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
         if (dir == 1) {
-            if (this->checkCollision((*it)->getPosition().x + dist, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+            if (this->checkCollision((*it)->getPosition().x - dist, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
                 return false;
         } else {
-            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z + dist) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - dist) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
                 return false;
         }
         if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
@@ -96,48 +114,54 @@ bool Bomberman::checkMove(gdl::Input &input, float dist, int dir) {
 }
 
 void Bomberman::move(gdl::Input & input) {
-    if (input.isKeyDown(gdl::Keys::Up) == true) {
-        this->rotation_.y = 180;
-        if (checkMove(input, (25.0f + speed_ * 7.0f), 2)) {
-            this->position_.z -= 25.0f + speed_ * 7.0f;
-            this->model_.play("Run");
-        } else
-            this->model_.play("Stop");
-    } else if (input.isKeyDown(gdl::Keys::Down) == true) {
-        this->rotation_.y = 0;
-        if (checkMove(input, -(25.0f + speed_ * 7.0f), 2)) {
-            this->position_.z += 25.0f + speed_ * 7.0f;
-            this->model_.play("Run");
-        } else
-            this->model_.play("Stop");
-    } else if (input.isKeyDown(gdl::Keys::Left) == true) {
-        this->rotation_.y = -90;
-        if (checkMove(input, (25.0f + speed_ * 7.0f), 1)) {
-            this->position_.x -= 25.0f + speed_ * 7.0f;
-            this->model_.play("Run");
-        } else
-            this->model_.play("Stop");
-    } else if (input.isKeyDown(gdl::Keys::Right) == true) {
-        this->rotation_.y = 90;
-        if (checkMove(input, -(25.0f + speed_ * 7.0f), 1)) {
-            this->position_.x += 25.0f + speed_ * 7.0f;
-            this->model_.play("Run");
-        } else
-            this->model_.play("Stop");
-
-    } else
-        this->model_.play("Stop");
-    if (input.isKeyDown(gdl::Keys::B) == true)
-        this->putBomb(input);
-
-    //    for (int i = 0; i < 4; i++) {
-    //        if (input.isKeyDown(getKeys()[i].key) == true) {
-    //            //this->rotation_.y = getKeys()[i].angle;
-    //        } else if (input.isKeyDown(gdl::Keys::B) == true) {
-    //            this->putBomb(input);
+    //    if (input.isKeyDown(gdl::Keys::Up) == true) {
+    //        this->rotation_.y = 180;
+    //        if (checkMove(input, (25.0f + speed_ * 7.0f), 2)) {
+    //            this->position_.z -= 25.0f + speed_ * 7.0f;
+    //            this->model_.play("Run");
     //        } else
     //            this->model_.play("Stop");
-    //    }
+    //    } else if (input.isKeyDown(gdl::Keys::Down) == true) {
+    //        this->rotation_.y = 0;
+    //        if (checkMove(input, -(25.0f + speed_ * 7.0f), 2)) {
+    //            this->position_.z += 25.0f + speed_ * 7.0f;
+    //            this->model_.play("Run");
+    //        } else
+    //            this->model_.play("Stop");
+    //    } else if (input.isKeyDown(gdl::Keys::Left) == true) {
+    //        this->rotation_.y = -90;
+    //        if (checkMove(input, (25.0f + speed_ * 7.0f), 1)) {
+    //            this->position_.x -= 25.0f + speed_ * 7.0f;
+    //            this->model_.play("Run");
+    //        } else
+    //            this->model_.play("Stop");
+    //    } else if (input.isKeyDown(gdl::Keys::Right) == true) {
+    //        this->rotation_.y = 90;
+    //        if (checkMove(input, -(25.0f + speed_ * 7.0f), 1)) {
+    //            this->position_.x += 25.0f + speed_ * 7.0f;
+    //            this->model_.play("Run");
+    //        } else
+    //            this->model_.play("Stop");
+    //
+    //    } else
+    //        this->model_.play("Stop");
+    //    if (input.isKeyDown(gdl::Keys::B) == true)
+    //        this->putBomb(input);
+    for (int i = 0; i < 4; i++) {
+        if (input.isKeyDown(getKeys()[i].key) == true) {
+            this->rotation_.y = getKeys()[i].angle;
+            if (checkMove(input, (25.0f + speed_ * 7.0f) * getKeys()[i].coefX, 1)) {
+                this->position_.x += (25.0f + speed_ * 7.0f) * getKeys()[i].coefX;
+                this->model_.play("Run");
+            }
+            if (checkMove(input, (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ, 2)) {
+                this->position_.z += (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ;
+                this->model_.play("Run");
+            }
+        }
+    }
+    if (input.isKeyDown(getKeys()[4].key) == true)
+        this->putBomb(input);
 }
 
 void Bomberman::putBomb(gdl::Input & input) {
@@ -168,8 +192,10 @@ bool Bomberman::getBonus(Bonus * bonus) {
 }
 
 t_move* Bomberman::getKeys() const {
-    if (this->id_ == 1)
+    if (this->id_ == 0)
         return (moveP1);
+    else
+        return (moveP2);
 }
 
 int Bomberman::getAmmo() const {

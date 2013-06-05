@@ -9,6 +9,8 @@
 struct t_move {
     gdl::Keys::Key key;
     int angle;
+    int coefX;
+    int coefZ;
 };
 
 class Bomberman : public AObject {
