@@ -8,6 +8,8 @@
 #include "Camera.hpp"
 #include "Bonus.hpp"
 
+#define TIMER_FLAMME 0.145
+
 enum eDirection {
     LEFT = 1,
     RIGHT,

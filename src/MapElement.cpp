@@ -12,6 +12,50 @@
 
 namespace MapElement {
 
+    Background::Background(float const x, float const z, std::list<AObject*> *objects) {
+        this->position_.x = x;
+        this->position_.y = 300.0f;
+        this->position_.z = z;
+        this->objects_ = objects;
+        this->initialize();
+    }
+
+    Background::~Background() {
+    }
+
+    void Background::initialize(void) {
+        this->texture_ = gdl::Image::load("assets/fond.png");
+    }
+
+    void Background::update(gdl::GameClock const & gameClock, gdl::Input & input) {
+    }
+
+    void Background::draw(void) {
+        texture_.bind();
+        glEnable(GL_TEXTURE_2D);
+        glPushMatrix();
+        glTranslatef(this->position_.x, this->position_.y, this->position_.z);
+
+        glBegin(GL_QUADS);
+        int size = 250;
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-size, -size, -size);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-size, -size, size);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(size, -size, size);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(size, -size, -size);
+        /*glRotatef(this->camera_.getRotation().x +
+                this->position_.x,
+                this->camera_.getRotation().y +
+                this->position_.y,
+                this->camera_.getRotation().z +
+                this->position_.z, 0.0f);*/
+        glEnd();
+        glPopMatrix();
+    }
+
     Ground::Ground(float const x, float const z, std::list<AObject*> *objects) {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;

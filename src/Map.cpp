@@ -49,6 +49,7 @@ void Map::openMap() {
     std::string str;
 
     this->posMap();
+    this->objects_->push_back(new MapElement::Background(0, 0, this->objects_));
     while (getline(file, str)) {
         std::string::iterator it = str.begin();
         while (it != str.end()) {

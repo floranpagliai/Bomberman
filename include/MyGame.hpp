@@ -10,7 +10,7 @@ private:
     std::list<AObject*> objects_;
     Camera camera_;
     float cameraZ_;
-
+    
 public:
     virtual void initialize(void);
     virtual void update(void);

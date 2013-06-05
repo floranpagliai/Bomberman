@@ -53,6 +53,8 @@ public:
     AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), isOver(false) {
     }
 
+    virtual ~AObject(void) {
+    }
     virtual void initialize(void) = 0;
     virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
     virtual void draw(void) = 0;
@@ -74,6 +76,10 @@ public:
 
     bool getIsOver() const {
         return this->isOver;
+    }
+
+    void setIsOver(void) {
+        this->isOver = true;
     }
 
     int getType() const {

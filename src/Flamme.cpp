@@ -9,6 +9,7 @@ Flamme::Flamme(float const x, float const z, int const power, int dir, std::list
     this->objects_ = objects;
     isExpand_ = false;
     dir_ = dir;
+    this->checkPropagation();
     this->initialize();
 }
 
@@ -17,20 +18,18 @@ Flamme::~Flamme() {
 
 void Flamme::initialize() {
     this->texture_ = gdl::Image::load("assets/flamme.jpg");
-    this->checkPropagation();
     this->timer_.play();
 }
 
 void Flamme::update(gdl::GameClock const & gameClock, gdl::Input & input) {
-    if (this->isOver == false) {
-        this->timer_.update();
-        if (this->isExpand_ == false) {
-            this->propagate();
-            this->isExpand_ = true;
-        }
-        if (this->timer_.getTotalElapsedTime() >= 0.135)
-            this->isOver = true;
+    this->timer_.update();
+    if (this->isExpand_ == false) {
+
+        this->propagate();
+        this->isExpand_ = true;
     }
+    if (this->timer_.getTotalElapsedTime() >= TIMER_FLAMME)
+        this->isOver = true;
 }
 
 void Flamme::draw() {
@@ -100,19 +99,21 @@ void Flamme::propagate(void) const {
         this->objects_->push_front(new Flamme(this->position_.x, this->position_.z - BLOCK_SIZE * 2, (this->power_ - 1), 4, this->objects_));
 }
 
-void Flamme::checkPropagation() {
+void Flamme::checkPropagation(void) {
     std::list<AObject *>::iterator it = this->objects_->begin();
     for (std::list<AObject *>::iterator it = this->objects_->begin(); it != this->objects_->end() && this->isOver == false; it++) {
         if (((*it)->getType() == PLAYER || (*it)->getType() == CRATE) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-            this->isOver = true;
-            delete (*it);
-            objects_->erase(it);
-            if ((*it)->getType() == CRATE)
+            if ((*it)->getType() == CRATE) {
+                this->power_ = 0;
                 this->popBonus();
-            //break;
+            }
+            (*it)->setIsOver();
+//            delete (*it);
+//            objects_->erase(it);
+            break;
 
         } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-            this->isOver = true;
+            this->power_ = 0;
             break;
         }
     }
@@ -123,5 +124,5 @@ void Flamme::popBonus(void) const {
 
     value = rand() % 6 + 1;
     if (value == 1 || value == 2 || value == 3)
-        this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType)value, this->objects_));
+        this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType) value, this->objects_));
 }
