@@ -16,7 +16,7 @@ private:
     std::list<AObject*> *objects_;
     gdl::Model model_;
     gdl::Clock timer_;
-    Bomberman *pl_;
+    Bomberman *player_;
     int power_;
 
 

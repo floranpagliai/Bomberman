@@ -13,8 +13,8 @@ void MyGame::initialize(void) {
     Map map_("map/map08", &objects_);
     map_.openMap();
 
-    cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 550.0f;
-    camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, cameraZ_);
+    cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
+    camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 5000);
 
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();
@@ -31,7 +31,7 @@ void MyGame::update(void) {
             it = this->objects_.erase(it);
         }
     }
-    if (camera_.getPosition().z != 0)
+    if (camera_.getPosition().z != cameraZ_)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
 //    if (camera_.getPosition().z == 0) {
@@ -41,14 +41,6 @@ void MyGame::update(void) {
 //        }
 //    }
 
-    if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z >= 0)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z + 50.f));
-    if (input_.isKeyDown(gdl::Keys::F2) == true && camera_.getPosition().z > 0)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
-    if (input_.isKeyDown(gdl::Keys::F3) == true)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, cameraZ_);
-    if (input_.isKeyDown(gdl::Keys::F4) == true)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 0.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }

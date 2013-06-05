@@ -17,15 +17,14 @@ class Bomberman : public AObject {
 protected:
     std::list<AObject*> *objects_;
     gdl::Model model_;
+    sf::Music *powerupSound_;
+    sf::Music *deathSound_;
     int ammo_;
     int ammoStock_;
     int power_;
     int speed_;
     int id_;
 
-
-    sf::Music *powerup;
-    sf::Music *death;
 
 public:
     Bomberman(float const, float const, int const, std::list<AObject*> *);
