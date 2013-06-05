@@ -10,7 +10,8 @@ SRC		=	$(DIR)main.cpp\
 			$(DIR)Flamme.cpp\
 			$(DIR)MapElement.cpp\
 			$(DIR)Bonus.cpp\
-			$(DIR)Map.cpp
+			$(DIR)Map.cpp\
+			$(DIR)MyClock.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 
@@ -22,7 +23,7 @@ INCLUDE		+=	-I./include/ -I./lib/include
 
 CXXFLAGS	+=	
 
-LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU
+LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU -lsfml-audio
 
 
 

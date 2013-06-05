@@ -1,13 +1,3 @@
-//
-// MapElement.cpp for MapElement.cpp in /home/cayrel_l//tek2/projet/bomber/Bomberman/src
-//
-// Made by lambert cayrel
-// Login   <cayrel_l@epitech.net>
-//
-// Started on  Mon May 27 17:03:43 2013 lambert cayrel
-// Last update Mon May 27 17:24:14 2013 lambert cayrel
-//
-
 #include "MapElement.hpp"
 
 namespace MapElement {
@@ -47,12 +37,7 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
-        /*glRotatef(this->camera_.getRotation().x +
-                this->position_.x,
-                this->camera_.getRotation().y +
-                this->position_.y,
-                this->camera_.getRotation().z +
-                this->position_.z, 0.0f);*/
+       
         glEnd();
         glPopMatrix();
     }
@@ -129,11 +114,7 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
 
         glEnd();
-        //        glRotatef(this->camera_.getRotation().x, 1.0f, 0.0f, 0.0f);
-        //        glRotatef(this->camera_.getRotation().y, 0.0f, 1.0f, 0.0f);
-        //        glRotatef(this->camera_.getRotation().z, 0.0f, 0.0f, 1.0f);
-
-        glPopMatrix();
+	glPopMatrix();
     }
 
     Crate::Crate(float const x, float const z, std::list<AObject*> *objects) {
@@ -206,12 +187,7 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-        //        glRotatef(this->camera_.getRotation().x +
-        //                this->position_.x,
-        //                this->camera_.getRotation().y +
-        //                this->position_.y,
-        //                this->camera_.getRotation().z +
-        //                this->position_.z, 0.0f);
+        
         glEnd();
         glPopMatrix();
     }

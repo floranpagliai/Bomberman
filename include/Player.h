@@ -1,9 +1,12 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
+#include <SFML/Audio.hpp>
 #include "AObject.hpp"
 #include "Bomb.hpp"
 #include "Bonus.hpp"
+
+#define NB_BOMB 1
 
 class Player : public AObject {
 protected:
@@ -13,7 +16,7 @@ protected:
     int power_;
     int speed_;
     bool isPush_;
-
+    
 public:
     Player(float const, float const, std::list<AObject*> *);
     ~Player(void);
@@ -27,14 +30,21 @@ public:
     void move(gdl::Input &);
     void putBomb(gdl::Input &);
     bool getBonus(Bonus *);
+    //    void isDead(gdl::Input &);
+    
+    int getAmmo() const; 
+    void isDead(gdl::Input &);
 
-    int getAmmo() const;
     int getPower() const;
     int getSpeed() const;
 
+    void	setAmmo(int);
     bool ammoUp();
     bool powerUp();
     bool speedUp();
+    
+    sf::Music	*powerup;
+    sf::Music	*death;
 };
 
 #endif

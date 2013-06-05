@@ -4,6 +4,7 @@
 #include "AObject.hpp"
 #include "MapElement.hpp"
 #include "Player.h"
+#include "MyClock.hpp"
 
 class Map {
 private:

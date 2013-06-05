@@ -22,15 +22,15 @@ void Flamme::initialize() {
 }
 
 void Flamme::update(gdl::GameClock const & gameClock, gdl::Input & input) {
-    if (this->isOver == false) {
-        this->timer_.update();
-        if (this->isExpand_ == false) {
-            this->propagate();
-            this->isExpand_ = true;
-        }
-        if (this->timer_.getTotalElapsedTime() >= 0.135)
-            this->isOver = true;
+  if (this->isOver == false) {
+    this->timer_.update();
+    if (this->isExpand_ == false) {
+      this->propagate();
+      this->isExpand_ = true;
     }
+    if (this->timer_.getTotalElapsedTime() >= 0.1)
+      this->isOver = true;
+  }
 }
 
 void Flamme::draw() {
@@ -103,17 +103,16 @@ void Flamme::propagate(void) const {
 void Flamme::checkPropagation() {
     std::list<AObject *>::iterator it = this->objects_->begin();
     for (std::list<AObject *>::iterator it = this->objects_->begin(); it != this->objects_->end() && this->isOver == false; it++) {
-        if (((*it)->getType() == PLAYER || (*it)->getType() == CRATE) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-            this->isOver = true;
-            delete (*it);
-            objects_->erase(it);
-            if ((*it)->getType() == CRATE)
-                this->popBonus();
-            //break;
-
-        } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-            this->isOver = true;
-            break;
+      if (((*it)->getType() == PLAYER || (*it)->getType() == CRATE) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
+	this->isOver = true;
+	if((*it)->getType() == PLAYER)
+	  delete (*it);
+	objects_->erase(it);
+	if ((*it)->getType() == CRATE)
+	  this->popBonus();
+      } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
+	this->isOver = true;
+	break;
         }
     }
 }
@@ -123,5 +122,5 @@ void Flamme::popBonus(void) const {
 
     value = rand() % 6 + 1;
     if (value == 1 || value == 2 || value == 3)
-        this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType)value, this->objects_));
+      this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType)value, this->objects_));
 }

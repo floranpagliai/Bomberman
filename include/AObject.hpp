@@ -24,6 +24,8 @@
 #include <list>
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <iomanip>
 
 #include "Vector3f.hpp"
 
@@ -49,14 +51,16 @@ protected:
     eType type_;
 
 public:
-
-    AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), isOver(false) {
-    }
-
+  
+  AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), isOver(false) {
+  }
+  /*  virtual ~AObject(void){
+    std::cout << "bonjour" << std::endl;
+    }*/
     virtual void initialize(void) = 0;
-    virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
-    virtual void draw(void) = 0;
-
+  virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
+  virtual void draw(void) = 0;
+  
     bool checkCollision(float x, float z) {
         if (this->position_.x - x - BLOCK_SIZE * 1.25 > 0)
             return false;

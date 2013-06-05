@@ -1,18 +1,15 @@
 #include "MyClock.hpp"
 
-MyClock::MyClock()
+MyClock::MyClock(Player *p)
 {
-
-}
-
-MyClock::~MyClock()
-{
-
-}
-
-void	MyClock::initialize(void)
-{
+  this->pl = p;
   this->timer_.play();
+}
+
+MyClock::~MyClock(){
+}
+
+void	MyClock::initialize(void){
 }
 
 void	MyClock::update(gdl::GameClock const &, gdl::Input &)
@@ -26,35 +23,35 @@ void	MyClock::update(gdl::GameClock const &, gdl::Input &)
 
 void	MyClock::draw(void)
 {
-  text_.setText(s_time);
+  camera_.setPosition(this->camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z+50.f);
+  
+  text_.setText( "Time : " + s_time);
   text_.setSize(20);//taille de la police d'écriture !
-  text_.setPosition(0, 500);
-  
-  //dimension of the OpenGl component
-  int w = 1024;
-  int h = 700;
-  
-  
-  //Top left viewport : Viewport 1                                     //reset the view on the viewport  
-  //  glViewport(0, h/2, w/2, h/2);
-  //text_.draw();  
-  //glLoadIdentity();                                            //reset the view on the viewport
-  //gluLookAt(0.0, 0.0, this->position_.z, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); //front view
-  //drawScene(glDrawable, quadric);    //draws the object of the scene
+  text_.setPosition(10, 100);
   text_.draw();
-  /*
-  glTranslatef(0.0f, -1.0f, 0.0f);
-  glPushMatrix();
-  glRotatef(0.0f, 1.0f, 0.0f, 0.f);
-  glTranslatef(-1.5f,0.0f,0.0f);
-  glRotatef(90.f, 0.0f, 1.0f, 0.0f);
-  glPopMatrix();  
-  */
+  
+  scoreP1_.setText( "Score P1: 0");
+  scoreP1_.setSize(20);//taille de la police d'écriture !
+  scoreP1_.setPosition(10, 170);
+  scoreP1_.draw();
+  
+  scoreP2_.setText( "Score P2: 0");
+  scoreP2_.setSize(20);//taille de la police d'écriture !
+  scoreP2_.setPosition(10, 240);
+  scoreP2_.draw();
+  
+  camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z-50.f));
 }
 
 std::string	MyClock::float2string(float f)
 {
   std::ostringstream	os;
-  os << f;
+  
+  if (f > 10.00 && f < 100.00)
+    os << std::setprecision(4) << f;
+  else if (f < 10)
+    os << std::setprecision(3) << f;
+  else
+    os << std::setprecision(5) << f;
   return os.str();
 }
