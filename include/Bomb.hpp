@@ -16,8 +16,9 @@ private:
     std::list<AObject*> *objects_;
     gdl::Model model_;
     gdl::Clock timer_;
-    int power_;
     Player *pl_;
+    int power_;
+
 
 public:
     Bombe(float const, float const, int const, std::list<AObject*> *, Player *);

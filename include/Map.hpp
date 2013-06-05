@@ -3,8 +3,7 @@
 
 #include "AObject.hpp"
 #include "MapElement.hpp"
-#include "Player.h"
-#include "MyClock.hpp"
+#include "Bomberman.h"
 
 class Map {
 private:

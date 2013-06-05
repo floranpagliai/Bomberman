@@ -19,7 +19,11 @@ Player::~Player() {
 
 void Player::initialize(void) {
     this->model_ = gdl::Model::load("assets/marvin.fbx");
-    model_.set_default_model_color(gdl::Color(255, 0, 0));
+    int red = rand() % 255;
+    int green = rand() % 255;
+    int blue = rand() % 255;
+
+    model_.set_default_model_color(gdl::Color(red, green, blue));
     model_.set_anim_speed("Take 001", 1 + this->speed_); //pour changer la vitesse quand il court
     model_.cut_animation(this->model_, "Take 001", 0, 30, "StartRun");
     model_.cut_animation(this->model_, "Take 001", 35, 53, "Run");

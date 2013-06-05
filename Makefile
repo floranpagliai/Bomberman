@@ -6,6 +6,7 @@ SRC		=	$(DIR)main.cpp\
 			$(DIR)MyGame.cpp\
 			$(DIR)Camera.cpp\
 			$(DIR)Player.cpp\
+			$(DIR)Bomberman.cpp\
 			$(DIR)Bomb.cpp\
 			$(DIR)Flamme.cpp\
 			$(DIR)MapElement.cpp\
