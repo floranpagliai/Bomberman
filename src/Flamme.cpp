@@ -22,17 +22,6 @@ void Flamme::initialize() {
 }
 
 void Flamme::update(gdl::GameClock const & gameClock, gdl::Input & input) {
-<<<<<<< HEAD
-  if (this->isOver == false) {
-    this->timer_.update();
-    if (this->isExpand_ == false) {
-      this->propagate();
-      this->isExpand_ = true;
-    }
-    if (this->timer_.getTotalElapsedTime() >= 0.1)
-      this->isOver = true;
-  }
-=======
     this->timer_.update();
     if (this->isExpand_ == false) {
 
@@ -41,7 +30,6 @@ void Flamme::update(gdl::GameClock const & gameClock, gdl::Input & input) {
     }
     if (this->timer_.getTotalElapsedTime() >= TIMER_FLAMME)
         this->isOver = true;
->>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
 }
 
 void Flamme::draw() {
@@ -114,32 +102,19 @@ void Flamme::propagate(void) const {
 void Flamme::checkPropagation(void) {
     std::list<AObject *>::iterator it = this->objects_->begin();
     for (std::list<AObject *>::iterator it = this->objects_->begin(); it != this->objects_->end() && this->isOver == false; it++) {
-<<<<<<< HEAD
-      if (((*it)->getType() == PLAYER || (*it)->getType() == CRATE) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-	this->isOver = true;
-	if((*it)->getType() == PLAYER)
-	  delete (*it);
-	objects_->erase(it);
-	if ((*it)->getType() == CRATE)
-	  this->popBonus();
-      } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-	this->isOver = true;
-	break;
-=======
         if (((*it)->getType() == PLAYER || (*it)->getType() == CRATE) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
             if ((*it)->getType() == CRATE) {
                 this->power_ = 0;
                 this->popBonus();
             }
             (*it)->setIsOver();
-//            delete (*it);
-//            objects_->erase(it);
+            //            delete (*it);
+            //            objects_->erase(it);
             break;
 
         } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
             this->power_ = 0;
             break;
->>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
         }
     }
 }
@@ -149,9 +124,5 @@ void Flamme::popBonus(void) const {
 
     value = rand() % 6 + 1;
     if (value == 1 || value == 2 || value == 3)
-<<<<<<< HEAD
-      this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType)value, this->objects_));
-=======
         this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType) value, this->objects_));
->>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
 }

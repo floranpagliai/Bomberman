@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "MyClock.hpp"
+
 
 Player::Player(float const x, float const z, std::list<AObject*> *objects) {
     this->position_.x = x * (BLOCK_SIZE * 2);
@@ -7,28 +7,18 @@ Player::Player(float const x, float const z, std::list<AObject*> *objects) {
     this->position_.z = z * (BLOCK_SIZE * 2);
     this->type_ = PLAYER;
     this->ammo_ = 1;
-    this->power_ = 5;
-    this->speed_ = 5;
+    this->power_ = 0;
+    this->speed_ = 0;
     this->objects_ = objects;
     this->isPush_ = false;
     this->initialize();
 }
 
 Player::~Player() {
-  
+
 }
 
 void Player::initialize(void) {
-    /// Charge le modele
-<<<<<<< HEAD
-  this->model_ = gdl::Model::load("assets/marvin.fbx");
-  model_.set_default_model_color(gdl::Color(255, 0, 0));
-  model_.set_anim_speed("Take 001", 1 + this->speed_); //pour changer la vitesse quand il court
-  model_.cut_animation(this->model_, "Take 001", 0, 30, "StartRun");
-  model_.cut_animation(this->model_, "Take 001", 35, 53, "Run");
-  model_.cut_animation(this->model_, "Take 001", 57, 120, "EndRun");
-  model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
-=======
     this->model_ = gdl::Model::load("assets/marvin.fbx");
     model_.set_default_model_color(gdl::Color(255, 0, 0));
     model_.set_anim_speed("Take 001", 1 + this->speed_); //pour changer la vitesse quand il court
@@ -36,14 +26,16 @@ void Player::initialize(void) {
     model_.cut_animation(this->model_, "Take 001", 35, 53, "Run");
     model_.cut_animation(this->model_, "Take 001", 80, 120, "EndRun");
     model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
->>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
+
+    powerup = new sf::Music();
+    powerup->OpenFromFile("sound/powerup.wav");
 }
 
 void Player::update(gdl::GameClock const &gameClock, gdl::Input &input) {
-  this->model_.update(gameClock);
-  //this->checkMove(input);
-  move(input);
-  this->putBomb(input);
+    this->model_.update(gameClock);
+    //this->checkMove(input);
+    move(input);
+    this->putBomb(input);
 }
 
 void Player::draw(void) {
@@ -121,28 +113,24 @@ void Player::move(gdl::Input & input) {
 }
 
 void Player::putBomb(gdl::Input & input) {
-  if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
-    if (this->ammo_ != 0)
-      {
-	this->ammo_ = this->ammo_  - 1;
-	this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_, this));
+    if (input.isKeyDown(gdl::Keys::B) == true && this->isPush_ == false && this->ammo_ != 0) {
+        if (this->ammo_ != 0) {
+            this->ammo_ = this->ammo_ - 1;
+            this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_, this));
 
-      }
-    this->isPush_ = true;
-  } else
-    this->isPush_ = false;
+        }
+        this->isPush_ = true;
+    } else
+        this->isPush_ = false;
 }
 
 bool Player::getBonus(Bonus *bonus) {
-  powerup = new sf::Music();
-  powerup->OpenFromFile("sound/powerup.wav");
-  powerup->Play();
-  if (bonus->getBonusType() == AMMO)
-    return this->ammoUp();
-  else if (bonus->getBonusType() == POWER)
-    return this->powerUp();
-  else if (bonus->getBonusType() == SPEED)
-    return this->speedUp();
+    if (bonus->getBonusType() == AMMO)
+        return this->ammoUp();
+    else if (bonus->getBonusType() == POWER)
+        return this->powerUp();
+    else if (bonus->getBonusType() == SPEED)
+        return this->speedUp();
 }
 
 int Player::getAmmo() const {
@@ -163,18 +151,18 @@ int Player::getSpeed() const {
 bool Player::ammoUp() {
     if (ammo_ <= 5) {
         ammo_ += 1;
-	std::cout << ammo_ << std::endl;
+        powerup->Play();
         return true;
     }
     return false;
-    
+
 }
 
 bool Player::powerUp() {
     if (power_ <= 4) {
         power_ += 1;
-	std::cout << "Power:" << power_ << std::endl;
-     return true;
+        powerup->Play();
+        return true;
     }
     return false;
 }
@@ -182,14 +170,13 @@ bool Player::powerUp() {
 bool Player::speedUp() {
     if (speed_ < 4) {
         speed_ += 1;
-	std::cout << "Power:" << power_ << std::endl;
+        powerup->Play();
         return true;
     }
     return false;
 }
 
-void	Player::setAmmo(int nb)
-{
-  this->ammo_ = nb;
+void Player::setAmmo(int nb) {
+    this->ammo_ = nb;
 }
 

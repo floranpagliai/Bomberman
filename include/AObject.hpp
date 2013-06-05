@@ -4,6 +4,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include <SFML/Audio.hpp>
+
 #include "AnimStates.hpp"
 #include "Assert.hpp"
 #include "Clock.hpp"
@@ -51,25 +53,13 @@ protected:
     eType type_;
 
 public:
-<<<<<<< HEAD
-  
-  AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), isOver(false) {
-  }
-  /*  virtual ~AObject(void){
-    std::cout << "bonjour" << std::endl;
-    }*/
-=======
 
     AObject(void) : position_(0.0f, 0.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), isOver(false) {
     }
-
-    virtual ~AObject(void) {
-    }
->>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
     virtual void initialize(void) = 0;
-  virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
-  virtual void draw(void) = 0;
-  
+    virtual void update(gdl::GameClock const &, gdl::Input &) = 0;
+    virtual void draw(void) = 0;
+
     bool checkCollision(float x, float z) {
         if (this->position_.x - x - BLOCK_SIZE * 1.25 > 0)
             return false;

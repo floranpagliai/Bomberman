@@ -23,15 +23,9 @@ Bonus::~Bonus() {
 
 void Bonus::initialize(void) {
     if (this->bonusType_ == AMMO)
-<<<<<<< HEAD
-      this->texture_ = gdl::Image::load("assets/bonus/bombUp.png");
-    else if (this->bonusType_ == POWER)
-      this->texture_ = gdl::Image::load("assets/bonus/powerUp.png");
-=======
         this->texture_ = gdl::Image::load("assets/bonus/bombUp2.png");
     else if (this->bonusType_ == POWER)
         this->texture_ = gdl::Image::load("assets/bonus/powerUp2.png");
->>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
     else
         this->texture_ = gdl::Image::load("assets/bonus/speedUp2.png");
     this->timer_.play();
@@ -108,5 +102,5 @@ void Bonus::draw(void) {
 }
 
 eBonusType Bonus::getBonusType() const {
-  return this->bonusType_;
+    return this->bonusType_;
 }
