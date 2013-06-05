@@ -1,6 +1,6 @@
 #include "Bomb.hpp"
 
-Bombe::Bombe(float const x, float const z, int const power, std::list<AObject*> *objects, Player *pl) {
+Bombe::Bombe(float const x, float const z, int const power, std::list<AObject*> *objects, Bomberman *pl) {
   this->position_.x = x;
   this->position_.y = 0.0f;
   this->position_.z = z;

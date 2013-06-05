@@ -4,24 +4,24 @@
 #include <pthread.h>
 
 #include "AObject.hpp"
-#include "Player.h"
+#include "Bomberman.h"
 #include "Flamme.hpp"
 
 #define TIMER_BOMB 3
 
-class Player;
+class Bomberman;
 
 class Bombe : public AObject {
 private:
     std::list<AObject*> *objects_;
     gdl::Model model_;
     gdl::Clock timer_;
-    Player *pl_;
+    Bomberman *pl_;
     int power_;
 
 
 public:
-    Bombe(float const, float const, int const, std::list<AObject*> *, Player *);
+    Bombe(float const, float const, int const, std::list<AObject*> *, Bomberman *);
     virtual ~Bombe();
 
     void initialize(void);

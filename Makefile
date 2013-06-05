@@ -5,7 +5,6 @@ DIR		=	src/
 SRC		=	$(DIR)main.cpp\
 			$(DIR)MyGame.cpp\
 			$(DIR)Camera.cpp\
-			$(DIR)Player.cpp\
 			$(DIR)Bomberman.cpp\
 			$(DIR)Bomb.cpp\
 			$(DIR)Flamme.cpp\
@@ -22,9 +21,9 @@ CC		=	g++
 
 INCLUDE		+=	-I./include/ -I./lib/include
 
-CXXFLAGS	+=	
+CXXFLAGS	+=
 
-LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU -lsfml-audio 
+LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU -lsfml-audio
 
 
 
