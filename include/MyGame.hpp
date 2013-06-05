@@ -9,12 +9,19 @@
 
 class MyGame : public gdl::Game {
 private:
+<<<<<<< HEAD
   std::list<AObject*> objects_;
   Camera camera_;
   float cameraZ_;
   gdl::Clock	timer_;
   int	countClock_;
   
+=======
+    std::list<AObject*> objects_;
+    Camera camera_;
+    float cameraZ_;
+    
+>>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
 public:
   sf::Music	*music;
   sf::Music	*intro;

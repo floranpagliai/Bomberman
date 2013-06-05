@@ -7,8 +7,8 @@ Player::Player(float const x, float const z, std::list<AObject*> *objects) {
     this->position_.z = z * (BLOCK_SIZE * 2);
     this->type_ = PLAYER;
     this->ammo_ = 1;
-    this->power_ = 0;
-    this->speed_ = 0;
+    this->power_ = 5;
+    this->speed_ = 5;
     this->objects_ = objects;
     this->isPush_ = false;
     this->initialize();
@@ -20,6 +20,7 @@ Player::~Player() {
 
 void Player::initialize(void) {
     /// Charge le modele
+<<<<<<< HEAD
   this->model_ = gdl::Model::load("assets/marvin.fbx");
   model_.set_default_model_color(gdl::Color(255, 0, 0));
   model_.set_anim_speed("Take 001", 1 + this->speed_); //pour changer la vitesse quand il court
@@ -27,6 +28,15 @@ void Player::initialize(void) {
   model_.cut_animation(this->model_, "Take 001", 35, 53, "Run");
   model_.cut_animation(this->model_, "Take 001", 57, 120, "EndRun");
   model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
+=======
+    this->model_ = gdl::Model::load("assets/marvin.fbx");
+    model_.set_default_model_color(gdl::Color(255, 0, 0));
+    model_.set_anim_speed("Take 001", 1 + this->speed_); //pour changer la vitesse quand il court
+    model_.cut_animation(this->model_, "Take 001", 0, 30, "StartRun");
+    model_.cut_animation(this->model_, "Take 001", 35, 53, "Run");
+    model_.cut_animation(this->model_, "Take 001", 80, 120, "EndRun");
+    model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
+>>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
 }
 
 void Player::update(gdl::GameClock const &gameClock, gdl::Input &input) {
@@ -47,25 +57,8 @@ void Player::draw(void) {
     glPopMatrix();
 }
 
-void Player::checkMove(gdl::Input &input) {
-
-    for (int i = 0; i < 4; i++) {
-        std::list<AObject*>::iterator it;
-        for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
-            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
-                if (this->getBonus(dynamic_cast<Bonus *> (*it))) {
-                    delete (*it);
-                    objects_->erase(it);
-                    break;
-                }
-            }
-        }
-    }
-    move(input);
-}
-
-bool Player::checkMove2(gdl::Input &input, float dist, int dir) {
-    dist = dist * 1.8;
+bool Player::checkMove(gdl::Input &input, float dist, int dir) {
+    dist = dist * 3;
     for (int i = 0; i < 4; i++) {
         std::list<AObject*>::iterator it;
         for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
@@ -82,6 +75,9 @@ bool Player::checkMove2(gdl::Input &input, float dist, int dir) {
                     objects_->erase(it);
                     break;
                 }
+            } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == FLAMME) {
+                this->isOver = true;
+                break;
             }
 
         }
@@ -92,26 +88,36 @@ bool Player::checkMove2(gdl::Input &input, float dist, int dir) {
 void Player::move(gdl::Input & input) {
     if (input.isKeyDown(gdl::Keys::Up) == true) {
         this->rotation_.y = 180;
-        if (checkMove2(input, (25.0f + speed_ * 7.0f), 2))
+        if (checkMove(input, (25.0f + speed_ * 7.0f), 2)) {
             this->position_.z -= 25.0f + speed_ * 7.0f;
-        this->model_.play("Run");
+            this->model_.play("Run");
+        } else
+            this->model_.play("Stop");
     } else if (input.isKeyDown(gdl::Keys::Down) == true) {
         this->rotation_.y = 0;
-        if (checkMove2(input, -(25.0f + speed_ * 7.0f), 2))
+        if (checkMove(input, -(25.0f + speed_ * 7.0f), 2)) {
             this->position_.z += 25.0f + speed_ * 7.0f;
-        this->model_.play("Run");
+            this->model_.play("Run");
+        } else
+            this->model_.play("Stop");
     } else if (input.isKeyDown(gdl::Keys::Left) == true) {
         this->rotation_.y = -90;
-        if (checkMove2(input, (25.0f + speed_ * 7.0f), 1))
+        if (checkMove(input, (25.0f + speed_ * 7.0f), 1)) {
             this->position_.x -= 25.0f + speed_ * 7.0f;
-        this->model_.play("Run");
+            this->model_.play("Run");
+        } else
+            this->model_.play("Stop");
     } else if (input.isKeyDown(gdl::Keys::Right) == true) {
         this->rotation_.y = 90;
-        if (checkMove2(input, -(25.0f + speed_ * 7.0f), 1))
+        if (checkMove(input, -(25.0f + speed_ * 7.0f), 1)) {
             this->position_.x += 25.0f + speed_ * 7.0f;
-        this->model_.play("Run");
+            this->model_.play("Run");
+        } else
+            this->model_.play("Stop");
+
     } else
         this->model_.play("Stop");
+
 }
 
 void Player::putBomb(gdl::Input & input) {

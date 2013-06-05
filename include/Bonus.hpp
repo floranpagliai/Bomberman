@@ -7,6 +7,7 @@
 
 #define BONUS_SIZE (BLOCK_SIZE - 100)
 #define TIMER_BONUS 15
+
 enum eBonusType {
     AMMO = 1,
     POWER,

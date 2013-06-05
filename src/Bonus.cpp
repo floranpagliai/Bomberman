@@ -9,7 +9,7 @@
 
 Bonus::Bonus(float const x, float const z, eBonusType const type, std::list<AObject*> *objects) {
     this->position_.x = x;
-    this->position_.y = BLOCK_SIZE;
+    this->position_.y = 50;
     this->position_.z = z;
     this->type_ = BONUS;
     this->bonusType_ = type;
@@ -23,24 +23,29 @@ Bonus::~Bonus() {
 
 void Bonus::initialize(void) {
     if (this->bonusType_ == AMMO)
+<<<<<<< HEAD
       this->texture_ = gdl::Image::load("assets/bonus/bombUp.png");
     else if (this->bonusType_ == POWER)
       this->texture_ = gdl::Image::load("assets/bonus/powerUp.png");
+=======
+        this->texture_ = gdl::Image::load("assets/bonus/bombUp2.png");
+    else if (this->bonusType_ == POWER)
+        this->texture_ = gdl::Image::load("assets/bonus/powerUp2.png");
+>>>>>>> f07ac6462182b93e1bca915cfb15c4defbd972a2
     else
-        this->texture_ = gdl::Image::load("assets/bonus/speedUp.png");
+        this->texture_ = gdl::Image::load("assets/bonus/speedUp2.png");
     this->timer_.play();
 }
 
 void Bonus::update(gdl::GameClock const & gameClock, gdl::Input & input) {
-    if (this->position_.y >= BLOCK_SIZE && dirAnim_ == 0)
-        this->position_.y += 2.0f;
-    if (this->position_.y == BLOCK_SIZE && dirAnim_ == 1)
+    if (this->position_.y >= 50 && dirAnim_ == 0)
+        this->position_.y += 5.0f;
+    if (this->position_.y == 50 && dirAnim_ == 1)
         dirAnim_ = 0;
-    if (this->position_.y == BLOCK_SIZE + 100 && dirAnim_ == 0)
+    if (this->position_.y == BLOCK_SIZE && dirAnim_ == 0)
         dirAnim_ = 1;
-    if (this->position_.y <= BLOCK_SIZE + 100 && dirAnim_ == 1)
-        this->position_.y -= 2.0f;
-    this->rotation_.y -= 80;
+    if (this->position_.y <= BLOCK_SIZE && dirAnim_ == 1)
+        this->position_.y -= 5.0f;
     this->timer_.update();
     if (this->timer_.getTotalElapsedTime() >= TIMER_BONUS)
         this->isOver = true;
@@ -97,11 +102,6 @@ void Bonus::draw(void) {
     glVertex3f(BONUS_SIZE, BONUS_SIZE, BONUS_SIZE);
     glTexCoord2f(1.0f, 0.0f);
     glVertex3f(BONUS_SIZE, BONUS_SIZE, -BONUS_SIZE);
-
-
-    //glRotatef(this->rotation_.x, 1.0f, 0.0f, 0.0f);
-    glRotatef(this->rotation_.y, 0.0f, 1.0f, 0.0f);
-    //glRotatef(this->rotation_.z, 0.0f, 0.0f, 1.0f);
 
     glEnd();
     glPopMatrix();

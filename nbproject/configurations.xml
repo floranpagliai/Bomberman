@@ -5,6 +5,8 @@
       <df name="assets">
         <df name="bomb.fbm">
         </df>
+        <df name="bonus">
+        </df>
         <df name="marvin.fbm">
         </df>
       </df>
@@ -13,14 +15,13 @@
       <df name="include">
         <in>AObject.hpp</in>
         <in>Bomb.hpp</in>
+        <in>Bonus.hpp</in>
         <in>Camera.hpp</in>
         <in>Flamme.hpp</in>
         <in>Map.hpp</in>
         <in>MapElement.hpp</in>
         <in>MyGame.hpp</in>
-        <in>Object.hpp</in>
-        <in>Parser.hpp</in>
-        <in>Player.hpp</in>
+        <in>Player.h</in>
         <in>Vector3f.hpp</in>
       </df>
       <df name="lib">
@@ -47,12 +48,12 @@
       </df>
       <df name="src">
         <in>Bomb.cpp</in>
+        <in>Bonus.cpp</in>
         <in>Camera.cpp</in>
         <in>Flamme.cpp</in>
         <in>Map.cpp</in>
         <in>MapElement.cpp</in>
         <in>MyGame.cpp</in>
-        <in>Parser.cpp</in>
         <in>Player.cpp</in>
         <in>main.cpp</in>
       </df>
