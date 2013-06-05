@@ -35,7 +35,7 @@ public:
     void update(gdl::GameClock const &, gdl::Input &);
     void draw(void);
 
-    bool checkMove(gdl::Input &input, float, int);
+    bool checkMove(gdl::Input &input, float, float);
     void move(gdl::Input &);
     void putBomb(gdl::Input &);
 

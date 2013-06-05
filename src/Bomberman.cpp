@@ -87,17 +87,15 @@ void Bomberman::draw(void) {
     glPopMatrix();
 }
 
-bool Bomberman::checkMove(gdl::Input &input, float dist, int dir) {
-    dist = dist * 3;
+bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
+    distX = distX * 3;
+    distZ = distZ * 3;
     std::list<AObject*>::iterator it;
     for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
-        if (dir == 1) {
-            if (this->checkCollision((*it)->getPosition().x - dist, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
-                return false;
-        } else {
-            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - dist) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
-                return false;
-        }
+        if (this->checkCollision((*it)->getPosition().x - distX, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+            return false;
+        if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+            return false;
         if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
             if (this->getBonus(dynamic_cast<Bonus *> (*it))) {
                 delete (*it);
@@ -150,11 +148,8 @@ void Bomberman::move(gdl::Input & input) {
     for (int i = 0; i < 4; i++) {
         if (input.isKeyDown(getKeys()[i].key) == true) {
             this->rotation_.y = getKeys()[i].angle;
-            if (checkMove(input, (25.0f + speed_ * 7.0f) * getKeys()[i].coefX, 1)) {
+            if (checkMove(input, (25.0f + speed_ * 7.0f) * getKeys()[i].coefX, (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ)) {
                 this->position_.x += (25.0f + speed_ * 7.0f) * getKeys()[i].coefX;
-                this->model_.play("Run");
-            }
-            if (checkMove(input, (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ, 2)) {
                 this->position_.z += (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ;
                 this->model_.play("Run");
             }
