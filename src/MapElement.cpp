@@ -97,7 +97,7 @@ namespace MapElement {
     }
 
     void Ground::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/ground_sand.png");
+        this->texture_ = gdl::Image::load("assets/ground_grass.png");
     }
 
     void Ground::update(gdl::GameClock const & gameClock, gdl::Input & input) {
@@ -137,7 +137,7 @@ namespace MapElement {
     }
 
     void Wall::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/ground_rock.png");
+        this->texture_ = gdl::Image::load("assets/wall_rock2.png");
     }
 
     void Wall::update(gdl::GameClock const & gameClock, gdl::Input & input) {
