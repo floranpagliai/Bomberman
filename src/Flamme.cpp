@@ -102,16 +102,16 @@ void Flamme::propagate(void) const {
 void Flamme::checkPropagation(void) {
     std::list<AObject *>::iterator it = this->objects_->begin();
     for (std::list<AObject *>::iterator it = this->objects_->begin(); it != this->objects_->end() && this->isOver == false; it++) {
-        if (((*it)->getType() == PLAYER || (*it)->getType() == CRATE) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
-            if ((*it)->getType() == CRATE) {
-                this->power_ = 0;
-                this->popBonus();
-            }
-            (*it)->setIsOver();
+      if (((*it)->getType() == PLAYER || (*it)->getType() == CRATE) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
+	if ((*it)->getType() == CRATE) {
+	  this->power_ = 0;
+	  this->popBonus();
+	}
+	(*it)->setIsOver();
             //            delete (*it);
             //            objects_->erase(it);
             break;
-
+	    
         } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
             this->power_ = 0;
             break;

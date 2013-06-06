@@ -4,7 +4,7 @@
 #include "AObject.hpp"
 #include "Bomb.hpp"
 #include "Bonus.hpp"
-#include "MyClock.hpp"
+#include "Display.hpp"
 
 struct t_move {
     gdl::Keys::Key key;
@@ -43,7 +43,9 @@ public:
     int getAmmo() const;
     int getPower() const;
     int getSpeed() const;
-
+    int getId() const;
+    int	getAmmoStock() const;
+    
     void recupBomb();
     bool ammoUp();
     bool powerUp();

@@ -61,14 +61,15 @@ void Bomberman::initialize(void) {
     model_.cut_animation(this->model_, "Take 001", 80, 120, "EndRun");
     model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
     if (this->id_ == 0)
-        model_.set_default_model_color(gdl::Color(255, 0, 0));
+      model_.set_default_model_color(gdl::Color(255, 0, 0));
     else
         model_.set_default_model_color(gdl::Color(0, 0, 255));
-
+    
     powerupSound_ = new sf::Music();
     powerupSound_->OpenFromFile("assets/sound/pop.wav");
     deathSound_ = new sf::Music();
     deathSound_->OpenFromFile("assets/sound/death.wav");
+    this->objects_->push_back(new Display::DisplayPlayer(this));
 }
 
 void Bomberman::update(gdl::GameClock const &gameClock, gdl::Input &input) {
@@ -176,6 +177,14 @@ int Bomberman::getPower() const {
 int Bomberman::getSpeed() const {
 
     return speed_;
+}
+
+int Bomberman::getId() const {
+  return id_;
+}
+
+int Bomberman::getAmmoStock() const {
+  return ammoStock_;
 }
 
 bool Bomberman::ammoUp() {

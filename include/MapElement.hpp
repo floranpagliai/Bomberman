@@ -1,13 +1,3 @@
-//
-// MapElement.hpp for __MAPELEMENT_HPP__ in /home/cayrel_l//tek2/projet/Bomberman/include
-//
-// Made by lambert cayrel
-// Login   <cayrel_l@epitech.net>
-//
-// Started on  Wed May 22 17:35:49 2013 lambert cayrel
-// Last update Mon May 27 17:17:52 2013 lambert cayrel
-//
-
 #ifndef __MAPELEMENT_HPP__
 #define __MAPELEMENT_HPP__
 

@@ -4,7 +4,7 @@
 #include "AObject.hpp"
 #include "Camera.hpp"
 #include "Map.hpp"
-#include "MyClock.hpp"
+#include "Display.hpp"
 
 class MyGame : public gdl::Game {
 private:

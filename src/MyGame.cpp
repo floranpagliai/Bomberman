@@ -10,7 +10,7 @@ void MyGame::initialize(void) {
 
     this->countClock_ = 0;
 
-    Map map_("map/map1", &objects_);
+    Map map_("map/map06", &objects_);
     map_.openMap();
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
@@ -38,7 +38,7 @@ void MyGame::update(void) {
     camera_.update(gameClock_, input_);
         if (this->countClock_ == 0) {
             this->countClock_ = 1;
-            this->objects_.push_back(new MyClock());
+            this->objects_.push_back(new Display::Timer());
         }
 
     if (input_.isKeyDown(gdl::Keys::Escape) == true)

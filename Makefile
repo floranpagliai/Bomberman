@@ -11,7 +11,7 @@ SRC		=	$(DIR)main.cpp\
 			$(DIR)MapElement.cpp\
 			$(DIR)Bonus.cpp\
 			$(DIR)Map.cpp\
-			$(DIR)MyClock.cpp
+			$(DIR)Display.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 
