@@ -6,6 +6,9 @@
 #include "Bomberman.h"
 
 class Bomberman;
+
+#define   DISPLAY_SIZE 500
+
 namespace Display{
 
   class Timer : public AObject {
@@ -14,7 +17,7 @@ namespace Display{
     gdl::Text	T_time_;
     gdl::Clock	C_timer_;
     gdl::Image	texture_;
-    
+
     float	f_time_;
     std::string	s_time_;
 
@@ -22,11 +25,11 @@ namespace Display{
   public:
     Timer(std::list<AObject*> *);
     ~Timer();
-    
+
     void	initialize(void);
     void	update(gdl::GameClock const &, gdl::Input &);
     void	draw(void);
-    
+
     std::string	float2string(float f);
   };
   //  class Bomberman;
@@ -38,16 +41,16 @@ namespace Display{
     gdl::Text	speed_;
     gdl::Text	power_;
     gdl::Text	Ammo_;
-    
+
     std::string	s_bomb;
     int		i_bomb;
-    
+
     std::string s_speed_;
     int		i_speed_;
-    
+
     std::string	s_power_;
     int		i_power_;
-    
+
     Bomberman	*p_player;
 
     public:
@@ -83,7 +86,7 @@ protected:
   std::string		s_text;
 
   float			f_time;
-  
+
   gdl::Color		color_;
 
 public:

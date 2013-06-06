@@ -17,14 +17,16 @@ void MyGame::initialize(void) {
     float cameraY;
     cameraY = map_.getMaxX() * -300.0f;
     camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, cameraZ_);
-
+    if (this->countClock_ == 0) {
+        this->countClock_ = 1;
+        this->objects_.push_back(new Display::Timer(&objects_));
+    }
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();
 }
 
 void MyGame::update(void) {
     std::list<AObject*>::iterator it;
-
     for (it = this->objects_.begin(); it != this->objects_.end(); ++it) {
         sleep(0.9);
         (*it)->update(gameClock_, input_);
@@ -36,10 +38,7 @@ void MyGame::update(void) {
     //if (camera_.getPosition().z != cameraZ_)
     //camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
-    if (this->countClock_ == 0) {
-      this->countClock_ = 1;
-      this->objects_.push_back(new Display::Timer(this->objects_));
-    }
+
     if (input_.isKeyDown(gdl::Keys::F1) == true)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 10.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
@@ -58,10 +57,10 @@ void MyGame::draw(void) {
 }
 
 void MyGame::unload(void) {
-  std::list<AObject *>::iterator it = this->objects_.begin();
-  for (; it != this->objects_.end(); it++)
-    delete *it;
-  this->objects_.clear();
+    std::list<AObject *>::iterator it = this->objects_.begin();
+    for (; it != this->objects_.end(); it++)
+        delete *it;
+    this->objects_.clear();
 }
 
 std::string MyGame::float2string(float f) {
