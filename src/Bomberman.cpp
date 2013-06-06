@@ -93,10 +93,16 @@ bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
     distZ = distZ * 3;
     std::list<AObject*>::iterator it;
     for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
-        if (this->checkCollision((*it)->getPosition().x - distX, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+        if (this->checkCollision((*it)->getPosition().x - distX, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE || (*it)->getType() == BOMB)) {
+            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && ((*it)->getType() == BOMB))
+                return true;
             return false;
-        if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ) && ((*it)->getType() == WALL || (*it)->getType() == CRATE))
+        }
+        else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ) && ((*it)->getType() == WALL || (*it)->getType() == CRATE || (*it)->getType() == BOMB)) {
+            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && ((*it)->getType() == BOMB))
+                return true;
             return false;
+        }
         if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
             if (this->getBonus(dynamic_cast<Bonus *> (*it))) {
                 delete (*it);

@@ -7,7 +7,32 @@
         </df>
         <df name="bonus">
         </df>
+        <df name="essence">
+          <in>Essence Sans Bold Italic.ttf</in>
+          <in>Essence Sans Bold.ttf</in>
+          <in>Essence Sans Light Italic.ttf</in>
+          <in>Essence Sans Light.ttf</in>
+          <in>Essence Sans.ttf</in>
+          <in>Essence-Sans.jpg</in>
+          <in>Notice - License.txt</in>
+          <in>bomb.fbx</in>
+          <in>crate.png</in>
+          <in>crate2.png</in>
+          <in>essence_italic.ttf</in>
+          <in>essence_sans.zip</in>
+          <in>ground_dirt.png</in>
+          <in>ground_grass.png</in>
+          <in>ground_rock.png</in>
+          <in>ground_sand.png</in>
+          <in>marvin.fbx</in>
+        </df>
         <df name="marvin.fbm">
+        </df>
+        <df name="sound">
+          <in>death.wav</in>
+          <in>intro.wav</in>
+          <in>music.wav</in>
+          <in>powerup.wav</in>
         </df>
       </df>
       <df name="doc">
@@ -15,13 +40,14 @@
       <df name="include">
         <in>AObject.hpp</in>
         <in>Bomb.hpp</in>
+        <in>Bomberman.h</in>
         <in>Bonus.hpp</in>
         <in>Camera.hpp</in>
         <in>Flamme.hpp</in>
         <in>Map.hpp</in>
         <in>MapElement.hpp</in>
+        <in>MyClock.hpp</in>
         <in>MyGame.hpp</in>
-        <in>Player.h</in>
         <in>Vector3f.hpp</in>
       </df>
       <df name="lib">
@@ -48,13 +74,14 @@
       </df>
       <df name="src">
         <in>Bomb.cpp</in>
+        <in>Bomberman.cpp</in>
         <in>Bonus.cpp</in>
         <in>Camera.cpp</in>
         <in>Flamme.cpp</in>
         <in>Map.cpp</in>
         <in>MapElement.cpp</in>
+        <in>MyClock.cpp</in>
         <in>MyGame.cpp</in>
-        <in>Player.cpp</in>
         <in>main.cpp</in>
       </df>
     </df>
