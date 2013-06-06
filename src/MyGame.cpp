@@ -10,11 +10,7 @@ void MyGame::initialize(void) {
 
     this->countClock_ = 0;
 
-<<<<<<< HEAD
-    Map map_("map/map06", &objects_);
-=======
     Map map_("map/plaine", &objects_);
->>>>>>> 842ab4ebd036274353bc648e346e982395479a6e
     map_.openMap();
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
@@ -40,20 +36,12 @@ void MyGame::update(void) {
     //if (camera_.getPosition().z != cameraZ_)
     //camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
-<<<<<<< HEAD
-        if (this->countClock_ == 0) {
-            this->countClock_ = 1;
-            this->objects_.push_back(new Display::Timer());
-        }
-
-=======
     if (this->countClock_ == 0) {
         this->countClock_ = 1;
-        this->objects_.push_back(new MyClock());
+        this->objects_.push_back(new Display::Timer());
     }
     if (input_.isKeyDown(gdl::Keys::F1) == true)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 10.0f);
->>>>>>> 842ab4ebd036274353bc648e346e982395479a6e
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }
