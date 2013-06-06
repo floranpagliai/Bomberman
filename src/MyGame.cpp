@@ -10,7 +10,7 @@ void MyGame::initialize(void) {
 
     this->countClock_ = 0;
 
-    Map map_("map/map1", &objects_);
+    Map map_("map/usine", &objects_);
     map_.openMap();
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
