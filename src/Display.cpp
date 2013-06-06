@@ -2,8 +2,12 @@
 
 namespace Display {
   
-  Timer::Timer()
+  Timer::Timer(std::list<AObject *> *objects)
   {
+    this->position_.x = 100;
+    this->position_.y = 1.0f;
+    this->position_.z = 100;
+    this->objects_ = objects;
     this->C_timer_.play();
   }
   
@@ -11,6 +15,7 @@ namespace Display {
   }
   
   void	Timer::initialize(void){
+    this->texture_ = gdl::Image::load("assets/clock.png");
   }
   
   void	Timer::update(gdl::GameClock const &, gdl::Input &)
@@ -25,6 +30,25 @@ namespace Display {
   {
     camera_.setPosition(this->camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z+50.f);
     
+    texture_.bind();
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+    glTranslatef(this->position_.x, this->position_.y, this->position_.z);
+
+    glBegin(GL_QUADS);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
+
+    glEnd();
+    glPopMatrix();
+
     T_time_.setText( "Time : " + s_time_);
     T_time_.setSize(20);//taille de la police d'écriture !
     T_time_.setPosition(500, 10);

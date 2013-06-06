@@ -13,12 +13,14 @@ namespace Display{
     Camera	camera_;
     gdl::Text	T_time_;
     gdl::Clock	C_timer_;
-
+    gdl::Image	texture_;
+    
     float	f_time_;
     std::string	s_time_;
 
+    std::list<AObject*>	*objects_;
   public:
-    Timer();
+    Timer(std::list<AObject*> *);
     ~Timer();
     
     void	initialize(void);
