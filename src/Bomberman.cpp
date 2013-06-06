@@ -66,8 +66,8 @@ void Bomberman::initialize(void) {
         model_.set_default_model_color(gdl::Color(0, 0, 255));
 
     powerupSound_ = new sf::Music();
-    powerupSound_->OpenFromFile("assets/sound/pop.wav");
     deathSound_ = new sf::Music();
+    powerupSound_->OpenFromFile("assets/sound/pop.wav");
     deathSound_->OpenFromFile("assets/sound/death.wav");
 }
 
@@ -93,12 +93,9 @@ bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
     distZ = distZ * 3;
     std::list<AObject*>::iterator it;
     for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
-        if (this->checkCollision((*it)->getPosition().x - distX, (*it)->getPosition().z) && ((*it)->getType() == WALL || (*it)->getType() == CRATE || (*it)->getType() == BOMB)) {
-            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && ((*it)->getType() == BOMB))
-                return true;
-            return false;
-        } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ) && ((*it)->getType() == WALL || (*it)->getType() == CRATE || (*it)->getType() == BOMB)) {
-            if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && ((*it)->getType() == BOMB))
+        if ((this->checkCollision((*it)->getPosition().x - distX, (*it)->getPosition().z) || this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ))
+                && ((*it)->getType() == WALL || (*it)->getType() == CRATE || (*it)->getType() == BOMB)) {
+            if ((this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z)) && ((*it)->getType() == BOMB))
                 return true;
             return false;
         } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS && this->getBonus(dynamic_cast<Bonus *> (*it))) {
@@ -155,7 +152,7 @@ bool Bomberman::getBonus(Bonus * bonus) {
         return this->speedUp();
 }
 
-t_move* Bomberman::getKeys() const {
+t_move * Bomberman::getKeys() const {
     if (this->id_ == 0)
         return (moveP1);
 

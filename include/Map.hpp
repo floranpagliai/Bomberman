@@ -20,8 +20,10 @@ public:
     virtual ~Map();
 
     int getMaxX() const;
+
     void posMap();
     void openMap();
+    void randMap(int);
 };
 
 #endif

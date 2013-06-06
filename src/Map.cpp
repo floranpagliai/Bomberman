@@ -38,8 +38,8 @@ void Map::posMap() {
         x = 0;
         z++;
     }
-    posX_ = (posX_ - posX_ - posX_)/2;
-    posZ_ = (z - z - z)/2;
+    posX_ = (posX_ - posX_ - posX_) / 2;
+    posZ_ = (z - z - z) / 2;
     maxX_ = posX_;
     file.close();
 }
@@ -73,5 +73,28 @@ void Map::openMap() {
         posZ_++;
     }
     file.close();
+}
+
+void Map::randMap(int size) {
+    int x = (size - size - size) / 2;
+    int z = (size - size - size) / 2;
+    this->maxX_ = z;
+    int value;
+    while (x != size + 1) {
+        z = maxX_;
+        while (z != size + 1) {
+            if ((z == (size - size - size) / 2 || x == (size - size - size) / 2 || x == size || z == size) ||
+                    ((z % 2) == 0 && (x % 2) == 0))
+                this->objects_->push_back(new MapElement::Wall(x, z, this->objects_));
+            else {
+                value = rand() % 2;
+                    this->objects_->push_back(new MapElement::Ground(x, z, this->objects_));
+                    if (value == 1)
+                        this->objects_->push_back(new MapElement::Crate(x, z, this->objects_));
+            }
+            z++;
+        }
+        x++;
+    }
 }
 

@@ -10,7 +10,7 @@ void MyGame::initialize(void) {
 
     this->countClock_ = 0;
 
-    Map map_("map/usine", &objects_);
+    Map map_("map/plaine", &objects_);
     map_.openMap();
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
@@ -36,11 +36,12 @@ void MyGame::update(void) {
     //if (camera_.getPosition().z != cameraZ_)
     //camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
-        if (this->countClock_ == 0) {
-            this->countClock_ = 1;
-            this->objects_.push_back(new MyClock());
-        }
-
+    if (this->countClock_ == 0) {
+        this->countClock_ = 1;
+        this->objects_.push_back(new MyClock());
+    }
+    if (input_.isKeyDown(gdl::Keys::F1) == true)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 10.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }
