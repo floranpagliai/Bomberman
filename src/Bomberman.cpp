@@ -105,7 +105,6 @@ bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
             delete (*it);
             objects_->erase(it);
             powerupSound_->Play();
-
             break;
         }
     }
@@ -113,39 +112,6 @@ bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
 }
 
 void Bomberman::move(gdl::Input & input) {
-    //    if (input.isKeyDown(gdl::Keys::Up) == true) {
-    //        this->rotation_.y = 180;
-    //        if (checkMove(input, (25.0f + speed_ * 7.0f), 2)) {
-    //            this->position_.z -= 25.0f + speed_ * 7.0f;
-    //            this->model_.play("Run");
-    //        } else
-    //            this->model_.play("Stop");
-    //    } else if (input.isKeyDown(gdl::Keys::Down) == true) {
-    //        this->rotation_.y = 0;
-    //        if (checkMove(input, -(25.0f + speed_ * 7.0f), 2)) {
-    //            this->position_.z += 25.0f + speed_ * 7.0f;
-    //            this->model_.play("Run");
-    //        } else
-    //            this->model_.play("Stop");
-    //    } else if (input.isKeyDown(gdl::Keys::Left) == true) {
-    //        this->rotation_.y = -90;
-    //        if (checkMove(input, (25.0f + speed_ * 7.0f), 1)) {
-    //            this->position_.x -= 25.0f + speed_ * 7.0f;
-    //            this->model_.play("Run");
-    //        } else
-    //            this->model_.play("Stop");
-    //    } else if (input.isKeyDown(gdl::Keys::Right) == true) {
-    //        this->rotation_.y = 90;
-    //        if (checkMove(input, -(25.0f + speed_ * 7.0f), 1)) {
-    //            this->position_.x += 25.0f + speed_ * 7.0f;
-    //            this->model_.play("Run");
-    //        } else
-    //            this->model_.play("Stop");
-    //
-    //    } else
-    //        this->model_.play("Stop");
-    //    if (input.isKeyDown(gdl::Keys::B) == true)
-    //        this->putBomb(input);
     for (int i = 0; i < 4; i++) {
         if (input.isKeyDown(getKeys()[i].key) == true) {
             this->rotation_.y = getKeys()[i].angle;
@@ -157,7 +123,6 @@ void Bomberman::move(gdl::Input & input) {
                 this->model_.play("Stop");
         }
     }
-
     if (input.isKeyDown(getKeys()[4].key) == true)
         this->putBomb(input);
 }

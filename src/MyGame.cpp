@@ -16,7 +16,7 @@ void MyGame::initialize(void) {
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
     float cameraY;
     cameraY = map_.getMaxX() * -300.0f;
-    camera_.setPosition(camera_.getPosition().x, cameraY, cameraZ_);
+    camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, cameraZ_);
 
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();

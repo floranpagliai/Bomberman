@@ -1,6 +1,6 @@
 #include "Camera.hpp"
 
-Camera::Camera(void) : position_(0.0f, 5500.0f, 900.0f), rotation_(0.0f, 0.0f, 0.0f) {
+Camera::Camera(void) : position_(0.0f, 4500.0f, 900.0f), rotation_(0.0f, 0.0f, 0.0f) {
 }
 
 void Camera::initialize(void) {
