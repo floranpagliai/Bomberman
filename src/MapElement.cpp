@@ -4,7 +4,7 @@ namespace MapElement {
 
     Background::Background(float const x, float const z, std::list<AObject*> *objects) {
         this->position_.x = x;
-        this->position_.y = 300.0f;
+        this->position_.y = 1.0f;
         this->position_.z = z;
         this->objects_ = objects;
         this->initialize();
@@ -27,7 +27,8 @@ namespace MapElement {
         glTranslatef(this->position_.x, this->position_.y, this->position_.z);
 
         glBegin(GL_QUADS);
-        int size = 250;
+        int size = 10000;
+
         glTexCoord2f(0.0f, 0.0f);
         glVertex3f(-size, -size, -size);
         glTexCoord2f(0.0f, 1.0f);
@@ -36,6 +37,43 @@ namespace MapElement {
         glVertex3f(size, -size, size);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(size, -size, -size);
+
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(size, size, -size);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(size, -size, -size);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(-size, -size, -size);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(-size, size, -size);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(size, size, size);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(size, -size, size);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(size, -size, -size);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(size, size, -size);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-size, size, size);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-size, -size, size);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(-size, -size, -size);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(-size, size, -size);
+
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-size, size, -size);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-size, size, size);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(size, size, size);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(size, size, -size);
         /*glRotatef(this->camera_.getRotation().x +
                 this->position_.x,
                 this->camera_.getRotation().y +
@@ -81,7 +119,7 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, BLOCK_SIZE);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(BLOCK_SIZE, -BLOCK_SIZE, -BLOCK_SIZE);
-       
+
         glEnd();
         glPopMatrix();
     }
@@ -158,7 +196,7 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
 
         glEnd();
-	glPopMatrix();
+        glPopMatrix();
     }
 
     Crate::Crate(float const x, float const z, std::list<AObject*> *objects) {
@@ -231,7 +269,7 @@ namespace MapElement {
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(BLOCK_SIZE, BLOCK_SIZE, -BLOCK_SIZE);
-        
+
         glEnd();
         glPopMatrix();
     }
