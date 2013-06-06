@@ -97,24 +97,17 @@ bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
             if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && ((*it)->getType() == BOMB))
                 return true;
             return false;
-        }
-        else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ) && ((*it)->getType() == WALL || (*it)->getType() == CRATE || (*it)->getType() == BOMB)) {
+        } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ) && ((*it)->getType() == WALL || (*it)->getType() == CRATE || (*it)->getType() == BOMB)) {
             if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && ((*it)->getType() == BOMB))
                 return true;
             return false;
-        }
-        if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS) {
-            if (this->getBonus(dynamic_cast<Bonus *> (*it))) {
-                delete (*it);
-                objects_->erase(it);
-                powerupSound_->Play();
-                break;
-            }
-        } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == FLAMME) {
-            this->isOver = true;
+        } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS && this->getBonus(dynamic_cast<Bonus *> (*it))) {
+            delete (*it);
+            objects_->erase(it);
+            powerupSound_->Play();
+
             break;
         }
-
     }
     return true;
 }
@@ -164,6 +157,7 @@ void Bomberman::move(gdl::Input & input) {
                 this->model_.play("Stop");
         }
     }
+
     if (input.isKeyDown(getKeys()[4].key) == true)
         this->putBomb(input);
 }
@@ -179,6 +173,7 @@ void Bomberman::putBomb(gdl::Input & input) {
         }
     }
     if (this->ammoStock_ != 0 && putBomb == true) {
+
         this->ammoStock_ -= 1;
         this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_, this));
     }
@@ -191,12 +186,14 @@ bool Bomberman::getBonus(Bonus * bonus) {
     else if (bonus->getBonusType() == POWER)
         return this->powerUp();
     else if (bonus->getBonusType() == SPEED)
+
         return this->speedUp();
 }
 
 t_move* Bomberman::getKeys() const {
     if (this->id_ == 0)
         return (moveP1);
+
     else
         return (moveP2);
 }
@@ -220,6 +217,7 @@ bool Bomberman::ammoUp() {
     if (ammo_ <= 5) {
         ammo_ += 1;
         ammoStock_ += 1;
+
         return true;
     }
     return false;
@@ -227,12 +225,14 @@ bool Bomberman::ammoUp() {
 }
 
 void Bomberman::recupBomb() {
+
     ammoStock_ += 1;
 }
 
 bool Bomberman::powerUp() {
     if (power_ <= 4) {
         power_ += 1;
+
         return true;
     }
     return false;
