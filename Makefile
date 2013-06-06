@@ -28,7 +28,7 @@ LDFLAGS		=	-L./lib -Wl,--rpath=./lib -lgdl_gl -lGL -lGLU -lsfml-audio
 
 
 $(NAME)	:	$(OBJ)
-		$(CC) -lpthread -o $(NAME) $(OBJ) $(LDFLAGS)
+		$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) -Werror -Wall -W
 		make clean
 
 all	:	$(NAME)
