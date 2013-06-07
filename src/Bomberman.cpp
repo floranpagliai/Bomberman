@@ -64,7 +64,7 @@ void Bomberman::initialize(void) {
     else if (this->id_ == 2)
         model_.set_default_model_color(gdl::Color(0, 0, 255));
     else
-        model_.set_default_model_color(gdl::Color(0, 100, 0));
+        model_.set_default_model_color(gdl::Color(0, 155, 0));
     this->objects_->push_back(new Display::DisplayPlayer(this));
 }
 

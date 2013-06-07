@@ -47,7 +47,7 @@ void Map::posMap() {
 void Map::openMap() {
     std::ifstream file(name_, std::ios::in);
     std::string str;
-    int id = 1;
+    int id = 2;
 
     this->posMap();
     this->objects_->push_back(new MapElement::Background(0, 0, this->objects_));
@@ -63,7 +63,7 @@ void Map::openMap() {
                 this->objects_->push_back(new MapElement::Crate(posX_, posZ_, this->objects_));
             } else if (*it == '7' && id < 3) {
                 this->objects_->push_back(new MapElement::Ground(posX_, posZ_, this->objects_));
-                this->objects_->push_back(new Bomberman(posX_, posZ_, id++, this->objects_));
+                this->objects_->push_back(new Bomberman(posX_, posZ_, id--, this->objects_));
             } else if (*it == '8') {
                 this->objects_->push_back(new MapElement::Ground(posX_, posZ_, this->objects_));
                 this->objects_->push_back(new Bomberman(posX_, posZ_, 3, this->objects_));
