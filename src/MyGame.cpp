@@ -10,7 +10,7 @@ void MyGame::initialize(void) {
 
     this->countClock_ = 0;
 
-    Map map_("map/test", &objects_);
+    Map map_("map/plaine", &objects_);
     map_.openMap();
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
@@ -46,10 +46,7 @@ void MyGame::update(void) {
             it = this->objects_.erase(it);
         }
     }
-    if (checkWin()) {
-        std::cout << "GAME OVER: Joueur" << std::endl;
-        exit(EXIT_SUCCESS);
-    }
+    this->checkWin();
     //if (camera_.getPosition().z != cameraZ_)
     //camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
@@ -75,7 +72,7 @@ void MyGame::unload(void) {
     this->objects_.clear();
 }
 
-bool MyGame::checkWin(void) {
+void MyGame::checkWin(void) {
     int count = 0;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
         if ((*it)->getType() == PLAYER)
@@ -84,10 +81,9 @@ bool MyGame::checkWin(void) {
     if (count == 1) {
         for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
             if ((*it)->getType() == PLAYER) {
-                break;
+                std::cout << "GAME OVER: Player " << (*it)->getId() << " win" << std::endl;
+                exit(EXIT_SUCCESS);
             }
         }
-        return true;
     }
-    return false;
 }

@@ -59,10 +59,12 @@ void Bomberman::initialize(void) {
     model_.cut_animation(this->model_, "Take 001", 35, 53, "Run");
     model_.cut_animation(this->model_, "Take 001", 80, 120, "EndRun");
     model_.cut_animation(this->model_, "Take 001", 0, 0, "Stop");
-    if (this->id_ == 0)
+    if (this->id_ == 1)
         model_.set_default_model_color(gdl::Color(255, 0, 0));
-    else
+    else if (this->id_ == 2)
         model_.set_default_model_color(gdl::Color(0, 0, 255));
+    else
+        model_.set_default_model_color(gdl::Color(0, 100, 0));
     this->objects_->push_back(new Display::DisplayPlayer(this));
 }
 
@@ -134,7 +136,6 @@ void Bomberman::putBomb(gdl::Input & input) {
         }
     }
     if (this->ammoStock_ != 0 && putBomb == true) {
-
         this->ammoStock_ -= 1;
         this->objects_->push_front(new Bombe(this->position_.x, this->position_.z, this->power_, this->objects_, this));
     }
@@ -153,9 +154,8 @@ bool Bomberman::getBonus(Bonus * bonus) {
 }
 
 t_move * Bomberman::getKeys() const {
-    if (this->id_ == 0)
+    if (this->id_ == 1)
         return (moveP1);
-
     else
         return (moveP2);
 }

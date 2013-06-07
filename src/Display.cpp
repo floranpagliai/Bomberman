@@ -89,46 +89,36 @@ namespace Display {
     void DisplayPlayer::draw(void) {
         camera__.setPosition(this->camera__.getPosition().x, camera__.getPosition().y, camera__.getPosition().z + 1.0f);
 
-        if (this->p_player->getId() == 0) {
-            nb_Bomb_.setText("Bombes: " + s_bomb);
+        if (this->p_player->getId() == 1) {
+            nb_Bomb_.setText("Player 1\n\nBombes: " + s_bomb);
             nb_Bomb_.setSize(20); //taille de la police d'écriture !
-            nb_Bomb_.setPosition(10, 170);
+            nb_Bomb_.setPosition(10, 100);
             nb_Bomb_.draw();
-
-            score_.setText("Player 1\n\nScore : 0");
-            score_.setSize(20); //taille de la police d'écriture !
-            score_.setPosition(10, 100);
-            score_.draw();
 
             speed_.setText("Speed: " + s_speed_);
             speed_.setSize(20); //taille de la police d'écriture !
-            speed_.setPosition(10, 200);
+            speed_.setPosition(10, 170);
             speed_.draw();
 
             power_.setText("Power: " + s_power_);
             power_.setSize(20); //taille de la police d'écriture !
-            power_.setPosition(10, 230);
+            power_.setPosition(10, 200);
             power_.draw();
-        } else if (this->p_player->getId() == 1) {
+        } else if (this->p_player->getId() == 2) {
 
-            nb_Bomb_.setText("Bombes: " + s_bomb);
+            nb_Bomb_.setText("Player 2\n\nBombes: " + s_bomb);
             nb_Bomb_.setSize(20); //taille de la police d'écriture !
-            nb_Bomb_.setPosition(910, 170);
+            nb_Bomb_.setPosition(910, 100);
             nb_Bomb_.draw();
-
-            score_.setText("Player2\n\nScore : 0");
-            score_.setSize(20); //taille de la police d'écriture !
-            score_.setPosition(910, 100);
-            score_.draw();
 
             speed_.setText("Speed: " + s_speed_);
             speed_.setSize(20); //taille de la police d'écriture !
-            speed_.setPosition(910, 200);
+            speed_.setPosition(910, 170);
             speed_.draw();
 
             power_.setText("Power: " + s_power_);
             power_.setSize(20); //taille de la police d'écriture !
-            power_.setPosition(910, 230);
+            power_.setPosition(910, 200);
             power_.draw();
         }
         camera__.setPosition(camera__.getPosition().x, camera__.getPosition().y, (camera__.getPosition().z - 1.0f));

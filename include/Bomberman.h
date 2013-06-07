@@ -21,7 +21,6 @@ protected:
     int ammoStock_;
     int power_;
     int speed_;
-    int id_;
 
 
 public:

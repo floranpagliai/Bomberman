@@ -25,7 +25,7 @@ public:
     virtual void draw(void);
     virtual void unload(void);
 
-    bool checkWin();
+    void checkWin(void);
 };
 
 #endif

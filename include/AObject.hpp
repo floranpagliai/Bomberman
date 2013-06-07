@@ -49,6 +49,7 @@ protected:
     Vector3f rotation_;
     bool isOver;
     eType type_;
+    int id_;
 
 public:
 
@@ -83,7 +84,11 @@ public:
     }
 
     int getType(void) const {
-        return type_;
+        return this->type_;
+    }
+
+    int getId(void) const {
+        return this->id_;
     }
 };
 
