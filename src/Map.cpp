@@ -93,7 +93,7 @@ void Map::randMap(int size) {
     this->maxX_ = z;
     int value;
 
-    this->objects_->push_back(new MapElement::Background(0, 0, this->theme_, this->objects_));
+    //this->objects_->push_back(new MapElement::Background(0, 0, this->theme_, this->objects_));
     while (x != size + 1) {
         z = maxX_;
         while (z != size + 1) {

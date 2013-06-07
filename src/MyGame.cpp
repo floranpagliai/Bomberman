@@ -9,6 +9,7 @@ void MyGame::initialize(void) {
 
     this->countClock_ = 0;
 
+    //Map map_(10, &objects_);
     Map map_("map/plaine", POLENORD, &objects_);
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
