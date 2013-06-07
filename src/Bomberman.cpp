@@ -65,7 +65,7 @@ void Bomberman::initialize(void) {
         model_.set_default_model_color(gdl::Color(0, 0, 255));
     else
         model_.set_default_model_color(gdl::Color(0, 155, 0));
-    this->objects_->push_back(new Display::DisplayPlayer(this));
+    //this->objects_->push_back(new Display::DisplayPlayer(this));
 }
 
 void Bomberman::update(gdl::GameClock const &gameClock, gdl::Input &input) {

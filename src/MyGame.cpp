@@ -16,7 +16,7 @@ void MyGame::initialize(void) {
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
     float cameraY;
     cameraY = map_.getMaxX() * -300.0f;
-    camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, cameraZ_);
+    camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 4000);
     if (this->countClock_ == 0) {
         this->countClock_ = 1;
         this->objects_.push_back(new Display::Timer(&objects_));
@@ -32,6 +32,9 @@ void MyGame::initialize(void) {
 }
 
 void MyGame::update(void) {
+    if (camera_.getPosition().z != this->cameraZ_)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
+    camera_.update(gameClock_, input_);
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
         sleep(0.9);
         (*it)->update(gameClock_, input_);
@@ -47,9 +50,6 @@ void MyGame::update(void) {
         }
     }
     this->checkWin();
-    //if (camera_.getPosition().z != cameraZ_)
-    //camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
-    camera_.update(gameClock_, input_);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }

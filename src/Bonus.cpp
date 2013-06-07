@@ -29,7 +29,7 @@ void Bonus::initialize(void) {
     else if (this->bonusType_ == POWER)
         this->texture_ = gdl::Image::load("assets/bonus/powerUp.png");
     else
-        this->texture_ = gdl::Image::load("assets/bonus/powerUp.png");
+        this->texture_ = gdl::Image::load("assets/bonus/powerDown.png");
     this->timer_.play();
 }
 

@@ -12,7 +12,7 @@ class Bomberman;
 namespace Display{
 
   class Timer : public AObject {
-  protected:
+  private:
     Camera	camera_;
     gdl::Text	T_time_;
     gdl::Clock	C_timer_;
@@ -34,13 +34,14 @@ namespace Display{
   };
   //  class Bomberman;
   class DisplayPlayer : public AObject {
-  protected:
+  private:
     Camera	camera__;
     gdl::Text	score_;
     gdl::Text	nb_Bomb_;
     gdl::Text	speed_;
     gdl::Text	power_;
     gdl::Text	Ammo_;
+
 
     std::string	s_bomb;
     int		i_bomb;

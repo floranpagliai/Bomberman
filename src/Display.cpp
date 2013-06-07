@@ -43,14 +43,14 @@ namespace Display {
 
         glEnd();
         glPopMatrix();
-        camera_.setPosition(this->camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 50.f);
+        camera_.setPosition(this->camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 1.f);
 
         T_time_.setText(s_time_);
-        T_time_.setSize(18); //taille de la police d'écriture !
+        T_time_.setSize(18);
         T_time_.setPosition(500, 10);
         T_time_.draw();
 
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 1.f));
     }
 
     std::string Timer::float2string(float f) {
@@ -87,10 +87,10 @@ namespace Display {
     }
 
     void DisplayPlayer::draw(void) {
-        camera__.setPosition(this->camera__.getPosition().x, camera__.getPosition().y, camera__.getPosition().z + 1.0f);
+            camera__.setPosition(this->camera__.getPosition().x, camera__.getPosition().y, camera__.getPosition().z + 1.0f);
 
         if (this->p_player->getId() == 1) {
-            nb_Bomb_.setText("Player 1\n\nBombes: " + s_bomb);
+            nb_Bomb_.setText("\tPlayer 1\n\nBombes: " + s_bomb);
             nb_Bomb_.setSize(20); //taille de la police d'écriture !
             nb_Bomb_.setPosition(10, 100);
             nb_Bomb_.draw();
@@ -106,7 +106,7 @@ namespace Display {
             power_.draw();
         } else if (this->p_player->getId() == 2) {
 
-            nb_Bomb_.setText("Player 2\n\nBombes: " + s_bomb);
+            nb_Bomb_.setText("\tPlayer 2\n\nBombes: " + s_bomb);
             nb_Bomb_.setSize(20); //taille de la police d'écriture !
             nb_Bomb_.setPosition(910, 100);
             nb_Bomb_.draw();
