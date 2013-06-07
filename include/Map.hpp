@@ -9,20 +9,22 @@ class Map {
 private:
     std::list<AObject*> *objects_;
     const char *name_;
+    eMapTheme theme_;
     int posX_;
     int posZ_;
     int maxX_;
 
 
 public:
-    Map(const char *name, std::list<AObject*> *);
+    Map(int size, std::list<AObject*> *);
+    Map(const char *name, eMapTheme, std::list<AObject*> *);
     Map(const Map &);
     virtual ~Map();
 
-    int getMaxX() const;
+    int getMaxX(void) const;
 
-    void posMap();
-    void openMap();
+    void posMap(void);
+    void openMap(void);
     void randMap(int);
 };
 

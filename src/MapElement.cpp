@@ -2,10 +2,11 @@
 
 namespace MapElement {
 
-    Background::Background(float const x, float const z, std::list<AObject*> *objects) {
+    Background::Background(float const x, float const z, eMapTheme theme, std::list<AObject*> *objects) {
         this->position_.x = x;
         this->position_.y = 1.0f;
         this->position_.z = z;
+        this->theme_ = theme;
         this->objects_ = objects;
         this->initialize();
     }
@@ -14,7 +15,12 @@ namespace MapElement {
     }
 
     void Background::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/fond.png");
+        if (this->theme_ == PLAINE)
+            this->texture_ = gdl::Image::load("assets/plaine/fond.png");
+        else if (this->theme_ == USINE)
+            this->texture_ = gdl::Image::load("assets/usine/fond.png");
+        else if (this->theme_ == POLENORD)
+            this->texture_ = gdl::Image::load("assets/polenord/fond.png");
     }
 
     void Background::update(gdl::GameClock const & gameClock, gdl::Input & input) {
@@ -27,7 +33,7 @@ namespace MapElement {
         glTranslatef(this->position_.x, this->position_.y, this->position_.z);
 
         glBegin(GL_QUADS);
-        int size = 10000;
+        int size = 9800;
 
         glTexCoord2f(0.0f, 0.0f);
         glVertex3f(-size, -size, -size);
@@ -84,11 +90,12 @@ namespace MapElement {
         glPopMatrix();
     }
 
-    Ground::Ground(float const x, float const z, std::list<AObject*> *objects) {
+    Ground::Ground(float const x, float const z, eMapTheme theme, std::list<AObject*> *objects) {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->type_ = GROUND;
+        this->theme_ = theme;
         this->objects_ = objects;
         this->initialize();
     }
@@ -97,7 +104,14 @@ namespace MapElement {
     }
 
     void Ground::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/plaine/ground.png");
+        if (this->theme_ == PLAINE)
+            this->texture_ = gdl::Image::load("assets/plaine/ground.png");
+        else if (this->theme_ == USINE)
+            this->texture_ = gdl::Image::load("assets/usine/ground.png");
+        else if (this->theme_ == POLENORD)
+            this->texture_ = gdl::Image::load("assets/polenord/ground.png");
+        else
+            this->texture_ = gdl::Image::load("assets/ground.png");
     }
 
     void Ground::update(gdl::GameClock const & gameClock, gdl::Input & input) {
@@ -124,11 +138,12 @@ namespace MapElement {
         glPopMatrix();
     }
 
-    Wall::Wall(float const x, float const z, std::list<AObject*> *objects) {
+    Wall::Wall(float const x, float const z, eMapTheme theme, std::list<AObject*> *objects) {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->type_ = WALL;
+        this->theme_ = theme;
         this->objects_ = objects;
         this->initialize();
     }
@@ -137,7 +152,14 @@ namespace MapElement {
     }
 
     void Wall::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/plaine/wall.png");
+        if (this->theme_ == PLAINE)
+            this->texture_ = gdl::Image::load("assets/plaine/wall.png");
+        else if (this->theme_ == USINE)
+            this->texture_ = gdl::Image::load("assets/usine/wall.png");
+        else if (this->theme_ == POLENORD)
+            this->texture_ = gdl::Image::load("assets/polenord/wall.png");
+        else
+            this->texture_ = gdl::Image::load("assets/wall.png");
     }
 
     void Wall::update(gdl::GameClock const & gameClock, gdl::Input & input) {
@@ -199,11 +221,12 @@ namespace MapElement {
         glPopMatrix();
     }
 
-    Crate::Crate(float const x, float const z, std::list<AObject*> *objects) {
+    Crate::Crate(float const x, float const z, eMapTheme theme, std::list<AObject*> *objects) {
         this->position_.x = x * (BLOCK_SIZE * 2);
         this->position_.y = 0.0f;
         this->position_.z = z * (BLOCK_SIZE * 2);
         this->type_ = CRATE;
+        this->theme_ = theme;
         this->objects_ = objects;
         this->initialize();
     }
@@ -212,7 +235,14 @@ namespace MapElement {
     }
 
     void Crate::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/plaine/crate.png");
+        if (this->theme_ == PLAINE)
+            this->texture_ = gdl::Image::load("assets/plaine/crate.png");
+        else if (this->theme_ == USINE)
+            this->texture_ = gdl::Image::load("assets/usine/crate.png");
+        else if (this->theme_ == POLENORD)
+            this->texture_ = gdl::Image::load("assets/polenord/crate.png");
+        else
+            this->texture_ = gdl::Image::load("assets/crate.png");
     }
 
     void Crate::update(gdl::GameClock const & gameClock, gdl::Input & input) {

@@ -5,13 +5,11 @@ void MyGame::initialize(void) {
     window_.setHeight(700);
     window_.setWidth(1024);
     window_.create();
-
     camera_.initialize();
 
     this->countClock_ = 0;
 
-    Map map_("map/plaine", &objects_);
-    map_.openMap();
+    Map map_("map/plaine", POLENORD, &objects_);
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
     float cameraY;
@@ -32,8 +30,6 @@ void MyGame::initialize(void) {
 }
 
 void MyGame::update(void) {
-    if (camera_.getPosition().z != this->cameraZ_)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
         sleep(0.9);
