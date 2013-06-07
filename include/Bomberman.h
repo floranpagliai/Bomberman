@@ -45,10 +45,11 @@ public:
     int getSpeed() const;
     int getId() const;
     int	getAmmoStock() const;
-    
+
     void recupBomb();
     bool ammoUp();
     bool powerUp();
+    bool powerDown();
     bool speedUp();
 };
 

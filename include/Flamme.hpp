@@ -37,7 +37,7 @@ public:
 
     void propagate(void) const;
     void checkPropagation(void);
-    void popBonus(void) const;
+    void popBonus(void);
 };
 
 #endif

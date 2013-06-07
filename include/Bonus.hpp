@@ -10,8 +10,9 @@
 
 enum eBonusType {
     AMMO = 1,
+    SPEED,
     POWER,
-    SPEED
+    MPOWER
 };
 
 class Player;
@@ -23,7 +24,7 @@ private:
   eBonusType bonusType_;
   int dirAnim_;
   Player	*pl_;
-  
+
 public:
   Bonus(float const, float const, eBonusType const, std::list<AObject*> *);
   virtual ~Bonus();
@@ -31,7 +32,7 @@ public:
   void initialize(void);
   void update(gdl::GameClock const &, gdl::Input &);
   void draw(void);
-  
+
   eBonusType getBonusType() const;
 };
 

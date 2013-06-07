@@ -90,8 +90,8 @@ void Bomberman::draw(void) {
 }
 
 bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
-    distX = distX * 3;
-    distZ = distZ * 3;
+    distX = distX * 2;
+    distZ = distZ * 2;
     std::list<AObject*>::iterator it;
     for (it = this->objects_->begin(); it != this->objects_->end(); ++it) {
         if ((this->checkCollision((*it)->getPosition().x - distX, (*it)->getPosition().z) || this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z - distZ))
@@ -152,11 +152,12 @@ void Bomberman::putBomb(gdl::Input & input) {
 bool Bomberman::getBonus(Bonus * bonus) {
     if (bonus->getBonusType() == AMMO)
         return this->ammoUp();
+    else if (bonus->getBonusType() == SPEED)
+        return this->speedUp();
     else if (bonus->getBonusType() == POWER)
         return this->powerUp();
-    else if (bonus->getBonusType() == SPEED)
-
-        return this->speedUp();
+    else if (bonus->getBonusType() == MPOWER)
+        return this->powerDown();
 }
 
 t_move * Bomberman::getKeys() const {
@@ -169,32 +170,29 @@ t_move * Bomberman::getKeys() const {
 
 int Bomberman::getAmmo() const {
 
-    return ammo_;
+    return this->ammo_;
 }
 
 int Bomberman::getPower() const {
-
-    return power_;
+    return this->power_;
 }
 
 int Bomberman::getSpeed() const {
-
-    return speed_;
+    return this->speed_;
 }
 
 int Bomberman::getId() const {
-    return id_;
+    return this->id_;
 }
 
 int Bomberman::getAmmoStock() const {
-    return ammoStock_;
+    return this->ammoStock_;
 }
 
 bool Bomberman::ammoUp() {
     if (ammo_ <= 5) {
-        ammo_ += 1;
-        ammoStock_ += 1;
-
+        this->ammo_ += 1;
+        this->ammoStock_ += 1;
         return true;
     }
     return false;
@@ -202,22 +200,29 @@ bool Bomberman::ammoUp() {
 }
 
 void Bomberman::recupBomb() {
-
-    ammoStock_ += 1;
+    this->ammoStock_ += 1;
 }
 
 bool Bomberman::powerUp() {
-    if (power_ <= 4) {
-        power_ += 1;
+    if (this->power_ <= 4) {
+        this->power_ += 1;
 
         return true;
     }
     return false;
 }
 
+bool Bomberman::powerDown() {
+    if (this->power_ > 0) {
+        power_ -= 1;
+        return true;
+    }
+    return false;
+}
+
 bool Bomberman::speedUp() {
-    if (speed_ < 4) {
-        speed_ += 1;
+    if (this->speed_ < 4) {
+        this->speed_ += 1;
         return true;
     }
     return false;

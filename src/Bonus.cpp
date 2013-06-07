@@ -24,10 +24,12 @@ Bonus::~Bonus() {
 void Bonus::initialize(void) {
     if (this->bonusType_ == AMMO)
         this->texture_ = gdl::Image::load("assets/bonus/bombUp2.png");
+    else if (this->bonusType_ == SPEED)
+        this->texture_ = gdl::Image::load("assets/bonus/speedUp2.png");
     else if (this->bonusType_ == POWER)
         this->texture_ = gdl::Image::load("assets/bonus/powerUp2.png");
     else
-        this->texture_ = gdl::Image::load("assets/bonus/speedUp2.png");
+        this->texture_ = gdl::Image::load("assets/bonus/powerUp.png");
     this->timer_.play();
 }
 
