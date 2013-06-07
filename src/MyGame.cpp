@@ -21,11 +21,12 @@ void MyGame::initialize(void) {
         this->countClock_ = 1;
         this->objects_.push_back(new Display::Timer(&objects_));
     }
-
     this->bombSound_ = new sf::Music();
     this->deathSound_ = new sf::Music();
+    this->powerupSound_ = new sf::Music();
     this->bombSound_->OpenFromFile("assets/sound/explosion.wav");
     this->deathSound_->OpenFromFile("assets/sound/death.wav");
+    this->powerupSound_->OpenFromFile("assets/sound/pop.wav");
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();
 }
@@ -37,11 +38,17 @@ void MyGame::update(void) {
         if ((*it)->getIsOver() == true) {
             if ((*it)->getType() == BOMB)
                 this->bombSound_->Play();
-            else if ((*it)->getType() == PLAYER)
+            if ((*it)->getType() == PLAYER)
                 this->deathSound_->Play();
+            if ((*it)->getType() == BONUS)
+                this->powerupSound_->Play();
             delete (*it);
             it = this->objects_.erase(it);
         }
+    }
+    if (checkWin()) {
+        std::cout << "GAME OVER: Joueur" << std::endl;
+        exit(EXIT_SUCCESS);
     }
     //if (camera_.getPosition().z != cameraZ_)
     //camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
@@ -62,5 +69,25 @@ void MyGame::draw(void) {
 void MyGame::unload(void) {
     for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
         delete (*it);
+    delete this->bombSound_;
+    delete this->deathSound_;
+    delete this->powerupSound_;
     this->objects_.clear();
+}
+
+bool MyGame::checkWin(void) {
+    int count = 0;
+    for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+        if ((*it)->getType() == PLAYER)
+            count++;
+    }
+    if (count == 1) {
+        for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+            if ((*it)->getType() == PLAYER) {
+                break;
+            }
+        }
+        return true;
+    }
+    return false;
 }

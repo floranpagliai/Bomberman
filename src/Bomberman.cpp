@@ -63,11 +63,6 @@ void Bomberman::initialize(void) {
         model_.set_default_model_color(gdl::Color(255, 0, 0));
     else
         model_.set_default_model_color(gdl::Color(0, 0, 255));
-
-    powerupSound_ = new sf::Music();
-
-    powerupSound_->OpenFromFile("assets/sound/pop.wav");
-
     this->objects_->push_back(new Display::DisplayPlayer(this));
 }
 
@@ -105,9 +100,7 @@ bool Bomberman::checkMove(gdl::Input &input, float distX, float distZ) {
             }
             return false;
         } else if (this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) && (*it)->getType() == BONUS && this->getBonus(dynamic_cast<Bonus *> (*it))) {
-            delete (*it);
-            objects_->erase(it);
-            powerupSound_->Play();
+            (*it)->setIsOver();
             break;
         }
     }

@@ -97,7 +97,7 @@ namespace MapElement {
     }
 
     void Ground::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/ground_grass.png");
+        this->texture_ = gdl::Image::load("assets/plaine/ground.png");
     }
 
     void Ground::update(gdl::GameClock const & gameClock, gdl::Input & input) {
@@ -137,7 +137,7 @@ namespace MapElement {
     }
 
     void Wall::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/wall_rock2.png");
+        this->texture_ = gdl::Image::load("assets/plaine/wall.png");
     }
 
     void Wall::update(gdl::GameClock const & gameClock, gdl::Input & input) {
@@ -212,7 +212,7 @@ namespace MapElement {
     }
 
     void Crate::initialize(void) {
-        this->texture_ = gdl::Image::load("assets/crate.png");
+        this->texture_ = gdl::Image::load("assets/plaine/crate.png");
     }
 
     void Crate::update(gdl::GameClock const & gameClock, gdl::Input & input) {

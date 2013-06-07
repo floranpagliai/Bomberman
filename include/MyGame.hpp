@@ -12,9 +12,11 @@ private:
     gdl::Clock timer_;
     sf::Music *bombSound_;
     sf::Music *deathSound_;
+    sf::Music *powerupSound_;
     Camera camera_;
     float cameraZ_;
     int countClock_;
+    int idPlayerW_;
 
 
 public:
@@ -22,6 +24,8 @@ public:
     virtual void update(void);
     virtual void draw(void);
     virtual void unload(void);
+
+    bool checkWin();
 };
 
 #endif
