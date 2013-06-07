@@ -90,25 +90,25 @@ void Map::openMap(void) {
 void Map::randMap(int size) {
     int x = (size - size - size) / 2;
     int z = (size - size - size) / 2;
-    this->maxX_ = z;
+    this->maxX_ = x;
     int value;
 
     //this->objects_->push_back(new MapElement::Background(0, 0, this->theme_, this->objects_));
-    while (x != size + 1) {
-        z = maxX_;
-        while (z != size + 1) {
-            if ((z == (size - size - size) / 2 || x == (size - size - size) / 2 || x == size || z == size) ||
+    while (z != (size/2)+1) {
+        while (x != (size/2)+1) {
+            if ((z == (size - size - size) / 2 || x == (size - size - size) / 2 || x == size/2 || z == size/2) ||
                     ((z % 2) == 0 && (x % 2) == 0))
                 this->objects_->push_back(new MapElement::Wall(x, z, this->theme_, this->objects_));
             else {
                 value = rand() % 2;
-                    this->objects_->push_back(new MapElement::Ground(x, z, this->theme_, this->objects_));
-                    if (value == 1)
-                        this->objects_->push_back(new MapElement::Crate(x, z, this->theme_, this->objects_));
+                this->objects_->push_back(new MapElement::Ground(x, z, this->theme_, this->objects_));
+                if (value == 1)
+                    this->objects_->push_back(new MapElement::Crate(x, z, this->theme_, this->objects_));
             }
-            z++;
+            x++;
         }
-        x++;
+        x = maxX_;
+        z++;
     }
 }
 
