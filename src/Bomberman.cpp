@@ -51,7 +51,6 @@ Bomberman::Bomberman(float const x, float const z, int const id, std::list<AObje
 }
 
 Bomberman::~Bomberman() {
-    deathSound_->Play();
 }
 
 void Bomberman::initialize(void) {
@@ -66,9 +65,9 @@ void Bomberman::initialize(void) {
         model_.set_default_model_color(gdl::Color(0, 0, 255));
 
     powerupSound_ = new sf::Music();
-    deathSound_ = new sf::Music();
+
     powerupSound_->OpenFromFile("assets/sound/pop.wav");
-    deathSound_->OpenFromFile("assets/sound/death.wav");
+
     this->objects_->push_back(new Display::DisplayPlayer(this));
 }
 

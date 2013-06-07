@@ -10,7 +10,7 @@ void MyGame::initialize(void) {
 
     this->countClock_ = 0;
 
-    Map map_("map/plaine", &objects_);
+    Map map_("map/test", &objects_);
     map_.openMap();
 
     cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
@@ -21,16 +21,24 @@ void MyGame::initialize(void) {
         this->countClock_ = 1;
         this->objects_.push_back(new Display::Timer(&objects_));
     }
+
+    this->bombSound_ = new sf::Music();
+    this->deathSound_ = new sf::Music();
+    this->bombSound_->OpenFromFile("assets/sound/explosion.wav");
+    this->deathSound_->OpenFromFile("assets/sound/death.wav");
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();
 }
 
 void MyGame::update(void) {
-    std::list<AObject*>::iterator it;
-    for (it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+    for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
         sleep(0.9);
         (*it)->update(gameClock_, input_);
         if ((*it)->getIsOver() == true) {
+            if ((*it)->getType() == BOMB)
+                this->bombSound_->Play();
+            else if ((*it)->getType() == PLAYER)
+                this->deathSound_->Play();
             delete (*it);
             it = this->objects_.erase(it);
         }
@@ -38,9 +46,6 @@ void MyGame::update(void) {
     //if (camera_.getPosition().z != cameraZ_)
     //camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 50.f));
     camera_.update(gameClock_, input_);
-
-    if (input_.isKeyDown(gdl::Keys::F1) == true)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 10.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }
@@ -49,23 +54,13 @@ void MyGame::draw(void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.f);
-
-    std::list<AObject*>::iterator itb = this->objects_.begin();
-    for (; itb != this->objects_.end(); ++itb)
-        (*itb)->draw();
+    for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
+        (*it)->draw();
     this->window_.display();
 }
 
 void MyGame::unload(void) {
-    std::list<AObject *>::iterator it = this->objects_.begin();
-    for (; it != this->objects_.end(); it++)
-        delete *it;
+    for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
+        delete (*it);
     this->objects_.clear();
 }
-
-std::string MyGame::float2string(float f) {
-    std::ostringstream os;
-    os << f;
-    return os.str();
-}
-

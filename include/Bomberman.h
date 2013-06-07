@@ -18,7 +18,6 @@ protected:
     std::list<AObject*> *objects_;
     gdl::Model model_;
     sf::Music *powerupSound_;
-    sf::Music *deathSound_;
     int ammo_;
     int ammoStock_;
     int power_;

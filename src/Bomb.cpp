@@ -42,18 +42,12 @@ void Bombe::initialize(void) {
     }
     this->position_.x = x;
     this->position_.z = z;
-
-    explosion = new sf::Music();
-    explosion->OpenFromFile("assets/sound/explosion.wav");
     this->timer_.play();
 }
 
 void Bombe::update(gdl::GameClock const & gameClock, gdl::Input & input) {
     this->model_.update(gameClock);
     this->timer_.update();
-    pthread_t thread;
-
-    // Permet d'exécuter le fonction maFonction en parallèle
 
     if (this->timer_.getTotalElapsedTime() >= TIMER_BOMB)
         this->explose();
@@ -75,14 +69,13 @@ void Bombe::draw(void) {
 }
 
 void Bombe::explose(void) {
-    this->explosion->Play();
+
     this->player_->recupBomb();
-    this->timer_.pause();
-    this->isOver = true;
     this->objects_->push_front(new Flamme(this->position_.x, this->position_.z, 0, 1, this->objects_));
     this->objects_->push_front(new Flamme(this->position_.x + BLOCK_SIZE * 2, this->position_.z, this->power_, 1, this->objects_));
     this->objects_->push_front(new Flamme(this->position_.x - BLOCK_SIZE * 2, this->position_.z, this->power_, 2, this->objects_));
     this->objects_->push_front(new Flamme(this->position_.x, this->position_.z + BLOCK_SIZE * 2, this->power_, 3, this->objects_));
     this->objects_->push_front(new Flamme(this->position_.x, this->position_.z - BLOCK_SIZE * 2, this->power_, 4, this->objects_));
+    this->isOver = true;
 }
 

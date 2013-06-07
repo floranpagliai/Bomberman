@@ -87,7 +87,7 @@ namespace Display {
     }
 
     void DisplayPlayer::draw(void) {
-        camera__.setPosition(this->camera__.getPosition().x, camera__.getPosition().y, camera__.getPosition().z + 50.f);
+        camera__.setPosition(this->camera__.getPosition().x, camera__.getPosition().y, camera__.getPosition().z + 1.0f);
 
         if (this->p_player->getId() == 0) {
             nb_Bomb_.setText("Bombes: " + s_bomb);
@@ -131,7 +131,7 @@ namespace Display {
             power_.setPosition(910, 230);
             power_.draw();
         }
-        camera__.setPosition(camera__.getPosition().x, camera__.getPosition().y, (camera__.getPosition().z - 50.f));
+        camera__.setPosition(camera__.getPosition().x, camera__.getPosition().y, (camera__.getPosition().z - 1.0f));
     }
 
     std::string DisplayPlayer::intToStr(int nb) {

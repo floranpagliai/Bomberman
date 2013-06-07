@@ -29,8 +29,6 @@ public:
     void draw(void);
 
     void explose(void);
-
-    sf::Music *explosion;
 };
 
 #endif
