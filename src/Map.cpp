@@ -107,7 +107,6 @@ void Map::randMap(int size) {
     this->maxX_ = size;
     int value;
 
-    //this->objects_->push_back(new MapElement::Background(0, 0, this->theme_, this->objects_));
     while (z <= maxX_ / 2) {
         while (x <= maxX_ / 2) {
             if ((z == (size - size - size) / 2 || x == (size - size - size) / 2 || x == size / 2 || z == size / 2) ||

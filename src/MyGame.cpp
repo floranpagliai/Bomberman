@@ -7,8 +7,8 @@ void MyGame::initialize(void) {
     window_.create();
     camera_.initialize();
 
-    //Map map_(20, 2, 10, &objects_);
-    Map map_("map/usine", USINE, 2, 10, &objects_);
+    //Map map_(60, 2, 11, &objects_);
+    Map map_("map/plaine", USINE, 1, 1, &objects_);
 
     cameraY_ = map_.getMaxX() * 325.0f;
     this->objects_.push_back(new Display::Timer(&objects_));
@@ -40,8 +40,12 @@ void MyGame::update(void) {
         }
     }
     this->checkWin();
-    if (input_.isKeyDown(gdl::Keys::F1) == true)
-        std::cout << camera_.getPosition().y << std::endl;
+    if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z != 5000.0f)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z  + 50.0f);
+    if (input_.isKeyDown(gdl::Keys::F2) == true && camera_.getPosition().z != 900.0f)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z  - 50.0f);
+    if (input_.isKeyDown(gdl::Keys::F3) == true)
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }
@@ -65,17 +69,24 @@ void MyGame::unload(void) {
 }
 
 void MyGame::checkWin(void) {
-    int count = 0;
+    int countP = 0;
+    int countIA = 0;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
-        if ((*it)->getType() == PLAYER && (*it)->getId() <= 3)
-            count++;
+        if ((*it)->getType() == PLAYER && (*it)->getId() < 3)
+            countP++;
+        if ((*it)->getType() == PLAYER && (*it)->getId() == 3)
+            countIA++;
     }
-    if (count == 1) {
+    if (countP == 1 && countIA == 0) {
         for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
             if ((*it)->getType() == PLAYER) {
                 std::cout << "GAME OVER: Player " << (*it)->getId() << " win" << std::endl;
                 exit(EXIT_SUCCESS);
             }
         }
+    }
+    if (countP == 0 && countIA > 0) {
+        std::cout << "GAME OVER: Computer win" << std::endl;
+        exit(EXIT_SUCCESS);
     }
 }

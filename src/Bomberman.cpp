@@ -70,8 +70,11 @@ void Bomberman::initialize(void) {
 
 void Bomberman::update(gdl::GameClock const &gameClock, gdl::Input &input) {
     model_.set_anim_speed("Take 001", 1 * this->speed_);
-    this->model_.update(gameClock);
-    this->move(input);
+    if (this->id_ != 3) {
+        this->model_.update(gameClock);
+        this->move(input);
+    }
+
 }
 
 void Bomberman::draw(void) {

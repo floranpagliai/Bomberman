@@ -43,14 +43,14 @@ namespace Display {
 
         glEnd();
         glPopMatrix();
-        camera_.setPosition(this->camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 1.f);
+        camera_.setPosition(this->camera_.getPosition().x + 1.f, camera_.getPosition().y, camera_.getPosition().z);
 
         T_time_.setText(s_time_);
         T_time_.setSize(18);
         T_time_.setPosition(500, 10);
         T_time_.draw();
 
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, (camera_.getPosition().z - 1.f));
+        camera_.setPosition(camera_.getPosition().x - 1.f, camera_.getPosition().y, (camera_.getPosition().z));
     }
 
     std::string Timer::float2string(float f) {
