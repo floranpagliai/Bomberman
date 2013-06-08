@@ -8,7 +8,7 @@ void MyGame::initialize(void) {
     camera_.initialize();
 
     //Map map_(20, 2, 10, &objects_);
-    Map map_("map/usine", USINE, 2, 0, &objects_);
+    Map map_("map/usine", USINE, 2, 10, &objects_);
 
     cameraY_ = map_.getMaxX() * 325.0f;
     this->objects_.push_back(new Display::Timer(&objects_));
