@@ -41,6 +41,7 @@ void MyMenu::update() {
     clock.update();
     time_ret = time_ret + cl_return.getElapsedTime();
     time = time + clock.getElapsedTime();
+
     if (time > 0.05f) {
         Exit(input_);
         Down(input_);
@@ -55,13 +56,16 @@ void MyMenu::update() {
         disp = false;
 
     }
-    if (level == 5) {
-        MyGame game;
-        //game.initialize();
+    if (level == 5 && pos == 1) {
+        MyGame game((char*)"map/plaine", PLAINE, 1, pos);
+        game.run();
+    } else if (level == 5 && pos == 2) {
+        MyGame game((char*)"map/usine", USINE, 1, pos);
+        game.run();
+    } else if (level == 5 && pos == 3) {
+        MyGame game((char*)"map/usine", POLENORD, 1, pos);
         game.run();
     }
-
-
 }
 
 void MyMenu::unload(void) {

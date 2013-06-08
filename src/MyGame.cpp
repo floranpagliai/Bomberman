@@ -1,6 +1,6 @@
 #include "MyGame.hpp"
 
-void MyGame::initialize(void) {
+MyGame::MyGame(char *map, eMapTheme theme, int nbPlayer, int nbIA) {
     window_.setTitle("Bomberman");
     window_.setHeight(700);
     window_.setWidth(1024);
@@ -8,9 +8,11 @@ void MyGame::initialize(void) {
     camera_.initialize();
 
     //Map map_(60, 2, 11, &objects_);
-    Map map_("map/usine", POLENORD, 2, 0, &objects_);
-
+    Map map_(map, theme, nbPlayer, nbIA, &objects_);
     cameraY_ = map_.getMaxX() * 325.0f;
+}
+
+void MyGame::initialize() {
     this->objects_.push_back(new Display::Timer(&objects_));
     this->bombSound_ = new sf::Music();
     this->deathSound_ = new sf::Music();

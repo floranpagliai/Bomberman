@@ -14,6 +14,7 @@
 #include "AObject.hpp"
 #include "MyGame.hpp"
 #include "Map.hpp"
+#include "MapElement.hpp"
 
 #define WINDOW_HEIGHT 700
 #define WINDOW_WIDHT 1024

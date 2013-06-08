@@ -8,7 +8,7 @@
 class Map {
 private:
     std::list<AObject*> *objects_;
-    const char *name_;
+    char *name_;
     eMapTheme theme_;
     int nbPlayer_;
     int nbIA_;
@@ -20,7 +20,7 @@ private:
 
 public:
     Map(int size, int nbPlayer, int nbIA, std::list<AObject*> *);
-    Map(const char *name, eMapTheme, int nbPlayer, int nbIA, std::list<AObject*> *);
+    Map(char *name, eMapTheme, int nbPlayer, int nbIA, std::list<AObject*> *);
     Map(const Map &);
     virtual ~Map();
 

@@ -19,9 +19,10 @@ private:
     float cameraY_;
     int idPlayerW_;
 
-
 public:
-    virtual void initialize(void);
+    MyGame(char *, eMapTheme, int, int);
+
+    virtual void initialize();
     virtual void update(void);
     virtual void draw(void);
     virtual void unload(void);

@@ -11,7 +11,7 @@ Map::Map(int size, int nbPlayer, int nbIA, std::list<AObject*> *objects) {
     this->randMap(size);
 }
 
-Map::Map(const char *name, eMapTheme theme, int nbPlayer, int nbIA, std::list<AObject*> *objects) {
+Map::Map(char *name, eMapTheme theme, int nbPlayer, int nbIA, std::list<AObject*> *objects) {
     this->objects_ = objects;
     this->name_ = name;
     this->theme_ = theme;
