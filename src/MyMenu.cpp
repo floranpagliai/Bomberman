@@ -56,16 +56,22 @@ void MyMenu::update() {
         disp = false;
 
     }
-    if (level == 5 && pos == 1) {
-        MyGame game((char*)"map/plaine", PLAINE, 1, pos);
-        game.run();
-    } else if (level == 5 && pos == 2) {
-        MyGame game((char*)"map/usine", USINE, 1, pos);
-        game.run();
-    } else if (level == 5 && pos == 3) {
-        MyGame game((char*)"map/usine", POLENORD, 1, pos);
-        game.run();
+    if (level == 5) {
+        if (level == 5 && pos == 1) {
+            MyGame game((char*) "map/plaine", PLAINE, 1, pos);
+            game.run();
+        } else if (level == 5 && pos == 2) {
+            MyGame game((char*) "map/usine", USINE, 1, pos);
+            game.run();
+        }
+        else if (level == 5 && pos == 3) {
+            MyGame game((char*) "map/usine", POLENORD, 1, pos);
+            game.run();
+        }
+        this->initialize();
     }
+
+    //this->initialize();
 }
 
 void MyMenu::unload(void) {
