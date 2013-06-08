@@ -8,6 +8,7 @@ MyMenu::~MyMenu() {
 }
 
 void MyMenu::initialize() {
+  std::cout << "Debut menu" << std::endl;
     clock.play();
     cl_return.play();
     window_.setTitle("Menu Bomberman");
@@ -27,6 +28,8 @@ void MyMenu::initialize() {
     validation->OpenFromFile("sound/validation.wav");
     intro->Play();
 
+    ia = 0;
+    nb_player = 0;
     level = 1;
     time = 0.00f;
     time_ret = 0.00f;
@@ -36,42 +39,50 @@ void MyMenu::initialize() {
 }
 
 void MyMenu::update() {
-    camera_.setPosition(camera_.getPosition().x, 0, camera_.getPosition().z);
-    cl_return.update();
-    clock.update();
-    time_ret = time_ret + cl_return.getElapsedTime();
-    time = time + clock.getElapsedTime();
+  camera_.setPosition(camera_.getPosition().x, 0, camera_.getPosition().z);
+  cl_return.update();
+  clock.update();
+  time_ret = time_ret + cl_return.getElapsedTime();
+  time = time + clock.getElapsedTime();
 
-    if (time > 0.05f) {
-        Exit(input_);
-        Down(input_);
-        Up(input_);
-        Return(input_);
-        Back(input_);
-        time = 0.00f;
-    }
-    if (disp == true) {
-        std::cout << "It = [" << *it << "] Pos = [" << pos << "] Level = [" << level << "]" << std::endl;
-        this->image_ = gdl::Image::load(*it);
-        disp = false;
+  if (time > 0.05f) {
+    Exit(input_);
+    Down(input_);
+    Up(input_);
+    Return(input_);
+    Back(input_);
+    time = 0.00f;
+  }
+  if (disp == true) {
+    std::cout << "It = [" << *it << "] Pos = [" << pos << "] Level = [" << level << "] Ia = [" << ia << "] nb_player = [" << nb_player << "]" << std::endl;
+    this->image_ = gdl::Image::load(*it);
+    disp = false;
 
+  }
+  if (level == 5) {
+    if (level == 5 && pos == 1) {
+      MyGame game((char*) "map/plaine", PLAINE, 1, pos);
+      std::cout << "Lancment de Game" << std::endl;
+      game.run();
+      window_.close();
+      std::cout << "Retour au menu apres Game" << std::endl;
+    } else if (level == 5 && pos == 2) {
+      MyGame game((char*) "map/usine", USINE, 1, pos);
+      std::cout << "Lancment de Game" << std::endl;
+      game.run();
+      window_.close();
+      std::cout << "Retour au menu apres Game" << std::endl;
     }
-    if (level == 5) {
-        if (level == 5 && pos == 1) {
-            MyGame game((char*) "map/plaine", PLAINE, 1, pos);
-            game.run();
-        } else if (level == 5 && pos == 2) {
-            MyGame game((char*) "map/usine", USINE, 1, pos);
-            game.run();
-        }
-        else if (level == 5 && pos == 3) {
-            MyGame game((char*) "map/usine", POLENORD, 1, pos);
-            game.run();
-        }
-        this->initialize();
+    else if (level == 5 && pos == 3) {
+      MyGame game((char*) "map/usine", POLENORD, 1, pos);
+      std::cout << "Lancment de Game" << std::endl;
+      game.run();
+      window_.close();
+      std::cout << "Retour au menu apres Game" << std::endl;
     }
+  }
 
-    //this->initialize();
+  //this->initialize();
 }
 
 void MyMenu::unload(void) {
@@ -144,6 +155,8 @@ void MyMenu::Return(gdl::Input &input_) {
     if (input_.isKeyDown(gdl::Keys::Return) == true && time_ret > 0.50f) {
         if ((pos == 5 && level == 2) || (pos == 11 && level == 3) || (pos == 5 && level == 4))
             exit(EXIT_FAILURE);
+	if (level == 3)
+	  this->ia = pos - 1;
         level++;
         LoadLevel2();
         disp = true;
@@ -180,8 +193,9 @@ void MyMenu::LoadLevel2(void) {
 
 void MyMenu::LoadLevel3(void) {
     std::cout << "LEVEL 3 lvl=" << level << std::endl;
-    if (level == 3 && pos == 1) {
+    if (level == 3 && (pos == 1 || pos == 2)) {
         std::cout << "In lvl 3" << std::endl;
+	this->nb_player = pos;
         mylist.clear();
         mylist.push_back("assets/menu/3.nbr_ia/ia.png");
         mylist.push_back("assets/menu/3.nbr_ia/ia1.png");
