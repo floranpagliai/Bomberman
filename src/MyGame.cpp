@@ -7,19 +7,11 @@ void MyGame::initialize(void) {
     window_.create();
     camera_.initialize();
 
-    this->countClock_ = 0;
+    Map map_(100, &objects_);
+    //Map map_("map/plaine", PLAINE, &objects_);
 
-    //Map map_(50, &objects_);
-    Map map_("map/plaine", USINE, &objects_);
-
-    cameraZ_ = camera_.getPosition().z - map_.getMaxX() * 150.0f;
-    float cameraY;
-    cameraY = map_.getMaxX() * -300.0f;
-    camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 4000);
-    if (this->countClock_ == 0) {
-        this->countClock_ = 1;
-        this->objects_.push_back(new Display::Timer(&objects_));
-    }
+    cameraY_ = map_.getMaxX() * 325.0f;
+    this->objects_.push_back(new Display::Timer(&objects_));
     this->bombSound_ = new sf::Music();
     this->deathSound_ = new sf::Music();
     this->powerupSound_ = new sf::Music();
@@ -31,6 +23,7 @@ void MyGame::initialize(void) {
 }
 
 void MyGame::update(void) {
+    camera_.setPosition(camera_.getPosition().x, cameraY_, camera_.getPosition().z);
     camera_.update(gameClock_, input_);
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
         sleep(0.9);
@@ -47,6 +40,8 @@ void MyGame::update(void) {
         }
     }
     this->checkWin();
+    if (input_.isKeyDown(gdl::Keys::F1) == true)
+        std::cout << camera_.getPosition().y << std::endl;
     if (input_.isKeyDown(gdl::Keys::Escape) == true)
         exit(EXIT_FAILURE);
 }
@@ -72,7 +67,7 @@ void MyGame::unload(void) {
 void MyGame::checkWin(void) {
     int count = 0;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
-        if ((*it)->getType() == PLAYER)
+        if ((*it)->getType() == PLAYER && (*it)->getId() <= 2)
             count++;
     }
     if (count == 1) {

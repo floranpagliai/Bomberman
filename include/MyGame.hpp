@@ -15,8 +15,7 @@ private:
     sf::Music *deathSound_;
     sf::Music *powerupSound_;
     Camera camera_;
-    float cameraZ_;
-    int countClock_;
+    float cameraY_;
     int idPlayerW_;
 
 

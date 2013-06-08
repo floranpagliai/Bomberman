@@ -12,6 +12,7 @@ private:
     eMapTheme theme_;
     int posX_;
     int posZ_;
+    int minX_;
     int maxX_;
 
 
@@ -21,6 +22,7 @@ public:
     Map(const Map &);
     virtual ~Map();
 
+    int getMinX(void) const;
     int getMaxX(void) const;
 
     void posMap(void);

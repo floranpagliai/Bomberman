@@ -4,6 +4,7 @@ Map::Map(int size, std::list<AObject*> *objects) {
     this->objects_ = objects;
     this->posX_ = 0;
     this->posZ_ = 0;
+    this->minX_ = 0;
     this->maxX_ = 0;
     this->randMap(size);
 }
@@ -14,6 +15,7 @@ Map::Map(const char *name, eMapTheme theme, std::list<AObject*> *objects) {
     this->theme_ = theme;
     this->posX_ = 0;
     this->posZ_ = 0;
+    this->minX_ = 0;
     this->maxX_ = 0;
     this->openMap();
 }
@@ -23,10 +25,15 @@ Map::Map(const Map &old) {
     this->name_ = old.name_;
     this->posX_ = old.posX_;
     this->posZ_ = old.posZ_;
+    this->minX_ = old.minX_;
     this->maxX_ = old.maxX_;
 }
 
 Map::~Map() {
+}
+
+int Map::getMinX(void) const {
+    return this->minX_;
 }
 
 int Map::getMaxX(void) const {
@@ -48,9 +55,10 @@ void Map::posMap(void) {
         x = 0;
         z++;
     }
+    maxX_ = posX_;
     posX_ = (posX_ - posX_ - posX_) / 2;
     posZ_ = (z - z - z) / 2;
-    maxX_ = posX_;
+    minX_ = posX_;
     file.close();
 }
 
@@ -81,33 +89,47 @@ void Map::openMap(void) {
             it++;
             posX_++;
         }
-        posX_ = maxX_;
+        posX_ = minX_;
         posZ_++;
     }
     file.close();
 }
 
 void Map::randMap(int size) {
+    if (size > 100)
+        size = 100;
+    else if (size < 10)
+        size = 10;
     int x = (size - size - size) / 2;
     int z = (size - size - size) / 2;
-    this->maxX_ = x;
+    this->minX_ = x;
+    this->maxX_ = size;
     int value;
+    int id = 2;
+    int count = 10;
 
     //this->objects_->push_back(new MapElement::Background(0, 0, this->theme_, this->objects_));
-    while (z != (size/2)+1) {
-        while (x != (size/2)+1) {
+    while (z <= maxX_/2) {
+        while (x <= maxX_/2) {
             if ((z == (size - size - size) / 2 || x == (size - size - size) / 2 || x == size/2 || z == size/2) ||
                     ((z % 2) == 0 && (x % 2) == 0))
                 this->objects_->push_back(new MapElement::Wall(x, z, this->theme_, this->objects_));
             else {
-                value = rand() % 2;
+                value = rand() % 3;
                 this->objects_->push_back(new MapElement::Ground(x, z, this->theme_, this->objects_));
-                if (value == 1)
+                if (value == 0)
                     this->objects_->push_back(new MapElement::Crate(x, z, this->theme_, this->objects_));
+                else if (value == 1 && id == 1)
+                    this->objects_->push_back(new Bomberman(x, z, id--, this->objects_));
+                else if (value == 2 &&& count <= 10) {
+                    this->objects_->push_back(new Bomberman(x, z, 3, this->objects_));
+                    count--
+                }
+
             }
             x++;
         }
-        x = maxX_;
+        x = minX_;
         z++;
     }
 }
