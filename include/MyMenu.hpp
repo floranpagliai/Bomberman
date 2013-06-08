@@ -11,15 +11,18 @@
 #ifndef	__MY_MENU_HPP__
 #define	__MY_MENU_HPP__
 
-#include	"AObject.hpp"
-#include	"MyGame.hpp"
+#include "AObject.hpp"
+#include "MyGame.hpp"
+#include "Map.hpp"
 
 #define WINDOW_HEIGHT 700
 #define WINDOW_WIDHT 1024
 
 class MyMenu : public gdl::Game {
 public:
+    MyMenu();
     virtual ~MyMenu();
+
     virtual void initialize(void);
     virtual void update(void);
     virtual void draw(void);
@@ -34,6 +37,7 @@ public:
     void LoadLevel3(void);
     void LoadLevel4(void);
 private:
+    std::list<AObject*> *objects_;
     sf::Music *intro;
     sf::Music *validation;
     sf::Music *selection;

@@ -1,4 +1,8 @@
 #include "MyMenu.hpp"
+
+MyMenu::MyMenu() {
+}
+
 MyMenu::~MyMenu() {
 
 }
@@ -51,8 +55,12 @@ void MyMenu::update() {
         disp = false;
 
     }
-    if (level == 4)
-        this->~MyMenu();
+    if (level == 5) {
+        MyGame game;
+        //game.initialize();
+        game.run();
+    }
+
 
 }
 

@@ -1,8 +1,8 @@
 #include "MyGame.hpp"
 
 int main(void) {
-    MyGame game;
+    MyMenu menu;
     srand(time(NULL));
-    game.run();
+    menu.run();
     return EXIT_SUCCESS;
 }

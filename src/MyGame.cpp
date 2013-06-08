@@ -1,8 +1,6 @@
 #include "MyGame.hpp"
 
 void MyGame::initialize(void) {
-    MyMenu menu;
-    menu.run();
     window_.setTitle("Bomberman");
     window_.setHeight(700);
     window_.setWidth(1024);
@@ -49,8 +47,10 @@ void MyGame::update(void) {
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z - 50.0f);
     if (input_.isKeyDown(gdl::Keys::F3) == true)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
-    if (input_.isKeyDown(gdl::Keys::Escape) == true)
-        exit(EXIT_FAILURE);
+    if (input_.isKeyDown(gdl::Keys::Escape) == true) {
+        window_.close();
+    }
+
 }
 
 void MyGame::draw(void) {
