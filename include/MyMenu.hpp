@@ -21,34 +21,35 @@
 
 class MyMenu : public gdl::Game {
 public:
-  MyMenu();
-  virtual ~MyMenu();
-
   virtual void initialize(void);
   virtual void update(void);
   virtual void draw(void);
   virtual void unload(void);
 
-  void Exit(gdl::Input &);
-  void Down(gdl::Input &);
-  void Up(gdl::Input &);
-  void Return(gdl::Input &);
-  void Back(gdl::Input &);
+  void Exit(void);
+  void Down(void);
+  void Up(void);
+  void Return(void);
+  void Back(void);
   void LoadLevel2(void);
   void LoadLevel3(void);
   void LoadLevel4(void);
+  void launchGame(void);
+
 private:
   std::list<AObject*> *objects_;
-  sf::Music *intro;
-  sf::Music *validation;
-  sf::Music *selection;
-  int	ia;
-  int	nb_player;
+  Camera camera_;
+
+  sf::Music *introSound;
+  sf::Music *validationSound;
+  sf::Music *selectionSound;
+  
+  int	nbIA;
+  int	nbPlayer;
   bool disp;
   int pos;
   int level;
-  Camera camera_;
-  float cameraY_;
+
   float time;
   float time_ret;
   gdl::Clock clock;
