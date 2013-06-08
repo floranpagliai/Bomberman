@@ -7,8 +7,8 @@ void MyGame::initialize(void) {
     window_.create();
     camera_.initialize();
 
-    Map map_(100, &objects_);
-    //Map map_("map/plaine", PLAINE, &objects_);
+    //Map map_(20, 2, 10, &objects_);
+    Map map_("map/usine", USINE, 2, 0, &objects_);
 
     cameraY_ = map_.getMaxX() * 325.0f;
     this->objects_.push_back(new Display::Timer(&objects_));
@@ -67,7 +67,7 @@ void MyGame::unload(void) {
 void MyGame::checkWin(void) {
     int count = 0;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
-        if ((*it)->getType() == PLAYER && (*it)->getId() <= 2)
+        if ((*it)->getType() == PLAYER && (*it)->getId() <= 3)
             count++;
     }
     if (count == 1) {

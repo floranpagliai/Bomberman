@@ -42,9 +42,9 @@ Bomberman::Bomberman(float const x, float const z, int const id, std::list<AObje
     this->position_.z = z * (BLOCK_SIZE * 2);
     this->type_ = PLAYER;
     this->id_ = id;
-    this->ammo_ = 10;
+    this->ammo_ = 1;
     this->ammoStock_ = ammo_;
-    this->power_ = 10;
+    this->power_ = 0;
     this->speed_ = 0;
     this->objects_ = objects;
     this->initialize();

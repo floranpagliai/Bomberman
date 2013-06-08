@@ -10,6 +10,8 @@ private:
     std::list<AObject*> *objects_;
     const char *name_;
     eMapTheme theme_;
+    int nbPlayer_;
+    int nbIA_;
     int posX_;
     int posZ_;
     int minX_;
@@ -17,8 +19,8 @@ private:
 
 
 public:
-    Map(int size, std::list<AObject*> *);
-    Map(const char *name, eMapTheme, std::list<AObject*> *);
+    Map(int size, int nbPlayer, int nbIA, std::list<AObject*> *);
+    Map(const char *name, eMapTheme, int nbPlayer, int nbIA, std::list<AObject*> *);
     Map(const Map &);
     virtual ~Map();
 
