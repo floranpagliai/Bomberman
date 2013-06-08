@@ -3,14 +3,15 @@ NAME		=	bomberman
 DIR		=	src/
 
 SRC		=	$(DIR)main.cpp\
+			$(DIR)MyMenu.cpp\
 			$(DIR)MyGame.cpp\
 			$(DIR)Camera.cpp\
+			$(DIR)Map.cpp\
+			$(DIR)MapElement.cpp\
 			$(DIR)Bomberman.cpp\
 			$(DIR)Bomb.cpp\
 			$(DIR)Flamme.cpp\
-			$(DIR)MapElement.cpp\
 			$(DIR)Bonus.cpp\
-			$(DIR)Map.cpp\
 			$(DIR)Display.cpp
 
 OBJ		=	$(SRC:.cpp=.o)

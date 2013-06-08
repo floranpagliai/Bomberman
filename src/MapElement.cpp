@@ -80,12 +80,7 @@ namespace MapElement {
         glVertex3f(size, size, size);
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(size, size, -size);
-        /*glRotatef(this->camera_.getRotation().x +
-                this->position_.x,
-                this->camera_.getRotation().y +
-                this->position_.y,
-                this->camera_.getRotation().z +
-                this->position_.z, 0.0f);*/
+        
         glEnd();
         glPopMatrix();
     }

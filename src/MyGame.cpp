@@ -1,6 +1,8 @@
 #include "MyGame.hpp"
 
 void MyGame::initialize(void) {
+    MyMenu menu;
+    menu.run();
     window_.setTitle("Bomberman");
     window_.setHeight(700);
     window_.setWidth(1024);
@@ -8,7 +10,7 @@ void MyGame::initialize(void) {
     camera_.initialize();
 
     //Map map_(60, 2, 11, &objects_);
-    Map map_("map/plaine", USINE, 1, 1, &objects_);
+    Map map_("map/usine", POLENORD, 2, 0, &objects_);
 
     cameraY_ = map_.getMaxX() * 325.0f;
     this->objects_.push_back(new Display::Timer(&objects_));
@@ -20,6 +22,7 @@ void MyGame::initialize(void) {
     this->powerupSound_->OpenFromFile("assets/sound/pop.wav");
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();
+
 }
 
 void MyGame::update(void) {
@@ -41,9 +44,9 @@ void MyGame::update(void) {
     }
     this->checkWin();
     if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z != 5000.0f)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z  + 50.0f);
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 50.0f);
     if (input_.isKeyDown(gdl::Keys::F2) == true && camera_.getPosition().z != 900.0f)
-        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z  - 50.0f);
+        camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z - 50.0f);
     if (input_.isKeyDown(gdl::Keys::F3) == true)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true)

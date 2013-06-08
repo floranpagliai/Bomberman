@@ -6,6 +6,7 @@
 #include "Map.hpp"
 #include "MapElement.hpp"
 #include "Display.hpp"
+#include "MyMenu.hpp"
 
 class MyGame : public gdl::Game {
 private:
