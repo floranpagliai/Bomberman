@@ -2,14 +2,14 @@
 
 namespace Display {
 
-    Timer::Timer(std::list<AObject *> *objects) {
-        this->position_.x = -200.0f;
-        this->position_.y = 300.0f;
-        this->position_.z = -5010.0f;
-        this->objects_ = objects;
-        this->C_timer_.play();
-        this->initialize();
-    }
+  Timer::Timer(std::list<AObject *> *objects) {
+    this->position_.x = -200.0f;
+    this->position_.y = 300.0f;
+    this->position_.z = -5010.0f;
+    this->objects_ = objects;
+    this->C_timer_.play();
+    this->initialize();
+  }
 
     Timer::~Timer() {
     }
@@ -130,5 +130,63 @@ namespace Display {
         os << nb;
         return os.str();
     }
+
+  ResultFinal::ResultFinal(int id_play) {
+    this->position_.x = 0;
+    this->position_.y = 300;
+    this->position_.z = 0;
+    this->id_player = id_play;
+    this->initialize();
+  }
+
+  ResultFinal::~ResultFinal() {
+
+  }
+
+  void	ResultFinal::initialize(void) {
+    if (this->id_player == 1)
+      this->texture_ = gdl::Image::load("assets/menu/winj1.png");
+    else if (this->id_player == 2)
+      this->texture_ = gdl::Image::load("assets/menu/winj2.png");
+    else
+      this->texture_ = gdl::Image::load("assets/menu/bomberover.png");
+  }
+
+  void	ResultFinal::update(gdl::GameClock const &, gdl::Input &) {
+
+  }
+
+  void	ResultFinal::draw(void) {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearDepth(1.f);
+
+    texture_.bind();
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+
+    glViewport(0, 0, WINDOW_WIDHT, WINDOW_HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, WINDOW_WIDHT, 0, WINDOW_HEIGHT);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glBegin(GL_QUADS);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0.0f, WINDOW_HEIGHT, 0.0f);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(WINDOW_WIDHT, 0.0f, 0.0f);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(WINDOW_WIDHT, WINDOW_HEIGHT, 0.0f);
+
+    glEnd();
+    glPopMatrix();
+  }
 }
 

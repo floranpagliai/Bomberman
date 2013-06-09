@@ -4,6 +4,7 @@
 #include "AObject.hpp"
 #include "Camera.hpp"
 #include "Bomberman.h"
+#include "MyGame.hpp"
 
 class Bomberman;
 
@@ -66,6 +67,21 @@ namespace Display {
         std::string intToStr(int);
     };
 
+  class ResultFinal : public AObject
+  {
+  protected:
+    gdl::Text	result;
+    gdl::Image	texture_;
+    int		id_player;
+
+  public:
+    ResultFinal(int);
+    ~ResultFinal();
+
+    void	initialize(void);
+    void	update(gdl::GameClock const &, gdl::Input &);
+    void	draw(void);
+  };
 }
 
 #endif
