@@ -223,8 +223,7 @@ void MyGame::Return(void) {
       this->nbIA = pos - 1;
     if (this->nbIA == 0 && this->nbPlayer == 1)
       this->nbIA++;
-    if (level != 6 && pos != 1)
-      level++;
+    level++;
     if (level == 3 && pos == 3)
       level = 6;
     if (level == 5 && pos == 4)
