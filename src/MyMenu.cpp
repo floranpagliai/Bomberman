@@ -196,17 +196,14 @@ void MyMenu::launchGame() {
     if (level == 5 && pos == 1) {
         MyGame game((char*) "map/plaine", PLAINE, nbPlayer, nbIA);
         game.run();
-        game.unload();
     } else if (level == 5 && pos == 2) {
         MyGame game((char*) "map/usine", USINE, nbPlayer, nbIA);
         game.run();
     } else if (level == 5 && pos == 3) {
         MyGame game((char*) "map/usine", POLENORD, nbPlayer, nbIA);
         game.run();
-
     } else {
         MyGame game(nbPlayer, nbIA);
         game.run();
     }
-
 }
