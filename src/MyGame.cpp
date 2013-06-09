@@ -13,22 +13,33 @@ void MyGame::initialize() {
     mylist.push_back("assets/menu/Prestart.png");
     it = mylist.begin();
 
-    //this->objects_.push_back(new Display::Timer(&objects_));
-    introSound = new sf::Music();
-    validationSound = new sf::Music();
-    selectionSound = new sf::Music();
+    this->introSound = new sf::Music();
+    this->validationSound = new sf::Music();
+    this->selectionSound = new sf::Music();
     this->bombSound_ = new sf::Music();
     this->deathSound_ = new sf::Music();
     this->powerupSound_ = new sf::Music();
+    this->iceSound_ = new sf::Music();
+    this->factorySound_ = new sf::Music();
+    this->plaineSound_ = new sf::Music();
     this->bombSound_->OpenFromFile("assets/sound/explosion.wav");
     this->deathSound_->OpenFromFile("assets/sound/death.wav");
     this->powerupSound_->OpenFromFile("assets/sound/pop.wav");
-    introSound->OpenFromFile("assets/sound/musicintro.wav");
-    introSound->SetLoop(true);
-    selectionSound->OpenFromFile("assets/sound/selection.wav");
-    selectionSound->SetVolume(50.00f);
-    validationSound->OpenFromFile("assets/sound/validation.wav");
-    introSound->Play();
+    this->introSound->OpenFromFile("assets/sound/musicintro.wav");
+    this->introSound->SetLoop(true);
+    this->selectionSound->OpenFromFile("assets/sound/selection.wav");
+    this->selectionSound->SetVolume(50.00f);
+    this->validationSound->OpenFromFile("assets/sound/validation.wav");
+    this->iceSound_->OpenFromFile("assets/sound/ice_kingdom.wav");
+    this->factorySound_->OpenFromFile("assets/sound/madness_factory.wav");
+    this->plaineSound_->OpenFromFile("assets/sound/peaceful_land.wav");
+    this->iceSound_->SetLoop(true);
+    this->factorySound_->SetLoop(true);
+    this->plaineSound_->SetLoop(true);
+    this->introSound->Play();
+
+
+
 
     this->launchMenu();
 }
@@ -40,7 +51,6 @@ void MyGame::update(void) {
         clock.update();
         time_ret = time_ret + cl_return.getElapsedTime();
         time = time + clock.getElapsedTime();
-
         if (time > 0.05f) {
             Exit();
             Down();
@@ -80,7 +90,7 @@ void MyGame::update(void) {
             camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z - 50.0f);
         if (input_.isKeyDown(gdl::Keys::F3) == true)
             camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
-        if (input_.isKeyDown(gdl::Keys::Escape) == true) {
+        if (input_.isKeyDown(gdl::Keys::Return) == true) {
             this->launchMenu();
         }
     }
@@ -104,8 +114,6 @@ void MyGame::draw(void) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glBegin(GL_QUADS);
-
-        //glColor3f(255, 255, 255);
 
         glTexCoord2f(0.0f, 0.0f);
         glVertex3f(0.0f, WINDOW_HEIGHT, 0.0f);
@@ -159,15 +167,18 @@ void MyGame::checkWin(void) {
 }
 
 void MyGame::launchMenu() {
+    this->iceSound_->Stop();
+    this->factorySound_->Stop();
+    this->plaineSound_->Stop();
     for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
         delete (*it);
     this->objects_.clear();
     this->state_ = MENU;
     this->level = 1;
+    it = mylist.begin();
     this->disp = true;
     clock.play();
     cl_return.play();
-
 }
 
 void MyGame::Exit(void) {
@@ -275,18 +286,22 @@ void MyGame::launchGame() {
     if (level == 5 && pos == 1) {
         Map map((char*) "map/plaine", PLAINE, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
+        this->plaineSound_->Play();
     } else if (level == 5 && pos == 2) {
         Map map((char*) "map/usine", USINE, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
+        this->factorySound_->Play();
     } else if (level == 5 && pos == 3) {
-        Map map((char*) "map/usine", POLENORD, nbPlayer, nbIA, &this->objects_);
+        Map map((char*) "map/plaine", POLENORD, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
+        this->iceSound_->Play();
     } else {
         Map map(40, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
     }
     camera_.setPosition(camera_.getPosition().x, cameraY_, camera_.getPosition().z);
     this->state_ = GAME;
+    this->objects_.push_back(new Display::Timer(&objects_));
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();
 }

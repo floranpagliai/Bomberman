@@ -29,6 +29,9 @@ private:
     sf::Music *bombSound_;
     sf::Music *deathSound_;
     sf::Music *powerupSound_;
+    sf::Music *factorySound_;
+    sf::Music *iceSound_;
+    sf::Music *plaineSound_;
 
     int nbIA;
     int nbPlayer;
