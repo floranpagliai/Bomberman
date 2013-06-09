@@ -345,7 +345,7 @@ void MyGame::launchGame() {
         cameraY_ = map.getMaxX() * 325.0f;
 	this->factorySound_->Play();
     } else if (level == 5 && pos == 3) {
-        Map map((char*) "map/usine", POLENORD, nbPlayer, nbIA, &this->objects_);
+        Map map((char*) "map/plaine", POLENORD, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
 	this->iceSound_->Play();
     } else {
