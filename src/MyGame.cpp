@@ -163,8 +163,12 @@ void MyGame::checkWin(void) {
         this->draw();
         sleep(3);
         this->launchMenu();
-    }
-    if (countP == 0 && countIA > 0) {
+    } else if (countP == 0 && countIA > 0) {
+        this->objects_.push_back(new Display::ResultFinal(3));
+        this->draw();
+        sleep(3);
+        this->launchMenu();
+    } else if (countP == 0 && countIA == 0) {
         this->objects_.push_back(new Display::ResultFinal(3));
         this->draw();
         sleep(3);
