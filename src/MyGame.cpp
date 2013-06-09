@@ -165,8 +165,12 @@ void MyGame::checkWin(void) {
         this->draw();
         sleep(3);
         this->launchMenu();
-    }
-    if (countP == 0 && countIA > 0) {
+    } else if (countP == 0 && countIA > 0) {
+        this->objects_.push_back(new Display::ResultFinal(3));
+        this->draw();
+        sleep(3);
+        this->launchMenu();
+    } else if (countP == 0 && countIA == 0) {
         this->objects_.push_back(new Display::ResultFinal(3));
         this->draw();
         sleep(3);
@@ -343,7 +347,7 @@ void MyGame::launchGame() {
         cameraY_ = map.getMaxX() * 325.0f;
 	this->factorySound_->Play();
     } else if (level == 5 && pos == 3) {
-        Map map((char*) "map/usine", POLENORD, nbPlayer, nbIA, &this->objects_);
+        Map map((char*) "map/plaine", POLENORD, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
 	this->iceSound_->Play();
     } else {

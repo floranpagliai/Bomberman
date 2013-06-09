@@ -107,10 +107,7 @@ void Map::randMap(int size) {
     this->minX_ = x;
     this->maxX_ = size;
     int value;
-    int posPlayer = (size * size / (this->nbPlayer_ + this->nbIA_) - size * 2);
-    std::cout << posPlayer << std::endl;
-    std::cout << this->nbPlayer_ << std::endl;
-    std::cout << this->nbIA_ << std::endl;
+    int posPlayer = (size * size / (this->nbPlayer_ + this->nbIA_) - 5);
     int i = 0;
     while (z <= maxX_ / 2) {
         while (x <= maxX_ / 2) {
@@ -118,17 +115,18 @@ void Map::randMap(int size) {
                     ((z % 2) == 0 && (x % 2) == 0))
                 this->objects_->push_back(new MapElement::Wall(x, z, this->theme_, this->objects_));
             else {
-                value = rand() % 3;
+                value = rand() % 4;
                 this->objects_->push_back(new MapElement::Ground(x, z, this->theme_, this->objects_));
                 if (value == 1) {
-                    if (this->nbPlayer_ > 0 && this->nbPlayer_ < 3 && i >= posPlayer) {
+                    if ((this->nbPlayer_ == 1 || this->nbPlayer_ == 2) && i >= posPlayer || i == 0) {
                         this->objects_->push_back(new Bomberman(x, z, this->nbPlayer_--, this->objects_));
                         i = 0;
-                    } else if (this->nbIA_ > 0 && this->nbIA_-- <= 10 && i >= posPlayer) {
+                    } else if (this->nbIA_ > 0 && this->nbIA_ <= 10 && i >= posPlayer) {
                         this->objects_->push_back(new Bomberman(x, z, 3, this->objects_));
+                        this->nbIA_--;
                         i = 0;
                     }
-                } else if (value == 3)
+                } else if (value == 2)
                     this->objects_->push_back(new MapElement::Crate(x, z, this->theme_, this->objects_));
             }
             i++;
