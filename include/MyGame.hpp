@@ -70,7 +70,7 @@ public:
     void LoadLevel4(void);
     void LoadLevel6(void);
     void LoadLevel7(void);
-    void LoadLevel8(void);
+    void LoadLevel9(void);
     void launchGame(void);
     void pause(void);
 };
