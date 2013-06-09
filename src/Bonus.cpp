@@ -1,10 +1,3 @@
-/*
- * File:   Bonus.cpp
- * Author: floran
- *
- * Created on 1 juin 2013, 01:05
- */
-
 #include "Bonus.hpp"
 
 Bonus::Bonus(float const x, float const z, eBonusType const type, std::list<AObject*> *objects) {

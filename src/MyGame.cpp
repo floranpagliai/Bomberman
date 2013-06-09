@@ -1,20 +1,28 @@
 #include "MyGame.hpp"
 
-MyGame::MyGame(char *map, eMapTheme theme, int nbPlayer, int nbIA) {
-  std::cout << "Constructeur Game" << std::endl;
+MyGame::MyGame(int nbPlayer, int nbIA) {
     window_.setTitle("Bomberman");
     window_.setHeight(700);
     window_.setWidth(1024);
     window_.create();
     camera_.initialize();
 
-    //Map map_(60, 2, 11, &objects_);
+    Map map_(100, nbPlayer, nbIA, &objects_);
+    cameraY_ = map_.getMaxX() * 325.0f;
+}
+
+MyGame::MyGame(char *map, eMapTheme theme, int nbPlayer, int nbIA) {
+    window_.setTitle("Bomberman");
+    window_.setHeight(700);
+    window_.setWidth(1024);
+    window_.create();
+    camera_.initialize();
+
     Map map_(map, theme, nbPlayer, nbIA, &objects_);
     cameraY_ = map_.getMaxX() * 325.0f;
 }
 
 void MyGame::initialize() {
-  std::cout << "Initialisation Game" << std::endl;
     this->objects_.push_back(new Display::Timer(&objects_));
     this->bombSound_ = new sf::Music();
     this->deathSound_ = new sf::Music();
@@ -52,9 +60,7 @@ void MyGame::update(void) {
     if (input_.isKeyDown(gdl::Keys::F3) == true)
         camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true) {
-      std::cout << "Avant Game Window close" << std::endl;
         window_.close();
-      std::cout << "Apres Game Window close" << std::endl;
     }
 
 }
@@ -71,35 +77,28 @@ void MyGame::draw(void) {
 void MyGame::unload(void) {
     for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
         delete (*it);
-    delete this->bombSound_;
-    delete this->deathSound_;
-    delete this->powerupSound_;
     this->objects_.clear();
 }
 
 void MyGame::checkWin(void) {
-  int countP = 0;
-  int countIA = 0;
-  for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
-    if ((*it)->getType() == PLAYER && (*it)->getId() < 3)
-      countP++;
-    if ((*it)->getType() == PLAYER && (*it)->getId() == 3)
-      countIA++;
-  }
-  if (countP == 1 && countIA == 0) {
+    int countP = 0;
+    int countIA = 0;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
-      if ((*it)->getType() == PLAYER) {
-	std::cout << "GAME OVER: Player " << (*it)->getId() << " win" << std::endl;
-	std::cout << "Avant Game Window close2" << std::endl;
-        window_.close();
-	std::cout << "Apres Game Window close2" << std::endl;
-      }
+        if ((*it)->getType() == PLAYER && (*it)->getId() < 3)
+            countP++;
+        if ((*it)->getType() == PLAYER && (*it)->getId() == 3)
+            countIA++;
     }
-  }
-  if (countP == 0 && countIA > 0) {
-    std::cout << "GAME OVER: Computer win" << std::endl;
-          std::cout << "Avant Game Window close3" << std::endl;
+    if (countP == 1 && countIA == 0) {
+        for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+            if ((*it)->getType() == PLAYER) {
+                std::cout << "GAME OVER: Player " << (*it)->getId() << " win" << std::endl;
+                window_.close();
+            }
+        }
+    }
+    if (countP == 0 && countIA > 0) {
+        std::cout << "GAME OVER: Computer win" << std::endl;
         window_.close();
-      std::cout << "Apres Game Window close3" << std::endl;
-  }
+    }
 }

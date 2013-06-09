@@ -108,8 +108,6 @@ void Flamme::checkPropagation(void) {
                 this->popBonus();
             }
             (*it)->setIsOver();
-            //break;
-
         } else if (((*it)->getType() == WALL) && this->checkCollision((*it)->getPosition().x, (*it)->getPosition().z) == true) {
             this->power_ = 0;
             break;
@@ -118,8 +116,9 @@ void Flamme::checkPropagation(void) {
 }
 
 void Flamme::popBonus(void) {
-    int value = rand() % 7 + 1;;
+    int value = rand() % 7 + 1;
+    ;
 
-    if (value == 1 || value == 2 || value == 3 || (value == 4 && rand()% 2 == 1))
+    if (value == 1 || value == 2 || value == 3 || (value == 4 && rand() % 2 == 1))
         this->objects_->push_front(new Bonus(this->position_.x, this->position_.z, (eBonusType) value, this->objects_));
 }

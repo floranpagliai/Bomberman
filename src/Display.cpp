@@ -87,7 +87,7 @@ namespace Display {
     }
 
     void DisplayPlayer::draw(void) {
-            camera__.setPosition(this->camera__.getPosition().x, camera__.getPosition().y, camera__.getPosition().z + 1.0f);
+        camera__.setPosition(this->camera__.getPosition().x, camera__.getPosition().y, camera__.getPosition().z + 1.0f);
 
         if (this->p_player->getId() == 1) {
             nb_Bomb_.setText("\tPlayer 1\n\nBombes: " + s_bomb);

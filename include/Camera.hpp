@@ -11,19 +11,19 @@
 
 class Camera {
 private:
-  Vector3f	position_;
-  Vector3f	rotation_;
+    Vector3f position_;
+    Vector3f rotation_;
 
 public:
-  Camera(void);
+    Camera(void);
 
-  void	initialize(void);
-  void	update(gdl::GameClock const &, gdl::Input &);
+    void initialize(void);
+    void update(gdl::GameClock const &, gdl::Input &);
 
-  Vector3f getPosition(void) const;
-  Vector3f getRotation(void) const;
+    Vector3f getPosition(void) const;
+    Vector3f getRotation(void) const;
 
-  void setPosition(float const x, float const y, float const z);
+    void setPosition(float const x, float const y, float const z);
 };
 
 #endif

@@ -77,7 +77,8 @@ void Map::openMap(void) {
         while (it != str.end()) {
             if (*it == '1' || *it == '7' || *it == '8') {
                 this->objects_->push_back(new MapElement::Ground(posX_, posZ_, this->theme_, this->objects_));
-            } if (*it == '2') {
+            }
+            if (*it == '2') {
                 this->objects_->push_back(new MapElement::Wall(posX_, posZ_, this->theme_, this->objects_));
             } else if (*it == '3') {
                 this->objects_->push_back(new MapElement::Ground(posX_, posZ_, this->theme_, this->objects_));

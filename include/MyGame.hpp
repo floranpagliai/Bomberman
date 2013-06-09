@@ -20,6 +20,7 @@ private:
     int idPlayerW_;
 
 public:
+    MyGame(int, int);
     MyGame(char *, eMapTheme, int, int);
 
     virtual void initialize();

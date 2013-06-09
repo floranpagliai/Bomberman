@@ -41,7 +41,7 @@ public:
     int getPower() const;
     int getSpeed() const;
     int getId() const;
-    int	getAmmoStock() const;
+    int getAmmoStock() const;
 
     void recupBomb();
     bool ammoUp();
