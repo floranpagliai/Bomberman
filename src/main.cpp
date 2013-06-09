@@ -1,13 +1,8 @@
 #include "MyGame.hpp"
-void playGame() {
-    MyMenu menu;
-    srand(time(NULL));
-    menu.run();
-    menu.unload();
-    playGame();
-}
 
 int main(void) {
-    playGame();
+    MyGame game;
+    srand(time(NULL));
+    game.run();
     return EXIT_SUCCESS;
 }

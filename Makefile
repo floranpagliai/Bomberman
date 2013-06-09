@@ -3,7 +3,6 @@ NAME		=	bomberman
 DIR		=	src/
 
 SRC		=	$(DIR)main.cpp\
-			$(DIR)MyMenu.cpp\
 			$(DIR)MyGame.cpp\
 			$(DIR)Camera.cpp\
 			$(DIR)Map.cpp\
