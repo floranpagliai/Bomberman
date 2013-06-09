@@ -82,6 +82,19 @@ namespace Display {
     void	update(gdl::GameClock const &, gdl::Input &);
     void	draw(void);
   };
+
+  class Pause : public AObject
+  {
+  protected:
+    gdl::Image	texture_;
+    
+  public:
+    Pause();
+    ~Pause();
+    
+    void	initialize(void);
+    void	draw(void);
+  };
 }
 
 #endif

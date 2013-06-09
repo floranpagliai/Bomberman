@@ -188,5 +188,53 @@ namespace Display {
     glEnd();
     glPopMatrix();
   }
+  Pause::Pause() {
+    this->position_.x = 0;
+    this->position_.y = 300;
+    this->position_.z = 0;
+    this->initialize();
+  }
+  
+  Pause::~Pause() {
+
+  }
+
+  void	Pause::initialize(void) {
+    this->texture_ = gdl::Image::load("assets/menu/pause.png");
+  }
+  
+  void	Pause::draw(void) {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearDepth(1.f);
+
+    texture_.bind();
+    glEnable(GL_TEXTURE_2D);
+    glPushMatrix();
+
+    glViewport(0, 0, WINDOW_WIDHT, WINDOW_HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, WINDOW_WIDHT, 0, WINDOW_HEIGHT);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glBegin(GL_QUADS);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(0.0f, WINDOW_HEIGHT, 0.0f);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(WINDOW_WIDHT, 0.0f, 0.0f);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(WINDOW_WIDHT, WINDOW_HEIGHT, 0.0f);
+
+    glEnd();
+    glPopMatrix();
+  }
+  
 }
 

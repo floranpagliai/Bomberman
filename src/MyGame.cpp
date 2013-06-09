@@ -93,18 +93,19 @@ void MyGame::update(void) {
     if (input_.isKeyDown(gdl::Keys::F3) == true)
       camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
     if (input_.isKeyDown(gdl::Keys::Escape) == true) {
-      this->launchMenu();
+      this->objects_.push_back(new Display::Pause());
+      if(input_.isKeyDown(gdl::Keys::Back) == true) {
+	launchGame();
+      }
     }
   }
-
 }
-
-void MyGame::draw(void) {
+  void MyGame::draw(void) {
     if (this->state_ == MENU) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClearDepth(1.f);
-
+	
         image_.bind();
         glEnable(GL_TEXTURE_2D);
         glPushMatrix();
@@ -132,20 +133,21 @@ void MyGame::draw(void) {
         glEnd();
         glPopMatrix();
     } else {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClearDepth(1.f);
-        for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
-            (*it)->draw();
-        this->window_.display();
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+      glClearDepth(1.f);
+      for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
+	(*it)->draw();
+      this->window_.display();
     }
-}
+  }
 
-void MyGame::unload(void) {
+
+  void MyGame::unload(void) {
     for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
-        delete (*it);
+      delete (*it);
     this->objects_.clear();
-}
+  }
 
 void MyGame::checkWin(void) {
     int countP = 0;
@@ -352,5 +354,5 @@ void MyGame::launchGame() {
     camera_.setPosition(camera_.getPosition().x, cameraY_, camera_.getPosition().z);
     this->state_ = GAME;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
-        (*it)->initialize();
+      (*it)->initialize();
 }
