@@ -5,7 +5,7 @@ namespace Display {
   Timer::Timer(std::list<AObject *> *objects) {
     this->position_.x = -200.0f;
     this->position_.y = 200.0f;
-    this->position_.z = -5010.0f;
+    this->position_.z = -5100.0f;
     this->objects_ = objects;
     this->C_timer_.play();
     this->initialize();
