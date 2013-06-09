@@ -33,7 +33,6 @@ namespace Display {
 
         std::string float2string(float f);
     };
-    //  class Bomberman;
 
     class DisplayPlayer : public AObject {
     private:
@@ -67,34 +66,33 @@ namespace Display {
         std::string intToStr(int);
     };
 
-  class ResultFinal : public AObject
-  {
-  protected:
-    gdl::Text	result;
-    gdl::Image	texture_;
-    int		id_player;
+    class ResultFinal : public AObject {
+    protected:
+        gdl::Text result;
+        gdl::Image texture_;
+        int id_player;
 
-  public:
-    ResultFinal(int);
-    ~ResultFinal();
+    public:
+        ResultFinal(int);
+        ~ResultFinal();
 
-    void	initialize(void);
-    void	update(gdl::GameClock const &, gdl::Input &);
-    void	draw(void);
-  };
+        void initialize(void);
+        void update(gdl::GameClock const &, gdl::Input &);
+        void draw(void);
+    };
 
-  class Pause : public AObject
-  {
-  protected:
-    gdl::Image	texture_;
-    
-  public:
-    Pause();
-    ~Pause();
-    
-    void	initialize(void);
-    void	draw(void);
-  };
+    class Pause : public AObject {
+    protected:
+        gdl::Image texture_;
+
+    public:
+        Pause();
+        ~Pause();
+
+        void initialize(void);
+        void update(gdl::GameClock const &, gdl::Input &);
+        void draw(void);
+    };
 }
 
 #endif

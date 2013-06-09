@@ -45,67 +45,66 @@ void MyGame::initialize() {
 }
 
 void MyGame::update(void) {
-  if (this->state_ == MENU) {
-    camera_.setPosition(camera_.getPosition().x, 0, camera_.getPosition().z);
-    cl_return.update();
-    clock.update();
-    time_ret = time_ret + cl_return.getElapsedTime();
-    time = time + clock.getElapsedTime();
-
-    if (time > 0.05f) {
-      Exit();
-      if (level != 1)
-	Down();
-      Up();
-      Return();
-      Back();
-      time = 0.00f;
-    }
-    if (disp == true) {
-      this->image_ = gdl::Image::load(*it);
-      disp = false;
-    }
-    if ((level == 5 && (pos == 1 || pos == 2 || pos == 3)) || (level == 8 && (pos == 1 || pos == 2 || pos == 3 || pos == 4))) {
-      launchGame();
-    }
-  } else {
-    camera_.setPosition(camera_.getPosition().x, cameraY_, camera_.getPosition().z);
-    camera_.update(gameClock_, input_);
-    for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
-      sleep(0.9);
-      (*it)->update(gameClock_, input_);
-      if ((*it)->getIsOver() == true) {
-	if ((*it)->getType() == BOMB)
-	  this->bombSound_->Play();
-	if ((*it)->getType() == PLAYER)
-	  this->deathSound_->Play();
-	if ((*it)->getType() == BONUS)
-	  this->powerupSound_->Play();
-	delete (*it);
-	it = this->objects_.erase(it);
-      }
-    }
-    this->checkWin();
-    if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z != 5000.0f)
-      camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 50.0f);
-    if (input_.isKeyDown(gdl::Keys::F2) == true && camera_.getPosition().z != 900.0f)
-      camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z - 50.0f);
-    if (input_.isKeyDown(gdl::Keys::F3) == true)
-      camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
-    if (input_.isKeyDown(gdl::Keys::Escape) == true) {
-      this->objects_.push_back(new Display::Pause());
-      if(input_.isKeyDown(gdl::Keys::Back) == true) {
-	launchGame();
-      }
-    }
-  }
-}
-  void MyGame::draw(void) {
     if (this->state_ == MENU) {
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        camera_.setPosition(camera_.getPosition().x, 0, camera_.getPosition().z);
+        cl_return.update();
+        clock.update();
+        time_ret = time_ret + cl_return.getElapsedTime();
+        time = time + clock.getElapsedTime();
+
+        if (time > 0.05f) {
+            Exit();
+            if (level != 1)
+                Down();
+            Up();
+            Return();
+            Back();
+            time = 0.00f;
+        }
+        if (disp == true) {
+            this->image_ = gdl::Image::load(*it);
+            disp = false;
+        }
+        if ((level == 5 && (pos == 1 || pos == 2 || pos == 3)) || (level == 8 && (pos == 1 || pos == 2 || pos == 3 || pos == 4))) {
+            launchGame();
+        }
+    } else {
+        camera_.setPosition(camera_.getPosition().x, cameraY_, camera_.getPosition().z);
+        camera_.update(gameClock_, input_);
+        for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+            sleep(0.9);
+            (*it)->update(gameClock_, input_);
+            if ((*it)->getIsOver() == true) {
+                if ((*it)->getType() == BOMB)
+                    this->bombSound_->Play();
+                if ((*it)->getType() == PLAYER)
+                    this->deathSound_->Play();
+                if ((*it)->getType() == BONUS)
+                    this->powerupSound_->Play();
+                delete (*it);
+                it = this->objects_.erase(it);
+            }
+        }
+        this->checkWin();
+        if (input_.isKeyDown(gdl::Keys::F1) == true && camera_.getPosition().z != 5000.0f)
+            camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z + 50.0f);
+        if (input_.isKeyDown(gdl::Keys::F2) == true && camera_.getPosition().z != 900.0f)
+            camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, camera_.getPosition().z - 50.0f);
+        if (input_.isKeyDown(gdl::Keys::F3) == true)
+            camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
+        if (input_.isKeyDown(gdl::Keys::Escape) == true)
+            this->pause();
+        if (input_.isKeyDown(gdl::Keys::Back) == true)
+            this->launchMenu();
+    }
+}
+
+void MyGame::draw(void) {
+    if (this->state_ == MENU) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClearDepth(1.f);
-	
+
         image_.bind();
         glEnable(GL_TEXTURE_2D);
         glPushMatrix();
@@ -133,21 +132,20 @@ void MyGame::update(void) {
         glEnd();
         glPopMatrix();
     } else {
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-      glClearDepth(1.f);
-      for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
-	(*it)->draw();
-      this->window_.display();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearDepth(1.f);
+        for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
+            (*it)->draw();
+        this->window_.display();
     }
-  }
+}
 
-
-  void MyGame::unload(void) {
+void MyGame::unload(void) {
     for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
-      delete (*it);
+        delete (*it);
     this->objects_.clear();
-  }
+}
 
 void MyGame::checkWin(void) {
     int countP = 0;
@@ -162,13 +160,15 @@ void MyGame::checkWin(void) {
     }
     if (countP == 1 && countIA == 0) {
         this->objects_.push_back(new Display::ResultFinal(this->idPlayerW_));
-        this->draw();
         sleep(3);
+        this->draw();
+
         this->launchMenu();
     } else if (countP == 0 && countIA > 0) {
         this->objects_.push_back(new Display::ResultFinal(3));
-        this->draw();
         sleep(3);
+        this->draw();
+        //sleep(3);
         this->launchMenu();
     } else if (countP == 0 && countIA == 0) {
         this->objects_.push_back(new Display::ResultFinal(3));
@@ -179,18 +179,18 @@ void MyGame::checkWin(void) {
 }
 
 void MyGame::launchMenu() {
-  this->iceSound_->Stop();
-  this->plaineSound_->Stop();
-  this->factorySound_->Stop();
-  this->introSound->Play();
-  for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
-    delete (*it);
-  this->objects_.clear();
-  this->state_ = MENU;
-  this->level = 1;
-  this->disp = true;
-  clock.play();
-  cl_return.play();
+    this->iceSound_->Stop();
+    this->plaineSound_->Stop();
+    this->factorySound_->Stop();
+    this->introSound->Play();
+    for (std::list<AObject *>::iterator it = this->objects_.begin(); it != this->objects_.end(); it++)
+        delete (*it);
+    this->objects_.clear();
+    this->state_ = MENU;
+    this->level = 1;
+    this->disp = true;
+    clock.play();
+    cl_return.play();
 
 }
 
@@ -222,25 +222,25 @@ void MyGame::Up(void) {
 }
 
 void MyGame::Return(void) {
-  if (input_.isKeyDown(gdl::Keys::Return) == true && time_ret > 0.50f) {
-    if ((pos == 5 && level == 2) || (pos == 11 && level == 3) || (pos == 5 && level == 4) || (pos == 5 && level == 7) || (level == 7 && pos == 5) || (level == 6 && pos == 2) || (level == 9 && pos == 1))
-      exit(EXIT_FAILURE);
-    if (level == 3)
-      this->nbIA = pos - 1;
-    if (this->nbIA == 0 && this->nbPlayer == 1)
-      this->nbIA++;
-    level++;
-    if (level == 3 && pos == 3)
-      level = 6;
-    if (level == 5 && pos == 4)
-      level = 7;
-    if (level == 3 && pos == 4)
-      level = 9;
-    LoadLevel2();
-    disp = true;
-    validationSound->Play();
-    time_ret = 0.00f;
-  }
+    if (input_.isKeyDown(gdl::Keys::Return) == true && time_ret > 0.50f) {
+        if ((pos == 5 && level == 2) || (pos == 11 && level == 3) || (pos == 5 && level == 4) || (pos == 5 && level == 7) || (level == 7 && pos == 5) || (level == 6 && pos == 2) || (level == 9 && pos == 1))
+            exit(EXIT_FAILURE);
+        if (level == 3)
+            this->nbIA = pos - 1;
+        if (this->nbIA == 0 && this->nbPlayer == 1)
+            this->nbIA++;
+        level++;
+        if (level == 3 && pos == 3)
+            level = 6;
+        if (level == 5 && pos == 4)
+            level = 7;
+        if (level == 3 && pos == 4)
+            level = 9;
+        LoadLevel2();
+        disp = true;
+        validationSound->Play();
+        time_ret = 0.00f;
+    }
 }
 
 void MyGame::Back(void) {
@@ -341,15 +341,15 @@ void MyGame::launchGame() {
     if (level == 5 && pos == 1) {
         Map map((char*) "map/plaine", PLAINE, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
-	this->plaineSound_->Play();
+        this->plaineSound_->Play();
     } else if (level == 5 && pos == 2) {
         Map map((char*) "map/usine", USINE, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
-	this->factorySound_->Play();
+        this->factorySound_->Play();
     } else if (level == 5 && pos == 3) {
         Map map((char*) "map/plaine", POLENORD, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
-	this->iceSound_->Play();
+        this->iceSound_->Play();
     } else {
         Map map((pos * 10) + 10, nbPlayer, nbIA, &this->objects_);
         cameraY_ = map.getMaxX() * 325.0f;
@@ -358,5 +358,22 @@ void MyGame::launchGame() {
     camera_.setPosition(camera_.getPosition().x, cameraY_, camera_.getPosition().z);
     this->state_ = GAME;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
-      (*it)->initialize();
+        (*it)->initialize();
+}
+
+void MyGame::pause() {
+    this->objects_.push_back(new Display::Pause());
+    while (input_.isKeyDown(gdl::Keys::Return) != true) {
+        this->draw();
+        if (input_.isKeyDown(gdl::Keys::Return) == true) {
+            break;
+        }
+    }
+    for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+        if ((*it)->getType() == PAUSE) {
+            (*it)->setIsOver();
+            break;
+        }
+    }
+
 }

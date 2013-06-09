@@ -12,7 +12,6 @@
 
 enum eState {
     MENU = 0,
-    PAUSE,
     GAME
 };
 

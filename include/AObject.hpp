@@ -40,7 +40,8 @@ enum eType {
     BOMB,
     FLAMME,
     BONUS,
-    PLAYER
+    PLAYER,
+    PAUSE
 };
 
 class AObject {

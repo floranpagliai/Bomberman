@@ -73,7 +73,11 @@ void Bomberman::update(gdl::GameClock const &gameClock, gdl::Input &input) {
         this->model_.update(gameClock);
         this->move(input);
     }
-
+    if (this->running_ == true) {
+        this->model_.play("Run");
+        this->running_ = false;
+    } else
+        this->model_.play("Stop");
 }
 
 void Bomberman::draw(void) {
@@ -118,9 +122,9 @@ void Bomberman::move(gdl::Input & input) {
             if (checkMove(input, (25.0f + speed_ * 7.0f) * getKeys()[i].coefX, (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ)) {
                 this->position_.x += (25.0f + speed_ * 7.0f) * getKeys()[i].coefX;
                 this->position_.z += (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ;
-                this->model_.play("Run");
+                this->running_ = true;
             } else
-                this->model_.play("Stop");
+                this->running_ = false;
         }
     }
     if (input.isKeyDown(getKeys()[4].key) == true)
