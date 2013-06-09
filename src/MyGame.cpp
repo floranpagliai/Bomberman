@@ -159,21 +159,19 @@ void MyGame::checkWin(void) {
             countIA++;
     }
     if (countP == 1 && countIA == 0) {
-        this->objects_.push_back(new Display::ResultFinal(this->idPlayerW_));
-        sleep(3);
+        this->objects_.push_front(new Display::ResultFinal(this->idPlayerW_));
         this->draw();
-
+        sleep(4);
         this->launchMenu();
     } else if (countP == 0 && countIA > 0) {
-        this->objects_.push_back(new Display::ResultFinal(3));
-        sleep(3);
+        this->objects_.push_front(new Display::ResultFinal(3));
         this->draw();
-        //sleep(3);
+        sleep(4);
         this->launchMenu();
     } else if (countP == 0 && countIA == 0) {
-        this->objects_.push_back(new Display::ResultFinal(3));
+        this->objects_.push_front(new Display::ResultFinal(3));
         this->draw();
-        sleep(3);
+        sleep(4);
         this->launchMenu();
     }
 }
@@ -363,11 +361,14 @@ void MyGame::launchGame() {
 
 void MyGame::pause() {
     this->objects_.push_back(new Display::Pause());
-    while (input_.isKeyDown(gdl::Keys::Return) != true) {
+    while (1) {
         this->draw();
-        if (input_.isKeyDown(gdl::Keys::Return) == true) {
+        std::cout << "1" << std::endl;
+        if (input_.isKeyDown(gdl::Keys::Space) == true) {
+            std::cout << "2" << std::endl;
             break;
         }
+        std::cout << "3" << std::endl;
     }
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
         if ((*it)->getType() == PAUSE) {

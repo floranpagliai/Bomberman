@@ -153,7 +153,6 @@ namespace Display {
     }
 
     void ResultFinal::update(gdl::GameClock const &, gdl::Input &) {
-
     }
 
     void ResultFinal::draw(void) {
@@ -184,7 +183,7 @@ namespace Display {
 
         glTexCoord2f(1.0f, 0.0f);
         glVertex3f(WINDOW_WIDHT, WINDOW_HEIGHT, 0.0f);
-
+        
         glEnd();
         glPopMatrix();
     }
