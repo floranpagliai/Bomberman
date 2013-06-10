@@ -3,6 +3,7 @@ Bomberman
 Touches
 =========
 Menu:
+
 	Selection : Return
 	
 	Retour : Backspace
