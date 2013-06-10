@@ -2,15 +2,22 @@ Bomberman
 =========
 Touches
 =========
+Menu:
+	Selection : Return
+	
+	Retour : Backspace
+	
+	Quitter : Escape
 Jeu :
 
 	Zoom+ : F1
 
 	Zoom- : F2
 
-	Vue profondeur : F3
+	Vue initiale : F3
+	
+	Retour menu : Backspace
 
-	Vue de Haut    : F4
 
 Deplacement Joueur 1
 
