@@ -123,6 +123,7 @@ void Bomberman::move(gdl::Input & input) {
                 this->position_.x += (25.0f + speed_ * 7.0f) * getKeys()[i].coefX;
                 this->position_.z += (25.0f + speed_ * 7.0f) * getKeys()[i].coefZ;
                 this->running_ = true;
+		break;
             } else
                 this->running_ = false;
         }

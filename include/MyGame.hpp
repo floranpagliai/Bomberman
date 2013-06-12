@@ -12,6 +12,7 @@
 
 enum eState {
     MENU = 0,
+    GAMEPAUSE,
     GAME
 };
 
@@ -71,7 +72,6 @@ public:
     void LoadLevel7(void);
     void LoadLevel9(void);
     void launchGame(void);
-    void pause(void);
 };
 
 #endif

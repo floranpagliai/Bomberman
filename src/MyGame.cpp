@@ -68,6 +68,19 @@ void MyGame::update(void) {
         if ((level == 5 && (pos == 1 || pos == 2 || pos == 3)) || (level == 8 && (pos == 1 || pos == 2 || pos == 3 || pos == 4))) {
             launchGame();
         }
+    } else if (this->state_ == GAMEPAUSE) {
+        this->objects_.push_back(new Display::Pause());
+        if (input_.isKeyDown(gdl::Keys::Return) == true) {
+            for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
+                if ((*it)->getType() == PAUSE) {
+                    delete (*it);
+                    it = this->objects_.erase(it);
+                    break;
+                }
+            }
+            this->draw();
+            this->state_ = GAME;
+        }
     } else {
         camera_.setPosition(camera_.getPosition().x, cameraY_, camera_.getPosition().z);
         camera_.update(gameClock_, input_);
@@ -93,7 +106,7 @@ void MyGame::update(void) {
         if (input_.isKeyDown(gdl::Keys::F3) == true)
             camera_.setPosition(camera_.getPosition().x, camera_.getPosition().y, 900.0f);
         if (input_.isKeyDown(gdl::Keys::Escape) == true)
-            this->pause();
+            this->state_ = GAMEPAUSE;
         if (input_.isKeyDown(gdl::Keys::Back) == true)
             this->launchMenu();
     }
@@ -357,24 +370,4 @@ void MyGame::launchGame() {
     this->state_ = GAME;
     for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it)
         (*it)->initialize();
-}
-
-void MyGame::pause() {
-    this->objects_.push_back(new Display::Pause());
-    while (1) {
-        this->draw();
-        std::cout << "1" << std::endl;
-        if (input_.isKeyDown(gdl::Keys::Space) == true) {
-            std::cout << "2" << std::endl;
-            break;
-        }
-        std::cout << "3" << std::endl;
-    }
-    for (std::list<AObject*>::iterator it = this->objects_.begin(); it != this->objects_.end(); ++it) {
-        if ((*it)->getType() == PAUSE) {
-            (*it)->setIsOver();
-            break;
-        }
-    }
-
 }
